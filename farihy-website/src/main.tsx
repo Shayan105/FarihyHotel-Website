@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import RoomCard from "./components/RoomCard";
 import VerticalPicture from "./components/VerticalPicture";
 import MassageGallery from "./farihy_components/MassageImageGalery";
-
+import RestaurantGallery from "./farihy_components/RestaurantImageGalery";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -12,7 +12,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       
       {/* Passing data via props */}
       <MassageGallery/>
-
+      <RestaurantGallery/>
  
 
     </div>
