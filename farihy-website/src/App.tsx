@@ -6,8 +6,8 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <h2>
-      
+    <h2 className='text-warning'>
+      Hello
     </h2>
 
   )

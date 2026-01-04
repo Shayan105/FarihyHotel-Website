@@ -1,10 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App'
-import './index.css'
+import 'bootstrap/dist/css/bootstrap.css'
+import RoomCard from './components/RoomCard'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <App />
+    <RoomCard 
+      roomName="Les Duplex"
+      minPax={1}
+      maxPax={6}
+      price="800 000"
+      imagePath="/src/assets/couverture-bungalow-double.webp"
+    />
   </React.StrictMode>,
 )
