@@ -14,15 +14,15 @@ const MassageGallery: React.FC = () => {
     images: [
       {
         path: basePath + "massage-1.jpg",
-        alt: "Massage aux huiles essentielles",
+        focusPosition: "",
       },
       {
         path: basePath + "massage-2-crop.jpg",
-        alt: "Massage aux huiles essentielles",
+        focusPosition: "65%",
       },
       {
         path: basePath + "massage-3.jpg",
-        alt: "Budha statue",
+        focusPosition: "",
       },
     ],
   };

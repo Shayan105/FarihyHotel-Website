@@ -11,9 +11,9 @@ import CuisineGallery from "./farihy_components/CuisineRestaurantGallery";
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <div className="container py-4">
-      <MassageGallery/>
       <RestaurantGallery/>
-      <CuisineGallery/>
+      <CuisineGallery/> 
+      <MassageGallery/>
     </div>
   </React.StrictMode>
 );

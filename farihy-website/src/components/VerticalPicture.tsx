@@ -1,3 +1,4 @@
+// VerticalPicture.tsx
 import React from "react";
 
 interface VerticalPictureProps {
@@ -6,10 +7,9 @@ interface VerticalPictureProps {
   containerClass?: string;
   maxWidth?: string | number;
   ratio?: string;
-  /** * Controls the focal point of the crop. 
-   * Examples: "center", "top", "bottom", "left", "right", "50% 20%" 
-   */
-  focusPosition?: string; 
+  focusPosition?: string;
+  // New prop
+  onClick?: () => void; 
 }
 
 const VerticalPicture: React.FC<VerticalPictureProps> = ({
@@ -18,15 +18,19 @@ const VerticalPicture: React.FC<VerticalPictureProps> = ({
   containerClass = "",
   maxWidth = "400px",
   ratio = "4 / 5",
-  focusPosition = "center", // Default remains center
+  focusPosition = "center",
+  onClick, // Destructure new prop
 }) => {
   return (
     <div
+      onClick={onClick} // Attach click handler
       className={`d-inline-block overflow-hidden shadow ${containerClass}`}
       style={{
         borderRadius: "40px",
         maxWidth: maxWidth,
         width: "100%",
+        // Add pointer cursor if onClick exists
+        cursor: onClick ? "pointer" : "default", 
       }}
     >
       <img
@@ -36,8 +40,7 @@ const VerticalPicture: React.FC<VerticalPictureProps> = ({
         style={{
           aspectRatio: ratio,
           objectFit: "cover",
-          // This allows you to shift the image
-          objectPosition: focusPosition, 
+          objectPosition: focusPosition,
         }}
       />
     </div>
