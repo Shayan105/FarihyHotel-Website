@@ -5,6 +5,7 @@ import RoomCard from "./components/RoomCard";
 import VerticalPicture from "./components/VerticalPicture";
 import MassageGallery from "./farihy_components/MassageImageGallery";
 import RestaurantGallery from "./farihy_components/RestaurantImageGallery";
+import CuisineGallery from "./farihy_components/CuisineRestaurantGallery";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -13,6 +14,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       {/* Passing data via props */}
       <MassageGallery/>
       <RestaurantGallery/>
+      <CuisineGallery/>
  
 
     </div>
