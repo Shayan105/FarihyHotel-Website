@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
+// 1. Import Autoplay module here
+import { Autoplay, Pagination } from 'swiper/modules';
 import VerticalPicture from './VerticalPicture';
 
-// 1. Import Lightbox and its styles
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 
@@ -30,8 +29,6 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
   footerTextSuffix,
   ctaLink,
 }) => {
-  // 2. State to track if lightbox is open and which image index to show
-  // -1 means closed, 0+ means open at that index
   const [index, setIndex] = useState(-1);
 
   const serifStyle: React.CSSProperties = {
@@ -42,7 +39,6 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
 
   return (
     <section className="w-100 py-5">
-      {/* Header */}
       <div className="mb-5">
         <h2 className="display-4" style={{ ...serifStyle, fontWeight: 500 }}>
           {title}
@@ -52,10 +48,18 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
         </p>
       </div>
 
-      {/* Slider Section */}
       <div className="container-fluid px-0">
         <Swiper
-          modules={[Pagination]}
+          // 2. Add Autoplay to the modules list
+          modules={[Autoplay, Pagination]}
+          
+          // 3. Configure the auto-scroll settings
+          autoplay={{
+            delay: 5000, // 8 seconds
+            disableOnInteraction: false, // Continues scrolling even after user swipes manually
+            pauseOnMouseEnter: true, // (Optional) Stops scrolling while user hovers to click
+          }}
+          
           spaceBetween={30}
           slidesPerView={1}
           loop={images.length > 3}
@@ -74,7 +78,6 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
                 ratio="4 / 5"
                 maxWidth="100%"
                 focusPosition={img.focusPosition}
-                // 3. Trigger the lightbox on click
                 onClick={() => setIndex(i)} 
               />
             </SwiperSlide>
@@ -82,16 +85,13 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
         </Swiper>
       </div>
 
-      {/* 4. The Lightbox Component */}
       <Lightbox
         open={index >= 0}
         index={index}
         close={() => setIndex(-1)}
-        // Prepare slides for the library
         slides={images.map((img) => ({ src: img.path, alt: img.alt }))} 
       />
 
-      {/* Footer */}
       {(footerTextPrefix || footerLinkText) && (
         <div className="mt-4">
           <p className="mx-auto" style={{ ...serifStyle, maxWidth: '750px', fontSize: '1.2rem' }}>
