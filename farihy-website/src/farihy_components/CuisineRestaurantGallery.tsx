@@ -14,27 +14,27 @@ const CuisineGallery: React.FC = () => {
     images: [
       {
         path: basePath + "cuisine-1.jpg",
-        alt: "",
+        focusPosition: "top",
       },
       {
         path: basePath + "cuisine-2.jpg",
-        alt: "",
+        focusPosition: "",
       },
       {
         path: basePath + "cuisine-3.jpg",
-        alt: "",
+        focusPosition: "",
       },
       {
         path: basePath + "cuisine-4.jpg",
-        alt: "",
+        focusPosition: "0% 40%",
       },
       {
         path: basePath + "cuisine-5.jpg",
-        alt: "",
+        focusPosition: "bottom",
       },
       {
         path: basePath + "cuisine-6.jpg",
-        alt: "",
+        focusPosition: "0%50%",
       },
     ],
   };
