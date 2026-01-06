@@ -5,8 +5,11 @@ interface VerticalPictureProps {
   altText?: string;
   containerClass?: string;
   maxWidth?: string | number;
-
   ratio?: string;
+  /** * Controls the focal point of the crop. 
+   * Examples: "center", "top", "bottom", "left", "right", "50% 20%" 
+   */
+  focusPosition?: string; 
 }
 
 const VerticalPicture: React.FC<VerticalPictureProps> = ({
@@ -15,6 +18,7 @@ const VerticalPicture: React.FC<VerticalPictureProps> = ({
   containerClass = "",
   maxWidth = "400px",
   ratio = "4 / 5",
+  focusPosition = "center", // Default remains center
 }) => {
   return (
     <div
@@ -32,7 +36,8 @@ const VerticalPicture: React.FC<VerticalPictureProps> = ({
         style={{
           aspectRatio: ratio,
           objectFit: "cover",
-          objectPosition: "center",
+          // This allows you to shift the image
+          objectPosition: focusPosition, 
         }}
       />
     </div>

@@ -32,6 +32,7 @@ const RestaurantGallery: React.FC = () => {
         alt: "" 
       },      { 
         path: basePath+"restaurant-7.jpg", 
+        focusPosition:"30%",
         alt: "" 
       },
 

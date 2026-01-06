@@ -10,7 +10,7 @@ import 'swiper/css/pagination';
 interface ImageGalleryProps {
   title: string;
   subtitle: string;
-  images: { path: string; alt?: string }[];
+  images: { path: string; alt?: string,focusPosition?:string }[];
   footerTextPrefix?: string;
   footerLinkText?: string;
   footerTextSuffix?: string;
@@ -51,7 +51,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
           spaceBetween={30}
           slidesPerView={1} // Par défaut pour mobile
           loop={images.length > 3}
-          autoplay={{ delay: 3000, disableOnInteraction: false }}
+          autoplay={{ delay: 10000, disableOnInteraction: false }}
           pagination={{ clickable: true }}
           breakpoints={{
             // Configuration adaptative (Responsive)
@@ -67,6 +67,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
                 altText={img.alt || `Gallery image ${index + 1}`}
                 ratio="4 / 5"
                 maxWidth="100%"
+                focusPosition={img.focusPosition}
               />
             </SwiperSlide>
           ))}
