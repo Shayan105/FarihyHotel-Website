@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination } from 'swiper/modules';
+import { Pagination } from 'swiper/modules';
 import VerticalPicture from './VerticalPicture';
 
-// Import des styles Swiper
+// 1. Import Lightbox and its styles
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+
+// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 
 interface ImageGalleryProps {
   title: string;
   subtitle: string;
-  images: { path: string; alt?: string,focusPosition?:string }[];
+  images: { path: string; alt?: string, focusPosition?: string }[];
   footerTextPrefix?: string;
   footerLinkText?: string;
   footerTextSuffix?: string;
@@ -26,6 +30,10 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
   footerTextSuffix,
   ctaLink,
 }) => {
+  // 2. State to track if lightbox is open and which image index to show
+  // -1 means closed, 0+ means open at that index
+  const [index, setIndex] = useState(-1);
+
   const serifStyle: React.CSSProperties = {
     fontFamily: "'Playfair Display', serif",
     color: '#4a3728',
@@ -47,32 +55,41 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
       {/* Slider Section */}
       <div className="container-fluid px-0">
         <Swiper
-          modules={[Autoplay, Pagination]}
+          modules={[Pagination]}
           spaceBetween={30}
-          slidesPerView={1} // Par défaut pour mobile
+          slidesPerView={1}
           loop={images.length > 3}
-          autoplay={{ delay: 10000, disableOnInteraction: false }}
           pagination={{ clickable: true }}
           breakpoints={{
-            // Configuration adaptative (Responsive)
             768: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 }, // Affiche 3 images comme sur votre maquette
+            1024: { slidesPerView: 3 },
           }}
           className="pb-5"
         >
-          {images.map((img, index) => (
-            <SwiperSlide key={index} className="d-flex justify-content-center">
+          {images.map((img, i) => (
+            <SwiperSlide key={i} className="d-flex justify-content-center">
               <VerticalPicture
                 imagePath={img.path}
-                altText={img.alt || `Gallery image ${index + 1}`}
+                altText={img.alt || `Gallery image ${i + 1}`}
                 ratio="4 / 5"
                 maxWidth="100%"
                 focusPosition={img.focusPosition}
+                // 3. Trigger the lightbox on click
+                onClick={() => setIndex(i)} 
               />
             </SwiperSlide>
           ))}
         </Swiper>
       </div>
+
+      {/* 4. The Lightbox Component */}
+      <Lightbox
+        open={index >= 0}
+        index={index}
+        close={() => setIndex(-1)}
+        // Prepare slides for the library
+        slides={images.map((img) => ({ src: img.path, alt: img.alt }))} 
+      />
 
       {/* Footer */}
       {(footerTextPrefix || footerLinkText) && (
@@ -89,7 +106,6 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({
         </div>
       )}
 
-      {/* Style pour personnaliser les points de pagination aux couleurs du thème */}
       <style>{`
         .swiper-pagination-bullet-active {
           background: #4a3728 !important;
