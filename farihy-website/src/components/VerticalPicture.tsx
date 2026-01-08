@@ -9,7 +9,7 @@ interface VerticalPictureProps {
   ratio?: string;
   focusPosition?: string;
   // New prop
-  onClick?: () => void; 
+  onClick?: () => void;
 }
 
 const VerticalPicture: React.FC<VerticalPictureProps> = ({
@@ -26,11 +26,11 @@ const VerticalPicture: React.FC<VerticalPictureProps> = ({
       onClick={onClick} // Attach click handler
       className={`d-inline-block overflow-hidden shadow ${containerClass}`}
       style={{
-        borderRadius: "40px",
+        borderRadius: "0.375rem",
         maxWidth: maxWidth,
         width: "100%",
         // Add pointer cursor if onClick exists
-        cursor: onClick ? "pointer" : "default", 
+        cursor: onClick ? "pointer" : "default",
       }}
     >
       <img

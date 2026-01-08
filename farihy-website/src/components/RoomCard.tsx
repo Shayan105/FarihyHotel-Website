@@ -22,7 +22,6 @@ const RoomCard: React.FC<RoomCardProps> = ({
     maxWidth: '500px',
     backgroundColor: '#F9F5F0',
     border: 'none',
-    borderRadius: '25px',
     padding: '20px',
   };
 
@@ -43,7 +42,7 @@ const RoomCard: React.FC<RoomCardProps> = ({
   const imgStyle: React.CSSProperties = {
     width: '100%',
     display: 'block',
-    borderRadius: '15px',
+    borderRadius: '0.375rem',
     objectFit: 'cover', // Ensures image covers area without distortion
     height: '300px'     // Fixed height to keep cards uniform
   };
