@@ -4,7 +4,7 @@ import LargePictureGallery, {
   GalleryImage,
 } from "../components/LargePictureGallery";
 
-// 1. Define the shape of a single presentation block
+// 1. Structure d'une section de contenu (Texte + Image)
 export interface PresentationSection {
   imageSrc?: string;
   text: string[];
@@ -16,31 +16,40 @@ export interface PresentationSection {
   reversed?: boolean;
 }
 
-// 2. Update Page Props
+// 2. Props globales du Template
 interface RoomPageProps {
-  // Global Page Info
+  // Header & Titre
   headerImageSrc?: string;
   pageTitle?: string;
 
-  // Content: An array of sections instead of single fields
+  // Contenu principal (Liste de sections)
   contentSections: PresentationSection[]; 
 
-  // Gallery
+  // Galerie photo
   galleryTitle?: string;
   galleryImages?: GalleryImage[];
+
+  // NOUVEAU : Le composant pour les autres chambres (Optionnel)
+  otherRoomsComponent?: React.ReactNode;
 }
 
 const FarihyRoomPageTemplate: React.FC<RoomPageProps> = ({
   headerImageSrc,
   pageTitle,
-  contentSections, // <--- We now receive a list
+  contentSections,
   galleryTitle = "Aperçu de la chambre",
   galleryImages,
+  otherRoomsComponent, // <-- On récupère le composant ici
 }) => {
   
+  const titleStyle = { 
+    color: "#4a3728", 
+    fontFamily: "'Playfair Display', serif" 
+  };
+
   return (
     <>
-      {/* 1. HEADER (Only appears once) */}
+      {/* 1. HEADER (Affiché seulement si une image est fournie) */}
       {headerImageSrc && (
         <div className="w-100">
           <img
@@ -52,28 +61,45 @@ const FarihyRoomPageTemplate: React.FC<RoomPageProps> = ({
         </div>
       )}
 
-      {/* 2. TITLE (Only appears once) */}
+      {/* 2. TITRE DE LA PAGE */}
       {pageTitle && (
         <div className="container py-5 text-center">
-          <h1 className="display-4" style={{ color: "#4a3728" }}>
+          <h1 className="display-4" style={titleStyle}>
             {pageTitle}
           </h1>
         </div>
       )}
 
-      {/* 3. DYNAMIC CONTENT SECTIONS (Loop through the array) */}
+      {/* 3. SECTIONS DE PRÉSENTATION (Boucle sur le contenu) */}
       {contentSections.map((section, index) => (
         <FarihyRoomPresentationCard
-          key={index} // React needs a key for lists
-          imageSrc={section.imageSrc || ""} // Handle optional image
-          reversed={section.reversed ?? (index % 2 !== 0)} // Optional: Auto-alternate sides if not specified
+          key={index}
+          imageSrc={section.imageSrc || ""}
+          reversed={section.reversed ?? (index % 2 !== 0)} // Alterne gauche/droite auto si non précisé
           mainText={section.text}
           details={section.details}
         />
       ))}
 
-      {/* 4. GALLERY (At the bottom) */}
+      {/* 4. GALERIE PHOTOS */}
       <LargePictureGallery title={galleryTitle} images={galleryImages} />
+
+      {/* 5. SUGGESTIONS (Ils pourraient aussi vous plaire) */}
+      {otherRoomsComponent && (
+        <div className="container-fluid py-5" style={{ backgroundColor: "#F9F5F0" }}>
+            <div className="container text-center">
+                {/* Petit trait de séparation élégant */}
+                <hr className="mb-5 opacity-25" style={{ borderColor: "#4a3728", width: "60%", margin: "0 auto" }} />
+                
+                <h3 className="display-6 mb-5" style={titleStyle}>
+                    Ils pourraient aussi vous plaire
+                </h3>
+                
+                {/* Affichage du composant passé en props (ex: FarihyRoomGallery) */}
+                {otherRoomsComponent}
+            </div>
+        </div>
+      )}
     </>
   );
 };
