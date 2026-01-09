@@ -12,6 +12,7 @@ import {
   SuiteCard,
   DuplexCard,
   DoubleCard,
+  VillaCard,
 } from "../../../components/RoomCard";
 import { GalleryImage } from "../../../components/LargePictureGallery";
 
@@ -31,7 +32,7 @@ const OtherRoomsSuggestions = () => {
   // Liste des chambres à afficher (On exclut la Familiale)
   const rooms = [
     { id: "double", Component: DoubleCard },
-    { id: "suite", Component: SuiteCard },
+    { id: "villa", Component: VillaCard },
     { id: "duplex", Component: DuplexCard },
     { id: "familial", Component: FamilialeCard },
   ];
@@ -79,8 +80,8 @@ const OtherRoomsSuggestions = () => {
 };
 
 // --- Page Principale ---
-const FarihyVillaPage = () => {
-  const basePath = "/src/assets/pictures/villa/";
+const FarihySuitePage = () => {
+  const basePath = "/src/assets/pictures/suite/";
 
   const bungalowImages: GalleryImage[] = [
     { src: basePath + "1.jpg" },
@@ -89,40 +90,32 @@ const FarihyVillaPage = () => {
     { src: basePath + "4.jpg" },
     { src: basePath + "5.jpg" },
     { src: basePath + "6.jpg" },
-    { src: basePath + "7.jpg" },
-    { src: basePath + "8.jpg" },
-    { src: basePath + "9.jpg" },
     { src: basePath + "ext.jpg" },
   ];
 
   const pageSections: PresentationSection[] = [
     {
-      imageSrc: basePath + "8.jpg",
+      imageSrc: basePath + "2.jpg",
       reversed: true,
       text: [
-        "La Villa spacieuse de 200 m² offre une vue imprenable sur le lac Itasy depuis ses deux balcons.",
-        "Elle est idéale pour les grandes familles et peut accueillir jusqu’à 10 personnes.",
-        "Au rez-de-chaussée, elle dispose de deux chambres :  une double et une triple.  Deux salles de bains, dont l’une est équipée d’une grande baignoire ainsi que d’une douche à l’italienne.",
-        "Un confortable coin salon complète cet espace.",
+        "Cette suite de 80 m² , idéale pour un couple, un groupe d’amis ou une famille jusqu’à 5 personnes",
+        "Elle se compose de deux chambres communicantes.",
+        "La chambre principale est équipée d’un lit Queen-size et dispose de sa propre salle de bains.",
+        "La seconde chambre est modulable, avec trois lits simples ou un lit double et un lit simple, et comprend également une salle de bains.",
+        "Les équipements incluent la ventilation, une télévision et une connexion WIFI."
       ],
     },
     {
-      imageSrc: basePath + "2.jpg",
+      imageSrc: basePath + "1.jpg",
       reversed: false,
       text: [
-        "À l’étage, deux chambres communicantes sont aménagées : une chambre triple et une chambre double, avec deux salles de bains, dont l’une comprend également une baignoire.",
-        "Les équipements incluent la ventilation, la télévision ainsi que la connexion WIFI."
-      ],
-    },
-    {
-      imageSrc: basePath + "9.jpg",
-      reversed: true,
-      text: [
-        "La villa bénéficie par ailleurs d’une vaste terrasse ombragée donnant sur la piscine et le jacuzzi, idéale pour des moments de détente en toute sérénité.",
+        "La suite bénéficie d’une terrasse privée donnant sur le lac, d’une piscine privée ainsi que d’un jacuzzi*, pour des moments de détente privilégiés.",
+        
       ],
       details: {
-        price: "Tarif hors petit-déjeuner : 425.000 Ariary la nuit",
+        price: "Tarif hors petit-déjeuner : 750.000 Ariary la nuit",
         checkIn: "Check-in : 13h00 - Check-out : 11h00",
+        addText: "*Pour des raisons énergétiques, le jacuzzi peut être utilisé 30 minutes par jour entre 8h00 et 19h00"
       },
     },
 
@@ -131,10 +124,10 @@ const FarihyVillaPage = () => {
 
   return (
     <FarihyRoomPageTemplate
-      headerImageSrc={basePath + "ext.jpg"}
-      pageTitle="La Villa"
+      headerImageSrc={basePath + "6.jpg"}
+      pageTitle="La Suite"
       contentSections={pageSections}
-      galleryTitle="Aperçu de la Villa"
+      galleryTitle="Aperçu de la Suite"
       galleryImages={bungalowImages}
       // Injection du composant créé ci-dessus
       otherRoomsComponent={<OtherRoomsSuggestions />}
@@ -142,4 +135,4 @@ const FarihyVillaPage = () => {
   );
 };
 
-export default FarihyVillaPage;
+export default FarihySuitePage;

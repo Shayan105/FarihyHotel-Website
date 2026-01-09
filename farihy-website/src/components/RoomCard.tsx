@@ -34,7 +34,7 @@ export const farihyRooms: RoomData[] = [
     id: 2,
     minPax: 1,
     maxPax: 5,
-    roomName: "Les Familiales",
+    roomName: "Familiales",
     price: "425 000",
     imagePath: "/src/assets/pictures/familiale/ext.jpg",
   },

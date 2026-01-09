@@ -33,9 +33,7 @@ const OtherRoomsSuggestions = () => {
 
   return (
     <div>
-      <h3 className="mb-4" style={{ fontFamily: 'serif', color: '#5C3D2E' }}>
-        Découvrir nos autres hébergements
-      </h3>
+
 
       {/* --- VUE MOBILE : SWIPER (Visible seulement sur petit écran) --- */}
       {/* Note: 'd-md-none' est une classe Bootstrap qui cache l'élément sur medium screens et + */}
