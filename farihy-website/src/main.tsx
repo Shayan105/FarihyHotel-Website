@@ -4,14 +4,14 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./assets/css/index.css";
 
 // Import your new Header
-import FarihyHeader from "./farihy_components/FarihyHeader";
+import FarihyHeader from "./farihy_components/PresentationPage/FarihyHeader";
 import RoomCard from "./components/RoomCard";
-import FarihyBanner from "./farihy_components/FarihyBanner";
-import PresentationCard from "./farihy_components/PresentationCard";
-import FarihyRoomGallery from "./farihy_components/FarihyRoomGallery";
-import RestaurantGallery from "./farihy_components/RestaurantImageGallery";
-import CuisineGallery from "./farihy_components/CuisineRestaurantGallery";
-import MassageGallery from "./farihy_components/MassageImageGallery";
+import FarihyBanner from "./farihy_components/PresentationPage/FarihyBanner";
+import PresentationCard from "./farihy_components/PresentationPage/PresentationCard";
+import FarihyRoomGallery from "./farihy_components/PresentationPage/FarihyRoomGallery";
+import RestaurantGallery from "./farihy_components/PresentationPage/RestaurantImageGallery";
+import CuisineGallery from "./farihy_components/PresentationPage/CuisineRestaurantGallery";
+import MassageGallery from "./farihy_components/PresentationPage/MassageImageGallery";
 import FarihyFamilialPage from "./farihy_components/bungalow_components/FamilialePictureGallery";
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>

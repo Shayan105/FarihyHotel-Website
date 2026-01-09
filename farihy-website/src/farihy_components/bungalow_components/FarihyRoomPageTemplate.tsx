@@ -1,8 +1,8 @@
 import React from "react";
-import FarihyRoomPresentationCard from "./FarihyRoomPresentationCard";
+import FarihyRoomPresentationCard from "../FarihyRoomPresentationCard";
 import LargePictureGallery, {
   GalleryImage,
-} from "../components/LargePictureGallery";
+} from "../../components/LargePictureGallery";
 
 // 1. Structure d'une section de contenu (Texte + Image)
 export interface PresentationSection {

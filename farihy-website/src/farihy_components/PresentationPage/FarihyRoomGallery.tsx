@@ -1,5 +1,5 @@
 import React from 'react';
-import RoomGallery from '../components/RoomGallery';
+import RoomGallery from '../../components/RoomGallery';
 
 // Importez vos images ici si elles sont dans src/assets
 // import imgDouble from '../assets/pictures/chambres/double.jpg';

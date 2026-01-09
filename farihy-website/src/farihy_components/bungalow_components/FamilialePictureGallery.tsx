@@ -1,6 +1,6 @@
 import React from "react";
-import FarihyRoomPageTemplate from "../FarihyRoomPageTemplate";
-import FarihyRoomGallery from "../FarihyRoomGallery"; // 1. Import the gallery component
+import FarihyRoomPageTemplate from "./FarihyRoomPageTemplate";
+import FarihyRoomGallery from "../PresentationPage/FarihyRoomGallery"; // 1. Import the gallery component
 import { GalleryImage } from "../../components/LargePictureGallery";
 
 // Define interface for readability (optional, based on your project structure)
@@ -57,8 +57,6 @@ const FarihyFamilialPage = () => {
       galleryTitle="Aperçu du bungalow"
       galleryImages={bungalowImages}
       
-      // Other Rooms (The Fix)
-      // We pass the component directly. Ensure FarihyRoomPageTemplate renders this prop.
       otherRoomsComponent={<FarihyRoomGallery />} 
     />
   );
