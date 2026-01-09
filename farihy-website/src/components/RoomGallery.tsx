@@ -1,32 +1,26 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from 'swiper/modules';
-import RoomCard from '../components/RoomCard';
 
 // Styles Swiper
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
-export interface RoomData {
-  id: string | number;
-  minPax: number;
-  maxPax: number;
-  price: string | number;
-  imagePath: string;
-  roomName: string;
-}
-
 interface RoomGalleryProps {
   title?: string;
-  rooms: RoomData[];
+  // This accepts any React elements (RoomCards, divs, etc.)
+  children: React.ReactNode; 
 }
 
 const RoomGallery: React.FC<RoomGalleryProps> = ({ 
   title = "Nos hébergements", 
-  rooms 
+  children 
 }) => {
   
+  // Convert children to an array to map over them easily
+  const cards = React.Children.toArray(children);
+
   const titleStyle: React.CSSProperties = {
     fontFamily: "'Playfair Display', serif",
     color: '#4a3728',
@@ -49,18 +43,11 @@ const RoomGallery: React.FC<RoomGalleryProps> = ({
             Visible only on XL screens (>= 1200px)
            ========================================= */}
         <div className="d-none d-xl-flex row justify-content-center g-4">
-          {rooms.map((room) => (
-            // col-xl-4 means 3 cards per row (12 columns / 4 = 3)
-            // d-flex aligns items stretch so all cards are same height
-            <div key={room.id} className="col-xl-4 d-flex justify-content-center">
+          {cards.map((card, index) => (
+            <div key={index} className="col-xl-4 d-flex justify-content-center">
+              {/* Wrapper to ensure the card takes full height/width of the column */}
               <div className="w-100">
-                <RoomCard
-                  minPax={room.minPax}
-                  maxPax={room.maxPax}
-                  price={room.price}
-                  imagePath={room.imagePath}
-                  roomName={room.roomName}
-                />
+                {card}
               </div>
             </div>
           ))}
@@ -79,28 +66,20 @@ const RoomGallery: React.FC<RoomGalleryProps> = ({
             pagination={{ clickable: true }}
             breakpoints={{
               768: { slidesPerView: 2 },
-              // We don't need the 1200 breakpoint here anymore 
-              // because this entire Swiper div hides at 1200px
             }}
             className="pb-5 px-4"
           >
-            {rooms.map((room) => (
-              <SwiperSlide key={room.id} className="d-flex justify-content-center h-auto">
+            {cards.map((card, index) => (
+              // SwiperSlide requires specific keys and classes
+              <SwiperSlide key={index} className="d-flex justify-content-center h-auto">
                 <div className="h-100 w-100"> 
-                  <RoomCard
-                    minPax={room.minPax}
-                    maxPax={room.maxPax}
-                    price={room.price}
-                    imagePath={room.imagePath}
-                    roomName={room.roomName}
-                  />
+                  {card}
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
 
-        {/* Styles specific to Swiper */}
         <style>{`
           .swiper-pagination-bullet-active {
             background-color: #4a3728 !important;
