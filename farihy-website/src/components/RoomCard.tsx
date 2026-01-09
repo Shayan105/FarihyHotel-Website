@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 // --- 1. Interfaces ---
 interface RoomData {
@@ -28,7 +28,7 @@ export const farihyRooms: RoomData[] = [
     maxPax: 2,
     roomName: "Les Doubles",
     price: "400 000",
-    imagePath: "/src/assets/pictures/double/ext.jpg", 
+    imagePath: "/src/assets/pictures/double/ext.jpg",
   },
   {
     id: 2,
@@ -65,60 +65,70 @@ export const farihyRooms: RoomData[] = [
 ];
 
 // --- 3. Le Composant de Base (UI) ---
-export const RoomCard: React.FC<RoomCardProps> = ({ 
-  minPax, 
-  maxPax, 
-  price, 
-  imagePath, 
+export const RoomCard: React.FC<RoomCardProps> = ({
+  minPax,
+  maxPax,
+  price,
+  imagePath,
   roomName,
-  style 
+  style,
 }) => {
-  
   const cardStyle: React.CSSProperties = {
-    width: '100%', 
-    backgroundColor: '#F9F5F0',
-    border: 'none',
-    padding: '20px',
-    boxSizing: 'border-box',
-    ...style // Permet d'écraser les styles par défaut
+    width: "100%",
+    backgroundColor: "#F9F5F0",
+    border: "none",
+    padding: "20px",
+    boxSizing: "border-box",
+    ...style, // Permet d'écraser les styles par défaut
   };
 
   const contentBorderStyle: React.CSSProperties = {
-    border: '1px solid #7D5A44',
-    padding: '30px 25px',
-    display: 'flex',
-    flexDirection: 'column',
-    color: '#5C3D2E',
-    height: 'auto',
+    border: "1px solid #7D5A44",
+    padding: "30px 25px",
+    display: "flex",
+    flexDirection: "column",
+    color: "#5C3D2E",
+    height: "auto",
   };
 
   const textStyle: React.CSSProperties = {
-    fontFamily: 'serif',
-    letterSpacing: '0.5px',
+    fontFamily: "serif",
+    letterSpacing: "0.5px",
   };
 
   const imgStyle: React.CSSProperties = {
-    width: '100%',
-    display: 'block',
-    borderRadius: '0.375rem',
-    objectFit: 'cover',
-    height: '300px'
+    width: "100%",
+    display: "block",
+    borderRadius: "0.375rem",
+    objectFit: "cover",
+    height: "300px",
   };
 
   return (
     <div className="card shadow-sm" style={cardStyle}>
-      <img src={imagePath} className="img-fluid" alt={roomName} style={imgStyle} />
+      <img
+        src={imagePath}
+        className="img-fluid"
+        alt={roomName}
+        style={imgStyle}
+      />
       <div className="mt-3" style={contentBorderStyle}>
         <div className="mb-3">
-          <p className="mb-0" style={{ ...textStyle, fontSize: '1.2rem', opacity: 0.8 }}>
+          <p
+            className="mb-0"
+            style={{ ...textStyle, fontSize: "1.2rem", opacity: 0.8 }}
+          >
             {minPax} à {maxPax} personnes
           </p>
         </div>
         <div className="mt-1">
-          <h2 className="display-6 mb-1" style={{ ...textStyle, fontWeight: '500' }}>
+          <h2
+            className="display-6 mb-1"
+            style={{ ...textStyle, fontWeight: "500" }}
+          >
             {roomName}
           </h2>
-          <p className="mb-0" style={{ ...textStyle, fontSize: '1.1rem' }}>
+          <p className="mb-0" style={{ ...textStyle, fontSize: "1.1rem" }}>
             dès {price} Ariary la nuit
           </p>
         </div>
@@ -130,7 +140,7 @@ export const RoomCard: React.FC<RoomCardProps> = ({
 // --- 4. Les Composants Spécifiques Instanciables ---
 
 // Helper pour trouver les data sans risque de crash si l'ID change
-const getData = (id: number) => farihyRooms.find(r => r.id === id);
+const getData = (id: number) => farihyRooms.find((r) => r.id === id);
 
 export const DoubleCard = () => {
   const data = getData(1);
@@ -157,17 +167,16 @@ export const VillaCard = () => {
   return data ? <RoomCard {...data} /> : null;
 };
 
-
 // --- 5. La Liste Complète (Grid) ---
 
 export const FarihyRoomList: React.FC = () => {
   const gridStyle: React.CSSProperties = {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-    gap: '2rem',
-    padding: '2rem',
-    maxWidth: '1400px',
-    margin: '0 auto'
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
+    gap: "2rem",
+    padding: "2rem",
+    maxWidth: "1400px",
+    margin: "0 auto",
   };
 
   return (

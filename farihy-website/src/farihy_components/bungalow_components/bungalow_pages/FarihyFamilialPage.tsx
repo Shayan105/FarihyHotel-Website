@@ -6,9 +6,9 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 
-import FarihyRoomPageTemplate from "./FarihyRoomPageTemplate";
-import { VillaCard, SuiteCard, DuplexCard, DoubleCard } from "../../components/RoomCard";
-import { GalleryImage } from "../../components/LargePictureGallery";
+import FarihyRoomPageTemplate from "../FarihyRoomPageTemplate";
+import { VillaCard, SuiteCard, DuplexCard, DoubleCard } from "../../../components/RoomCard";
+import { GalleryImage } from "../../../components/LargePictureGallery";
 
 // --- Interfaces ---
 interface PresentationSection {

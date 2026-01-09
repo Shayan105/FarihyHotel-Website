@@ -30,6 +30,9 @@ const FarihyRoomPresentationCard: React.FC<FarihyRoomPresentationCardProps> = ({
     color: themeColors.text,
   };
 
+  // Logique de la bordure (reste la même)
+  const borderClass = reversed ? "border-start" : "border-end";
+
   return (
     <section 
       className="container-fluid p-0" 
@@ -37,11 +40,22 @@ const FarihyRoomPresentationCard: React.FC<FarihyRoomPresentationCardProps> = ({
     >
       <div className={`row g-0 ${reversed ? "flex-row-reverse" : ""}`}>
         
-        {/* --- COLONNE TEXTE (40% de la largeur) --- */}
-        {/* Changement ici : col-lg-6 devient col-lg-5 */}
-        <div className="col-lg-5 d-flex flex-column justify-content-center align-items-center text-center">
-          
-          <div className="p-5" style={{ maxWidth: "600px" }}>
+        {/* --- COLONNE TEXTE (50% de la largeur) --- */}
+        {/* CHANGEMENT ICI : col-lg-6 au lieu de col-lg-5 */}
+        <div 
+          className={`col-lg-6 d-flex flex-column justify-content-center align-items-center text-center position-relative`}
+        >
+            {/* Ligne de séparation */}
+            <div 
+                className={`d-none d-lg-block position-absolute top-0 bottom-0 w-100 ${borderClass}`}
+                style={{ 
+                    borderColor: themeColors.text, 
+                    pointerEvents: 'none',
+                    opacity: 0.3
+                }}
+            />
+
+          <div className="p-5" style={{ maxWidth: "600px", zIndex: 1 }}>
             
             <div className="mb-5">
               {mainText.map((text, index) => (
@@ -70,9 +84,9 @@ const FarihyRoomPresentationCard: React.FC<FarihyRoomPresentationCardProps> = ({
           </div>
         </div>
 
-        {/* --- COLONNE IMAGE (60% de la largeur) --- */}
-        {/* Changement ici : col-lg-6 devient col-lg-7 */}
-        <div className="col-lg-7">
+        {/* --- COLONNE IMAGE (50% de la largeur) --- */}
+        {/* CHANGEMENT ICI : col-lg-6 au lieu de col-lg-7 */}
+        <div className="col-lg-6">
           <img 
             src={imageSrc} 
             alt="Détail de la chambre" 
@@ -80,7 +94,6 @@ const FarihyRoomPresentationCard: React.FC<FarihyRoomPresentationCardProps> = ({
             style={{ 
               objectFit: "cover", 
               minHeight: "500px", 
-              // Optionnel : max-height pour éviter que ça soit trop grand sur les écrans géants
               maxHeight: "900px"  
             }} 
           />

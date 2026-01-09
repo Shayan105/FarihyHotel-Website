@@ -4,24 +4,18 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./assets/css/index.css";
 
 // Import your new Header
-import FarihyHeader from "./farihy_components/presentation_page/FarihyHeader";
-import RoomCard from "./components/RoomCard";
-import FarihyBanner from "./farihy_components/presentation_page/FarihyBanner";
-import PresentationCard from "./farihy_components/presentation_page/PresentationCard";
-import FarihyRoomGallery from "./farihy_components/presentation_page/FarihyRoomGallery";
-import RestaurantGallery from "./farihy_components/presentation_page/RestaurantImageGallery";
-import CuisineGallery from "./farihy_components/presentation_page/CuisineRestaurantGallery";
-import MassageGallery from "./farihy_components/presentation_page/MassageImageGallery";
-import FarihyFamilialPage from "./farihy_components/bungalow_components/FamilialePictureGallery";
+
+import FarihyFamilialPage from "./farihy_components/bungalow_components/bungalow_pages/FarihyFamilialPage";
+import FarihyVillaPage from "./farihy_components/bungalow_components/bungalow_pages/FarihyVillaPage";
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    {/* 1. Render the Header at the top */}
-    <FarihyHeader />
+
 
     {/* 2. Main Wrapper */}
     {/* ADD paddingTop: '80px' so the content isn't hidden behind the header */}
     <div className="container-fluid p-0" style={{ paddingTop: '80px' }}>
       <FarihyFamilialPage/>
+      <FarihyVillaPage/>
       <div className="container py-5">
 
       </div>
