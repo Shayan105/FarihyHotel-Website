@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom"; // <--- 1. Import Link
 
 // --- 1. Interfaces ---
 interface RoomData {
@@ -8,6 +9,7 @@ interface RoomData {
   roomName: string;
   price: string;
   imagePath: string;
+  link: string; // <--- 2. Add link property here
 }
 
 interface RoomCardProps {
@@ -16,11 +18,11 @@ interface RoomCardProps {
   price: string | number;
   imagePath: string;
   roomName: string;
-  style?: React.CSSProperties; // Ajouté pour permettre de surcharger le style si besoin
+  link: string; // <--- And here
+  style?: React.CSSProperties;
 }
 
 // --- 2. La Source de Données (Data) ---
-// Note: On l'exporte au cas où tu en aurais besoin ailleurs
 export const farihyRooms: RoomData[] = [
   {
     id: 1,
@@ -29,6 +31,7 @@ export const farihyRooms: RoomData[] = [
     roomName: "Les Doubles",
     price: "400 000",
     imagePath: "/src/assets/pictures/double/ext.jpg",
+    link: "/double", // <--- Mapped to your route
   },
   {
     id: 2,
@@ -37,6 +40,7 @@ export const farihyRooms: RoomData[] = [
     roomName: "Familiales",
     price: "425 000",
     imagePath: "/src/assets/pictures/familiale/ext.jpg",
+    link: "/familiale", // <--- Mapped to your route
   },
   {
     id: 3,
@@ -45,6 +49,7 @@ export const farihyRooms: RoomData[] = [
     roomName: "La Suite",
     price: "750 000",
     imagePath: "/src/assets/pictures/suite/ext.jpg",
+    link: "/suite", // <--- Mapped to your route
   },
   {
     id: 4,
@@ -53,6 +58,7 @@ export const farihyRooms: RoomData[] = [
     roomName: "Les Duplex",
     price: "800 000",
     imagePath: "/src/assets/pictures/duplex/ext.jpg",
+    link: "/duplex", // <--- Mapped to your route
   },
   {
     id: 5,
@@ -61,6 +67,7 @@ export const farihyRooms: RoomData[] = [
     roomName: "La Villa",
     price: "1 750 000",
     imagePath: "/src/assets/pictures/villa/ext.jpg",
+    link: "/villa", // <--- Mapped to your route
   },
 ];
 
@@ -71,6 +78,7 @@ export const RoomCard: React.FC<RoomCardProps> = ({
   price,
   imagePath,
   roomName,
+  link, // Receive the link prop
   style,
 }) => {
   const cardStyle: React.CSSProperties = {
@@ -79,7 +87,8 @@ export const RoomCard: React.FC<RoomCardProps> = ({
     border: "none",
     padding: "20px",
     boxSizing: "border-box",
-    ...style, // Permet d'écraser les styles par défaut
+    transition: "transform 0.2s ease", // Add a subtle animation
+    ...style,
   };
 
   const contentBorderStyle: React.CSSProperties = {
@@ -105,41 +114,48 @@ export const RoomCard: React.FC<RoomCardProps> = ({
   };
 
   return (
-    <div className="card shadow-sm" style={cardStyle}>
-      <img
-        src={imagePath}
-        className="img-fluid"
-        alt={roomName}
-        style={imgStyle}
-      />
-      <div className="mt-3" style={contentBorderStyle}>
-        <div className="mb-3">
-          <p
-            className="mb-0"
-            style={{ ...textStyle, fontSize: "1.2rem", opacity: 0.8 }}
-          >
-            {minPax} à {maxPax} personnes
-          </p>
-        </div>
-        <div className="mt-1">
-          <h2
-            className="display-6 mb-1"
-            style={{ ...textStyle, fontWeight: "500" }}
-          >
-            {roomName}
-          </h2>
-          <p className="mb-0" style={{ ...textStyle, fontSize: "1.1rem" }}>
-            dès {price} Ariary la nuit
-          </p>
+    // 3. Wrap the whole card in the Link component
+    <a href={link} style={{ textDecoration: "none", color: "inherit" }}>
+      <div 
+        className="card shadow-sm h-100" // Added h-100 for better consistency
+        style={cardStyle}
+        // Optional: Add hover effect logic here via CSS classes or state if needed
+      >
+        <img
+          src={imagePath}
+          className="img-fluid"
+          alt={roomName}
+          style={imgStyle}
+        />
+        <div className="mt-3" style={contentBorderStyle}>
+          <div className="mb-3">
+            <p
+              className="mb-0"
+              style={{ ...textStyle, fontSize: "1.2rem", opacity: 0.8 }}
+            >
+              {minPax} à {maxPax} personnes
+            </p>
+          </div>
+          <div className="mt-1">
+            <h2
+              className="display-6 mb-1"
+              style={{ ...textStyle, fontWeight: "500" }}
+            >
+              {roomName}
+            </h2>
+            <p className="mb-0" style={{ ...textStyle, fontSize: "1.1rem" }}>
+              dès {price} Ariary la nuit
+            </p>
+          </div>
         </div>
       </div>
-    </div>
+    </a>
   );
 };
 
 // --- 4. Les Composants Spécifiques Instanciables ---
+// No changes needed here, they automatically pass the new 'link' prop via {...data}
 
-// Helper pour trouver les data sans risque de crash si l'ID change
 const getData = (id: number) => farihyRooms.find((r) => r.id === id);
 
 export const DoubleCard = () => {

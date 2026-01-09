@@ -2,38 +2,49 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "bootstrap/dist/css/bootstrap.css"; 
 import "./assets/css/index.css"; 
-import CuisineGallery from "./farihy_components/presentation_page/CuisineRestaurantGallery";
-import FarihyRoomGallery from "./farihy_components/presentation_page/FarihyRoomGallery";
-import MassageGallery from "./farihy_components/presentation_page/MassageImageGallery";
-import PresentationCard from "./farihy_components/presentation_page/PresentationCard";
-import RestaurantGallery from "./farihy_components/presentation_page/RestaurantImageGallery";
 
-
-
-// 1. Import the Header
+// 1. Import Router components
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import FarihyHeader from "./farihy_components/presentation_page/FarihyHeader";
+import HomePage from "./pages/HomePage";
+import FarihyVillaPage from "./farihy_components/bungalow_components/bungalow_pages/FarihyVillaPage";
+import FarihySuitePage from "./farihy_components/bungalow_components/bungalow_pages/FarihySuitePage";
+import FarihyDoublePage from "./farihy_components/bungalow_components/bungalow_pages/FarihyDoublePage";
+import FarihyDuplexPage from "./farihy_components/bungalow_components/bungalow_pages/FarihyDuplexPage";
+import FarihyFamilialPage from "./farihy_components/bungalow_components/bungalow_pages/FarihyFamilialPage";
+
+// 2. Import your Layout/Header and Pages
+
+
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    {/* 2. Render the Header at the top */}
-    <FarihyHeader />
-
-    {/* 3. Add paddingTop: "80px" 
-        Because the header is fixed, we need to push the content down 
-        by the exact height of the header (80px) so it is not hidden.
-    */}
-    <div className="container-fluid p-0" style={{ paddingTop: "80px" }}>
+    {/* 3. Wrap everything in BrowserRouter */}
+    <BrowserRouter>
       
-      <PresentationCard/>
+      {/* Header is outside Routes so it stays visible on ALL pages */}
+      <FarihyHeader />
 
-      <FarihyRoomGallery />
+      {/* Add padding because Header is fixed-top */}
+      <div className="container-fluid p-0" style={{ paddingTop: "80px" }}>
+        
+        {/* 4. Define your Routes */}
+        <Routes>
+          {/* When URL is /, show HomePage */}
+          <Route path="/" element={<HomePage />} />
+          
+          {/* Room routes*/}
+          <Route path="/villa" element={<FarihyVillaPage />} />
+          <Route path="/suite" element={<FarihySuitePage />} />
+          <Route path="/double" element={<FarihyDoublePage />} />
+          <Route path="/duplex" element={<FarihyDuplexPage />} />
+          <Route path="/familiale" element={<FarihyFamilialPage />} />
+          
+          {/* You can map /bungalows to HomePage too, or a specific BungalowPage */}
+          <Route path="/bungalows" element={<HomePage />} />
+        </Routes>
 
-      <div className="container py-5">
-        <RestaurantGallery/>
-        <CuisineGallery/> 
-        <MassageGallery/>
       </div>
-
-    </div>
+    </BrowserRouter>
   </React.StrictMode>
 );
