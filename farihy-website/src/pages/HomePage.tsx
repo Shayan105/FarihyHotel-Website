@@ -5,16 +5,23 @@ import MassageGallery from "../farihy_components/presentation_page/MassageImageG
 import PresentationCard from "../farihy_components/presentation_page/PresentationCard";
 import RestaurantGallery from "../farihy_components/presentation_page/RestaurantImageGallery";
 
+// 1. Importer le composant Location
+import FarihyLocation from "../farihy_components/presentation_page/FarihyLocation";
+
 const HomePage = () => {
   return (
     <>
       <PresentationCard />
       <FarihyRoomGallery />
+      
       <div className="container py-5">
         <RestaurantGallery />
         <CuisineGallery />
         <MassageGallery />
       </div>
+
+      {/* 2. Ajouter la section map tout en bas */}
+      <FarihyLocation />
     </>
   );
 };
