@@ -72,7 +72,7 @@ const FarihyContact = () => {
     <section style={styles.section}>
       <div className="container">
         <div style={styles.title}>Une question ?<br />Contactez nous ici</div>
-        <p style={styles.subtitle}>Boite de contact par e-mail <span style={styles.redText}>petite* info obligatoire</span></p>
+        <p style={styles.subtitle}><span style={styles.redText}>*information obligatoire</span></p>
 
         <div className="row justify-content-center">
           <div className="col-md-8 col-lg-6">
@@ -112,9 +112,8 @@ const FarihyContact = () => {
               </form>
             ) : (
               <div style={styles.successBox}>
-                <h4 style={{marginBottom: "10px"}}>Dès le formulaire envoyé :</h4>
+                <h4 style={{marginBottom: "10px"}}>Formulaire envoyé</h4>
                 <p style={{margin: 0}}>Nous vous remercions pour votre demande, nous vous répondrons au plus vite.</p>
-                <button onClick={() => setIsSubmitted(false)} style={{...styles.button, fontSize: "0.9rem", padding: "8px 15px", marginTop: "15px"}}>Envoyer un autre message</button>
               </div>
             )}
             

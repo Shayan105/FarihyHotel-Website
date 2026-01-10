@@ -25,7 +25,7 @@ app.post('/send-email', async (req, res) => {
     from: `"${prenom} ${nom}" <${process.env.EMAIL_USER}>`, // L'expéditeur technique doit être votre Gmail
     to: process.env.EMAIL_USER, // Vous recevez le mail
     replyTo: email, // Quand vous répondez, ça va au client
-    subject: `Contact Farihy Hotel: ${sujet}`,
+    subject: `Contact Farihy Hotel Website: ${sujet}`,
     html: `
       <h3>Nouveau message du site web</h3>
       <p><strong>De:</strong> ${prenom} ${nom}</p>
