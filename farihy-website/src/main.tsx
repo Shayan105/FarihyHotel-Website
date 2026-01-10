@@ -16,6 +16,7 @@ import FarihySuitePage from "./farihy_components/bungalow_components/bungalow_pa
 import FarihyDoublePage from "./farihy_components/bungalow_components/bungalow_pages/FarihyDoublePage";
 import FarihyDuplexPage from "./farihy_components/bungalow_components/bungalow_pages/FarihyDuplexPage";
 import FarihyFamilialPage from "./farihy_components/bungalow_components/bungalow_pages/FarihyFamilialPage";
+import FarihyContact from "./farihy_components/contactPage/FarihyContact";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -47,8 +48,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
             <Route path="/double" element={<FarihyDoublePage />} />
             <Route path="/duplex" element={<FarihyDuplexPage />} />
             <Route path="/familiale" element={<FarihyFamilialPage />} />
-            
             <Route path="/bungalows" element={<HomePage />} />
+            {/*Contact Route */}
+            <Route path="/contact" element={<FarihyContact />} />
           </Routes>
         </div>
 
