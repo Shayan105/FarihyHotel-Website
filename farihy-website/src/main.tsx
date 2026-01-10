@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "bootstrap/dist/css/bootstrap.css"; 
-import "./assets/css/index.css"; 
+import "bootstrap/dist/css/bootstrap.css";
+import "./assets/css/index.css";
 
 // 1. Import Router components
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -16,12 +16,11 @@ import FarihySuitePage from "./farihy_components/bungalow_components/bungalow_pa
 import FarihyDoublePage from "./farihy_components/bungalow_components/bungalow_pages/FarihyDoublePage";
 import FarihyDuplexPage from "./farihy_components/bungalow_components/bungalow_pages/FarihyDuplexPage";
 import FarihyFamilialPage from "./farihy_components/bungalow_components/bungalow_pages/FarihyFamilialPage";
-import FarihyContact from "./farihy_components/contactPage/FarihyContact";
-
+import FarihyReservation from "./pages/FarihyReservation";
+import FarihyContact from "./pages/FarihyContact";
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
-      
       {/* HEADER (Fixe en haut) */}
       <FarihyHeader />
 
@@ -29,19 +28,21 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
          On utilise Flexbox pour créer un "Sticky Footer".
          Cela force le footer à rester tout en bas même si la page est vide.
       */}
-      <div className="container-fluid p-0" style={{ 
-          paddingTop: "80px", 
-          minHeight: "100vh",       // Prend au moins toute la hauteur de l'écran
-          display: "flex",          // Active Flexbox
-          flexDirection: "column"   // Organise les éléments en colonne
-      }}>
-        
+      <div
+        className="container-fluid p-0"
+        style={{
+          paddingTop: "80px",
+          minHeight: "100vh", // Prend au moins toute la hauteur de l'écran
+          display: "flex", // Active Flexbox
+          flexDirection: "column", // Organise les éléments en colonne
+        }}
+      >
         {/* WRAPPER DU CONTENU (Routes) */}
         {/* flexGrow: 1 fait que cette div prend tout l'espace vide disponible */}
         <div style={{ flexGrow: 1 }}>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            
+
             {/* Room routes */}
             <Route path="/villa" element={<FarihyVillaPage />} />
             <Route path="/suite" element={<FarihySuitePage />} />
@@ -51,12 +52,13 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
             <Route path="/bungalows" element={<HomePage />} />
             {/*Contact Route */}
             <Route path="/contact" element={<FarihyContact />} />
+            {/*Contact Route */}
+            <Route path="/reservation" element={<FarihyReservation />} />
           </Routes>
         </div>
 
         {/* FOOTER (Sera poussé tout en bas grâce au flexGrow du contenu) */}
         <FarihyFooter />
-
       </div>
     </BrowserRouter>
   </React.StrictMode>
