@@ -1,6 +1,7 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Navigation } from 'swiper/modules';
+// 1. Import Autoplay module
+import { Pagination, Navigation, Autoplay } from 'swiper/modules';
 
 // Styles Swiper
 import 'swiper/css';
@@ -9,7 +10,6 @@ import 'swiper/css/navigation';
 
 interface RoomGalleryProps {
   title?: string;
-  // This accepts any React elements (RoomCards, divs, etc.)
   children: React.ReactNode; 
 }
 
@@ -18,7 +18,6 @@ const RoomGallery: React.FC<RoomGalleryProps> = ({
   children 
 }) => {
   
-  // Convert children to an array to map over them easily
   const cards = React.Children.toArray(children);
 
   const titleStyle: React.CSSProperties = {
@@ -33,19 +32,14 @@ const RoomGallery: React.FC<RoomGalleryProps> = ({
     <section className="py-5" style={{ backgroundColor: '#efebe5' }}>
       <div className="container">
         
-        {/* Section Title */}
         <h2 className="display-4" style={titleStyle}>
           {title}
         </h2>
 
-        {/* =========================================
-            VIEW 1: DESKTOP GRID (Wide Screens) 
-            Visible only on XL screens (>= 1200px)
-           ========================================= */}
+        {/* Desktop View */}
         <div className="d-none d-xl-flex row justify-content-center g-4">
           {cards.map((card, index) => (
             <div key={index} className="col-xl-4 d-flex justify-content-center">
-              {/* Wrapper to ensure the card takes full height/width of the column */}
               <div className="w-100">
                 {card}
               </div>
@@ -53,24 +47,27 @@ const RoomGallery: React.FC<RoomGalleryProps> = ({
           ))}
         </div>
 
-        {/* =========================================
-            VIEW 2: SWIPER SLIDER (Mobile/Tablet) 
-            Hidden on XL screens (>= 1200px)
-           ========================================= */}
+        {/* Mobile/Tablet View (Swiper) */}
         <div className="d-block d-xl-none">
           <Swiper
-            modules={[Pagination, Navigation]}
+            // 2. Add Autoplay to modules list
+            modules={[Pagination, Navigation, Autoplay]}
             spaceBetween={30}
             slidesPerView={1}
             navigation={true}
             pagination={{ clickable: true }}
+            loop={true}
+            // 3. Configure Autoplay
+            autoplay={{
+              delay: 3000, // 3 seconds
+              disableOnInteraction: false, // Continue autoplay even after user touches it
+            }}
             breakpoints={{
               768: { slidesPerView: 2 },
             }}
             className="pb-5 px-4"
           >
             {cards.map((card, index) => (
-              // SwiperSlide requires specific keys and classes
               <SwiperSlide key={index} className="d-flex justify-content-center h-auto">
                 <div className="h-100 w-100"> 
                   {card}
