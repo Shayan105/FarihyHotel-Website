@@ -82,18 +82,18 @@ const FarihyDoublePage = () => {
   const basePath = "/src/assets/pictures/double/";
 
   const bungalowImages: GalleryImage[] = [
-    { src: basePath + "1.jpg" },
-    { src: basePath + "2.jpg" },
-    { src: basePath + "3.jpg" },
-    { src: basePath + "4.jpg" },
-    { src: basePath + "5.jpg" },
+    { src: basePath + "1.webp" },
+    { src: basePath + "2.webp" },
+    { src: basePath + "3.webp" },
+    { src: basePath + "4.webp" },
+    { src: basePath + "5.webp" },
 
-    { src: basePath + "ext.jpg" },
+    { src: basePath + "ext.webp" },
   ];
 
   const pageSections: PresentationSection[] = [
     {
-      imageSrc: basePath + "1.jpg",
+      imageSrc: basePath + "1.webp",
       reversed: true,
       text: [
         "Idéal pour les personnes seules ou les couples, nos trois bungalows doubles disposent d’un lit Queen-size,  d’une salle de bains et d’une terrasse privative.",
@@ -109,7 +109,7 @@ const FarihyDoublePage = () => {
 
   return (
     <FarihyRoomPageTemplate
-      headerImageSrc={basePath + "ext.jpg"}
+      headerImageSrc={basePath + "ext.webp"}
       pageTitle="Les Doubles"
       contentSections={pageSections}
       galleryTitle="Aperçu des doubles"

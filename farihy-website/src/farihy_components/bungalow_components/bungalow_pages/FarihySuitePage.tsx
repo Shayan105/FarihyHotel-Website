@@ -84,18 +84,18 @@ const FarihySuitePage = () => {
   const basePath = "/src/assets/pictures/suite/";
 
   const bungalowImages: GalleryImage[] = [
-    { src: basePath + "1.jpg" },
-    { src: basePath + "2.jpg" },
-    { src: basePath + "3.jpg" },
-    { src: basePath + "4.jpg" },
-    { src: basePath + "5.jpg" },
-    { src: basePath + "6.jpg" },
-    { src: basePath + "ext.jpg" },
+    { src: basePath + "1.webp" },
+    { src: basePath + "2.webp" },
+    { src: basePath + "3.webp" },
+    { src: basePath + "4.webp" },
+    { src: basePath + "5.webp" },
+    { src: basePath + "6.webp" },
+    { src: basePath + "ext.webp" },
   ];
 
   const pageSections: PresentationSection[] = [
     {
-      imageSrc: basePath + "2.jpg",
+      imageSrc: basePath + "2.webp",
       reversed: true,
       text: [
         "Cette suite de 80 m² , idéale pour un couple, un groupe d’amis ou une famille jusqu’à 5 personnes",
@@ -106,7 +106,7 @@ const FarihySuitePage = () => {
       ],
     },
     {
-      imageSrc: basePath + "1.jpg",
+      imageSrc: basePath + "1.webp",
       reversed: false,
       text: [
         "La suite bénéficie d’une terrasse privée donnant sur le lac, d’une piscine privée ainsi que d’un jacuzzi*, pour des moments de détente privilégiés.",
@@ -124,7 +124,7 @@ const FarihySuitePage = () => {
 
   return (
     <FarihyRoomPageTemplate
-      headerImageSrc={basePath + "6.jpg"}
+      headerImageSrc={basePath + "6.webp"}
       pageTitle="La Suite"
       contentSections={pageSections}
       galleryTitle="Aperçu de la Suite"

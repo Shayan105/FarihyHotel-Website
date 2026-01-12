@@ -83,21 +83,21 @@ const FarihyVillaPage = () => {
   const basePath = "/src/assets/pictures/villa/";
 
   const bungalowImages: GalleryImage[] = [
-    { src: basePath + "1.jpg" },
-    { src: basePath + "2.jpg" },
-    { src: basePath + "3.jpg" },
-    { src: basePath + "4.jpg" },
-    { src: basePath + "5.jpg" },
-    { src: basePath + "6.jpg" },
-    { src: basePath + "7.jpg" },
-    { src: basePath + "8.jpg" },
-    { src: basePath + "9.jpg" },
-    { src: basePath + "ext.jpg" },
+    { src: basePath + "1.webp" },
+    { src: basePath + "2.webp" },
+    { src: basePath + "3.webp" },
+    { src: basePath + "4.webp" },
+    { src: basePath + "5.webp" },
+    { src: basePath + "6.webp" },
+    { src: basePath + "7.webp" },
+    { src: basePath + "8.webp" },
+    { src: basePath + "9.webp" },
+    { src: basePath + "ext.webp" },
   ];
 
   const pageSections: PresentationSection[] = [
     {
-      imageSrc: basePath + "8.jpg",
+      imageSrc: basePath + "8.webp",
       reversed: true,
       text: [
         "La Villa spacieuse de 200 m² offre une vue imprenable sur le lac Itasy depuis ses deux balcons.",
@@ -107,7 +107,7 @@ const FarihyVillaPage = () => {
       ],
     },
     {
-      imageSrc: basePath + "2.jpg",
+      imageSrc: basePath + "2.webp",
       reversed: false,
       text: [
         "À l’étage, deux chambres communicantes sont aménagées : une chambre triple et une chambre double, avec deux salles de bains, dont l’une comprend également une baignoire.",
@@ -115,7 +115,7 @@ const FarihyVillaPage = () => {
       ],
     },
     {
-      imageSrc: basePath + "9.jpg",
+      imageSrc: basePath + "9.webp",
       reversed: true,
       text: [
         "La villa bénéficie par ailleurs d’une vaste terrasse ombragée donnant sur la piscine et le jacuzzi, idéale pour des moments de détente en toute sérénité.",
@@ -131,7 +131,7 @@ const FarihyVillaPage = () => {
 
   return (
     <FarihyRoomPageTemplate
-      headerImageSrc={basePath + "ext.jpg"}
+      headerImageSrc={basePath + "ext.webp"}
       pageTitle="La Villa"
       contentSections={pageSections}
       galleryTitle="Aperçu de la Villa"

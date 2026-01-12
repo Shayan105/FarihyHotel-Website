@@ -13,27 +13,27 @@ const CuisineGallery: React.FC = () => {
       "Une cuisine simple, généreuse et authentique, préparée avec des produits frais de saison et servie avec le sourire, de notre cuisine à votre table. ",
     images: [
       {
-        path: basePath + "cuisine-1.jpg",
+        path: basePath + "cuisine-1.webp",
         focusPosition: "top",
       },
       {
-        path: basePath + "cuisine-2.jpg",
+        path: basePath + "cuisine-2.webp",
         focusPosition: "",
       },
       {
-        path: basePath + "cuisine-3.jpg",
+        path: basePath + "cuisine-3.webp",
         focusPosition: "",
       },
       {
-        path: basePath + "cuisine-4.jpg",
+        path: basePath + "cuisine-4.webp",
         focusPosition: "0% 40%",
       },
       {
-        path: basePath + "cuisine-5.jpg",
+        path: basePath + "cuisine-5.webp",
         focusPosition: "bottom",
       },
       {
-        path: basePath + "cuisine-6.jpg",
+        path: basePath + "cuisine-6.webp",
         focusPosition: "0%50%",
       },
     ],

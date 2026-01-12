@@ -115,7 +115,7 @@ const FarihyHeader = () => {
         <div className="d-flex align-items-center">
           {/* Changed Link to a href */}
           <a href="/" onClick={closeAllMenus}> 
-            <img src="/src/assets/pictures/accueil/logo.png" alt="Logo" style={{ height: '50px', objectFit: 'contain' }} />
+            <img src="/src/assets/pictures/accueil/logo.webp" alt="Logo" style={{ height: '50px', objectFit: 'contain' }} />
           </a>
         </div>
 

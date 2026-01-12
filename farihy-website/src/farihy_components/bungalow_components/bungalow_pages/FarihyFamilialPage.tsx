@@ -78,17 +78,17 @@ const FarihyFamilialPage = () => {
   const basePath = "/src/assets/pictures/familiale/";
 
   const bungalowImages: GalleryImage[] = [
-    { src: basePath + "1.jpg" },
-    { src: basePath + "2.jpg" },
-    { src: basePath + "3.jpg" },
-    { src: basePath + "4.jpg" },
-    { src: basePath + "out.jpg" },
-    { src: basePath + "ext.jpg" },
+    { src: basePath + "1.webp" },
+    { src: basePath + "2.webp" },
+    { src: basePath + "3.webp" },
+    { src: basePath + "4.webp" },
+    { src: basePath + "out.webp" },
+    { src: basePath + "ext.webp" },
   ];
 
   const pageSections: PresentationSection[] = [
     {
-      imageSrc: basePath + "ext.jpg",
+      imageSrc: basePath + "ext.webp",
       reversed: true,
       text: [
         "Idéal pour un groupe d’amis ou une famille, nos quatre bungalows familiaux disposent de deux grands lit Queen-size et d’un petit lit, d’une salle de bains et d’une petite terrasse.",
@@ -103,7 +103,7 @@ const FarihyFamilialPage = () => {
 
   return (
     <FarihyRoomPageTemplate
-      headerImageSrc={basePath + "out.jpg"}
+      headerImageSrc={basePath + "out.webp"}
       pageTitle="Bungalow familial"
       
       contentSections={pageSections}

@@ -13,15 +13,15 @@ const MassageGallery: React.FC = () => {
       "Confiez-vous aux mains expertes de notre masseuse pour une parenthèse de relaxation et de sérénité.",
     images: [
       {
-        path: basePath + "massage-1.jpg",
+        path: basePath + "massage-1.webp",
         focusPosition: "",
       },
       {
-        path: basePath + "massage-2-crop.jpg",
+        path: basePath + "massage-2-crop.webp",
         focusPosition: "65%",
       },
       {
-        path: basePath + "massage-3.jpg",
+        path: basePath + "massage-3.webp",
         focusPosition: "",
       },
     ],

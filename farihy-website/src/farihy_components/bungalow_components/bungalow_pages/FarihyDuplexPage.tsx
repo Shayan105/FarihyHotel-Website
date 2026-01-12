@@ -82,18 +82,18 @@ const FarihyDuplexPage = () => {
   const basePath = "/src/assets/pictures/duplex/";
 
   const bungalowImages: GalleryImage[] = [
-    { src: basePath + "1.jpg" },
-    { src: basePath + "2.jpg" },
-    { src: basePath + "3.jpg" },
-    { src: basePath + "4.jpg" },
-    { src: basePath + "5.jpg" },
-    { src: basePath + "6.jpg" },
-    { src: basePath + "ext.jpg" },
+    { src: basePath + "1.webp" },
+    { src: basePath + "2.webp" },
+    { src: basePath + "3.webp" },
+    { src: basePath + "4.webp" },
+    { src: basePath + "5.webp" },
+    { src: basePath + "6.webp" },
+    { src: basePath + "ext.webp" },
   ];
 
   const pageSections: PresentationSection[] = [
     {
-      imageSrc: basePath + "1.jpg",
+      imageSrc: basePath + "1.webp",
       reversed: true,
       text: [
         "D’une superficie de 100 m², les Duplex peuvent accueillir jusqu’à 6 personnes.",
@@ -104,7 +104,7 @@ const FarihyDuplexPage = () => {
       ],
     },
     {
-      imageSrc: basePath + "7.jpg",
+      imageSrc: basePath + "7.webp",
       reversed: false,
       text: [
         "A l’étage, une grande chambre avec lit double et un petit coin salon.",
@@ -112,7 +112,7 @@ const FarihyDuplexPage = () => {
       ],
     },
     {
-      imageSrc: basePath + "10.jpg",
+      imageSrc: basePath + "10.webp",
       reversed: true,
       text: [
         "Dans la salle de bains, à l’étage, une élégante baignoire en îlot offre une vue imprenable sur le lac, invitant à la détente.",
@@ -128,7 +128,7 @@ const FarihyDuplexPage = () => {
 
   return (
     <FarihyRoomPageTemplate
-      headerImageSrc={basePath + "ext.jpg"}
+      headerImageSrc={basePath + "ext.webp"}
       pageTitle="Les Duplex"
       contentSections={pageSections}
       galleryTitle="Aperçu des Duplex"

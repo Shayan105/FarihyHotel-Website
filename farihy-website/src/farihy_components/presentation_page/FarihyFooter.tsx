@@ -52,7 +52,7 @@ const FarihyFooter = () => {
             {/* Logo Image */}
             <Link to="/" style={{ textDecoration: 'none' }}>
                 <img 
-                    src="/src/assets/pictures/accueil/logo.png" 
+                    src="/src/assets/pictures/accueil/logo.webp" 
                     alt="Farihy Logo" 
                     style={{ height: "60px", objectFit: "contain", marginBottom: "15px" }} 
                 />

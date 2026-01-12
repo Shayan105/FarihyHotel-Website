@@ -13,32 +13,32 @@ const RestaurantGallery: React.FC = () => {
       "Installez-vous sur la terrasse, la plage ou dans le jardin, laissez-vous porter par la vue sur le lac Itasy et savourez l’instant au bord de la piscine.",
     images: [
       {
-        path: basePath + "restaurant-1.jpg",
+        path: basePath + "restaurant-1.webp",
         focusPosition: "right",
       },
       {
-        path: basePath + "restaurant-2.jpg",
+        path: basePath + "restaurant-2.webp",
         focusPosition: "30%",
       },
       {
-        path: basePath + "restaurant-3.jpg",
+        path: basePath + "restaurant-3.webp",
         focusPosition: "10% ",
       },
       {
-        path: basePath + "restaurant-4.jpg",
+        path: basePath + "restaurant-4.webp",
         focusPosition: "left",
       },
       {
-        path: basePath + "restaurant-4.jpg",
+        path: basePath + "restaurant-4.webp",
         focusPosition: "right",
       },
       {
-        path: basePath + "restaurant-5.jpg",
+        path: basePath + "restaurant-5.webp",
         focusPosition: "10%",
       },
 
       {
-        path: basePath + "restaurant-7.jpg",
+        path: basePath + "restaurant-7.webp",
         focusPosition: "30%",
         
       },
