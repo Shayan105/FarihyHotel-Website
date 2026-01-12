@@ -1,14 +1,12 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
+// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   server: {
-    host: true,
-    port: 80,
-    allowedHosts: ['farihy.spotiphi.org'],
-    watch: {
-       usePolling: true, // Recommended for Linux/SSH environments
-    }
+    host: true, // Listen on all network interfaces
+    port: 80,   // Set port to 80
+    allowedHosts: ['farihy.spotiphi.org'] // Allow your specific domain
   }
 })
