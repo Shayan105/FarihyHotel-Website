@@ -4,4 +4,9 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  server: {
+    host: true, // Listen on all network interfaces
+    port: 80,   // Set port to 80
+    allowedHosts: ['farihy.spotiphi.org'] // Allow your specific domain
+  }
 })
