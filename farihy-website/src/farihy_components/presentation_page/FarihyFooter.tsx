@@ -64,15 +64,7 @@ const FarihyFooter = () => {
                 }}>
                     FARIHY HOTEL
                 </h3>
-                <p style={{ 
-                    fontFamily: "serif", 
-                    fontStyle: "italic", 
-                    fontSize: "0.9rem", 
-                    opacity: 0.8,
-                    marginTop: "5px" 
-                }}>
-                    Ampefy
-                </p>
+
             </Link>
           </div>
 
