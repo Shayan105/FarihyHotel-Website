@@ -48,7 +48,7 @@ const OtherRoomsSuggestions = () => {
           spaceBetween={20}
           slidesPerView={1.15} // Affiche un bout de la carte suivante pour inciter au swipe
           centeredSlides={true}
-          loop={true}
+          loop={false}
           modules={[Pagination]}
           pagination={{ clickable: true }}
         >
