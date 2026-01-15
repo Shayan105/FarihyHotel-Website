@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom"; // <--- 1. Import Link
+// removed "react-router-dom" import since we want a full refresh
 
 // --- 1. Interfaces ---
 interface RoomData {
@@ -9,7 +9,7 @@ interface RoomData {
   roomName: string;
   price: string;
   imagePath: string;
-  link: string; // <--- 2. Add link property here
+  link: string;
 }
 
 interface RoomCardProps {
@@ -18,7 +18,7 @@ interface RoomCardProps {
   price: string | number;
   imagePath: string;
   roomName: string;
-  link: string; // <--- And here
+  link: string;
   style?: React.CSSProperties;
 }
 
@@ -31,7 +31,7 @@ export const farihyRooms: RoomData[] = [
     roomName: "Les Doubles",
     price: "400 000",
     imagePath: "/src/assets/pictures/double/ext.webp",
-    link: "/double", // <--- Mapped to your route
+    link: "/double",
   },
   {
     id: 2,
@@ -40,7 +40,7 @@ export const farihyRooms: RoomData[] = [
     roomName: "Familiales",
     price: "425 000",
     imagePath: "/src/assets/pictures/familiale/ext.webp",
-    link: "/familiale", // <--- Mapped to your route
+    link: "/familiale",
   },
   {
     id: 3,
@@ -49,7 +49,7 @@ export const farihyRooms: RoomData[] = [
     roomName: "La Suite",
     price: "750 000",
     imagePath: "/src/assets/pictures/suite/ext.webp",
-    link: "/suite", // <--- Mapped to your route
+    link: "/suite",
   },
   {
     id: 4,
@@ -58,7 +58,7 @@ export const farihyRooms: RoomData[] = [
     roomName: "Les Duplex",
     price: "800 000",
     imagePath: "/src/assets/pictures/duplex/ext.webp",
-    link: "/duplex", // <--- Mapped to your route
+    link: "/duplex",
   },
   {
     id: 5,
@@ -67,7 +67,7 @@ export const farihyRooms: RoomData[] = [
     roomName: "La Villa",
     price: "1 750 000",
     imagePath: "/src/assets/pictures/villa/ext.webp",
-    link: "/villa", // <--- Mapped to your route
+    link: "/villa",
   },
 ];
 
@@ -78,7 +78,7 @@ export const RoomCard: React.FC<RoomCardProps> = ({
   price,
   imagePath,
   roomName,
-  link, // Receive the link prop
+  link,
   style,
 }) => {
   const cardStyle: React.CSSProperties = {
@@ -87,7 +87,7 @@ export const RoomCard: React.FC<RoomCardProps> = ({
     border: "none",
     padding: "20px",
     boxSizing: "border-box",
-    transition: "transform 0.2s ease", // Add a subtle animation
+    transition: "transform 0.2s ease",
     ...style,
   };
 
@@ -114,18 +114,17 @@ export const RoomCard: React.FC<RoomCardProps> = ({
   };
 
   return (
-    // 3. Wrap the whole card in the Link component
+    // Changed back to standard <a> tag to ensure full page refresh
     <a href={link} style={{ textDecoration: "none", color: "inherit" }}>
-      <div 
-        className="card shadow-sm h-100" // Added h-100 for better consistency
-        style={cardStyle}
-        // Optional: Add hover effect logic here via CSS classes or state if needed
-      >
+      <div className="card shadow-sm h-100" style={cardStyle}>
         <img
           src={imagePath}
           className="img-fluid"
           alt={roomName}
           style={imgStyle}
+          // Keeps the lazy loading
+          loading="lazy"
+          decoding="async"
         />
         <div className="mt-3" style={contentBorderStyle}>
           <div className="mb-3">
@@ -154,7 +153,6 @@ export const RoomCard: React.FC<RoomCardProps> = ({
 };
 
 // --- 4. Les Composants Spécifiques Instanciables ---
-// No changes needed here, they automatically pass the new 'link' prop via {...data}
 
 const getData = (id: number) => farihyRooms.find((r) => r.id === id);
 

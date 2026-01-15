@@ -8,7 +8,6 @@ interface VerticalPictureProps {
   maxWidth?: string | number;
   ratio?: string;
   focusPosition?: string;
-  // New prop
   onClick?: () => void;
 }
 
@@ -19,17 +18,16 @@ const VerticalPicture: React.FC<VerticalPictureProps> = ({
   maxWidth = "400px",
   ratio = "4 / 5",
   focusPosition = "center",
-  onClick, // Destructure new prop
+  onClick,
 }) => {
   return (
     <div
-      onClick={onClick} // Attach click handler
+      onClick={onClick}
       className={`d-inline-block overflow-hidden shadow ${containerClass}`}
       style={{
         borderRadius: "0.375rem",
         maxWidth: maxWidth,
         width: "100%",
-        // Add pointer cursor if onClick exists
         cursor: onClick ? "pointer" : "default",
       }}
     >
@@ -42,6 +40,9 @@ const VerticalPicture: React.FC<VerticalPictureProps> = ({
           objectFit: "cover",
           objectPosition: focusPosition,
         }}
+        // --- LAZY LOADING ADDED HERE ---
+        loading="lazy"
+        decoding="async"
       />
     </div>
   );
