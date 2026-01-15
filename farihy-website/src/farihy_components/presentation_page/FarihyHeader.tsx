@@ -21,7 +21,7 @@ const FarihyHeader = () => {
   const closeAllMenus = () => {
     setIsMenuOpen(false);
     setIsDropdownOpen(false);
-    setIsMobileSubMenuOpen(false); // <--- Uncommented and forced to fals
+    setIsMobileSubMenuOpen(false); // <--- Uncommented and forced to false
   };
 
   // --- CLICK OUTSIDE MANAGEMENT ---
