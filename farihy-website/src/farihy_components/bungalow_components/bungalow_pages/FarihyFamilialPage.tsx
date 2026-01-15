@@ -23,7 +23,7 @@ interface PresentationSection {
 
 // --- Composant Local : Gestion Responsive (Swiper Mobile / Grille Desktop) ---
 const OtherRoomsSuggestions = () => {
-  // Liste des chambres à afficher (On exclut la Familiale)
+  // Liste des chambres à afficher
   const rooms = [
     { id: 'double', Component: DoubleCard },
     { id: 'suite', Component: SuiteCard },
@@ -33,33 +33,35 @@ const OtherRoomsSuggestions = () => {
 
   return (
     <div>
-
-
-      {/* --- VUE MOBILE : SWIPER (Visible seulement sur petit écran) --- */}
-      {/* Note: 'd-md-none' est une classe Bootstrap qui cache l'élément sur medium screens et + */}
-      <div className="d-block d-md-none">
+      {/* --- VUE MOBILE : SWIPER --- */}
+      <div className="d-block d-md-none" style={{ paddingBottom: '30px' }}>
         <Swiper
-          spaceBetween={20}
-          slidesPerView={1.15} // Affiche un bout de la carte suivante pour inciter au swipe
-          centeredSlides={true}
-          loop={true}
           modules={[Pagination]}
+          spaceBetween={15}
+          slidesPerView={1.2} // Show slightly more of the next card
+          centeredSlides={true}
           pagination={{ clickable: true }}
+          grabCursor={true}
+          // Fix for "buggy" feel: Disable loop and enable touch settings
+          loop={false} 
+          touchStartPreventDefault={false} 
+          style={{ overflow: 'visible' }} // Allows shadows not to be cut off
         >
           {rooms.map((item) => (
-            <SwiperSlide key={item.id} style={{ height: 'auto' }}>
-              <item.Component />
+            <SwiperSlide key={item.id} style={{ height: 'auto', display: 'flex' }}>
+              <div style={{ width: '100%', height: '100%' }}>
+                <item.Component />
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
       </div>
 
-      {/* --- VUE DESKTOP : GRILLE (Visible seulement sur grand écran) --- */}
-      {/* Note: 'd-none d-md-grid' cache sur mobile, affiche en grid sur desktop */}
+      {/* --- VUE DESKTOP : GRILLE --- */}
       <div 
         className="d-none d-md-grid" 
         style={{ 
-          gridTemplateColumns: 'repeat(4, 1fr)', // Force 4 colonnes
+          gridTemplateColumns: 'repeat(4, 1fr)', 
           gap: '20px' 
         }}
       >
@@ -105,13 +107,9 @@ const FarihyFamilialPage = () => {
     <FarihyRoomPageTemplate
       headerImageSrc={basePath + "out.webp"}
       pageTitle="Bungalow familial"
-      
       contentSections={pageSections}
-      
       galleryTitle="Aperçu du bungalow"
       galleryImages={bungalowImages}
-      
-      // Injection du composant créé ci-dessus
       otherRoomsComponent={<OtherRoomsSuggestions />} 
     />
   );
