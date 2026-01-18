@@ -1,18 +1,33 @@
 import React, { useState, useRef } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 
+// Configuration des disponibilités
+const ROOM_LIMITS = {
+  Double: 3,
+  Familiale: 4,
+  Duplex: 2,
+  Suite: 1,
+  Villa: 1
+};
+
+type RoomType = keyof typeof ROOM_LIMITS;
+
 const FarihyReservation = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSending, setIsSending] = useState(false);
   
-  // Référence pour le Captcha
   const recaptchaRef = useRef<ReCAPTCHA>(null);
 
-  // État du formulaire complet
   const [formData, setFormData] = useState({
     dateArrivee: "",
     dateDepart: "",
-    typeBungalow: "Familiale",
+    selectedRooms: {
+      Double: 0,
+      Familiale: 0,
+      Duplex: 0,
+      Suite: 0,
+      Villa: 0
+    } as Record<RoomType, number>,
     nbAdultes: 1,
     nbEnfants: 0,
     agesEnfants: [] as string[],
@@ -24,13 +39,23 @@ const FarihyReservation = () => {
     questions: "",
   });
 
-  // Mise à jour des champs simples
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Gestion spécifique pour le nombre d'enfants
+  const handleRoomChange = (type: RoomType, newQuantity: number, max: number) => {
+    if (newQuantity >= 0 && newQuantity <= max) {
+      setFormData((prev) => ({
+        ...prev,
+        selectedRooms: {
+          ...prev.selectedRooms,
+          [type]: newQuantity
+        }
+      }));
+    }
+  };
+
   const handleEnfantsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const count = parseInt(e.target.value) || 0;
     setFormData((prev) => {
@@ -50,6 +75,7 @@ const FarihyReservation = () => {
     setFormData({ ...formData, agesEnfants: newAges });
   };
 
+  // --- STYLES ---
   const styles = {
     section: { backgroundColor: "#F2EFE9", color: "#4a3728", fontFamily: "'Playfair Display', serif", padding: "100px 0 60px 0" },
     title: { fontSize: "2.5rem", fontWeight: 500, textAlign: "center" as const, marginBottom: "20px" },
@@ -57,16 +83,43 @@ const FarihyReservation = () => {
     label: { display: "block", marginBottom: "5px", fontWeight: 600, fontFamily: "sans-serif", fontSize: "0.9rem" },
     subLabel: { display: "block", marginBottom: "5px", fontSize: "0.85rem", color: "#666", fontFamily: "sans-serif" },
     input: { width: "100%", padding: "10px", marginBottom: "15px", border: "1px solid #ccc", borderRadius: "5px", backgroundColor: "#fff" },
-    select: { width: "100%", padding: "10px", marginBottom: "15px", border: "1px solid #ccc", borderRadius: "5px", backgroundColor: "#fff", cursor: "pointer" },
     codeField: { padding: "10px", border: "1px solid #ccc", borderRadius: "5px 0 0 5px", backgroundColor: "#fff", borderRight: "none", width: "80px", textAlign: "center" as const },
-    button: { backgroundColor: "#4a3728", color: "#fff", padding: "12px 30px", border: "none", borderRadius: "5px", cursor: "pointer", fontSize: "1.1rem", marginTop: "10px", width: "100%", opacity: isSending ? 0.7 : 1 },
+    button: { backgroundColor: "#4a3728", color: "#fff", padding: "12px 30px", border: "none", borderRadius: "5px", cursor: "pointer", fontSize: "1.1rem", marginTop: "10px", width: "100%", opacity: isSending ? 0.7 : 1, transition: "opacity 0.3s" },
     successBox: { backgroundColor: "#d4edda", color: "#155724", padding: "20px", borderRadius: "10px", marginTop: "20px", border: "1px solid #c3e6cb" },
+    
+    // Styles de liste
+    roomContainer: { backgroundColor: "#fff", borderRadius: "8px", padding: "10px 20px", marginBottom: "20px", boxShadow: "0 2px 5px rgba(0,0,0,0.05)" },
+    roomRow: { display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid #f0f0f0", padding: "12px 0" },
+    
+    // Style du lien (Modifié: suppression de l'underline)
+    roomNameLink: { 
+        fontSize: "1.05rem", 
+        fontWeight: 500, 
+        fontFamily: "'Playfair Display', serif",
+        color: "#4a3728",
+        textDecoration: "none", // <--- Underline supprimé
+        cursor: "pointer",
+        display: "flex",
+        alignItems: "center",
+        gap: "5px" // Espacement entre le texte et la flèche
+    },
+    
+    // Stepper styles
+    stepperContainer: { display: "flex", alignItems: "center", backgroundColor: "#f8f9fa", borderRadius: "20px", padding: "2px" },
+    stepperBtn: { width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", border: "none", backgroundColor: "#fff", borderRadius: "50%", boxShadow: "0 1px 3px rgba(0,0,0,0.1)", cursor: "pointer", color: "#4a3728", fontSize: "1.2rem", fontWeight: "bold", transition: "all 0.2s" },
+    stepperBtnDisabled: { opacity: 0.3, cursor: "not-allowed", boxShadow: "none", backgroundColor: "transparent" },
+    stepperValue: { margin: "0 15px", fontSize: "1rem", fontWeight: 600, minWidth: "20px", textAlign: "center" as const, fontFamily: "sans-serif" }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // 1. Validation du Captcha
+    const totalRooms = Object.values(formData.selectedRooms).reduce((a, b) => a + b, 0);
+    if (totalRooms === 0) {
+      alert("Veuillez sélectionner au moins une chambre ou bungalow.");
+      return;
+    }
+
     const token = recaptchaRef.current?.getValue();
     if (!token) {
       alert("Veuillez valider le CAPTCHA.");
@@ -75,22 +128,32 @@ const FarihyReservation = () => {
 
     setIsSending(true);
 
+    const typeBungalowString = Object.entries(formData.selectedRooms)
+      .filter(([_, count]) => count > 0)
+      .map(([type, count]) => `${count}x ${type}`)
+      .join(", ");
+
+    const payload = {
+      ...formData,
+      typeBungalow: typeBungalowString,
+      captchaToken: token
+    };
+
     try {
-      // 2. Envoi des données + token captcha
-      const response = await fetch("http://localhost:5000/send-reservation", {
+      const response = await fetch("/api/send-reservation", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, captchaToken: token }),
+        body: JSON.stringify(payload),
       });
 
       const result = await response.json();
 
       if (response.ok && result.success) {
         setIsSubmitted(true);
-        setFormData({ ...formData, questions: "" }); 
+        setFormData(prev => ({ ...prev, questions: "" })); 
       } else {
         alert("Erreur lors de l'envoi ou validation CAPTCHA échouée.");
-        recaptchaRef.current?.reset(); // Reset du captcha en cas d'erreur
+        recaptchaRef.current?.reset();
       }
     } catch (error) {
       console.error("Erreur:", error);
@@ -126,25 +189,62 @@ const FarihyReservation = () => {
                   </div>
                 </div>
 
-                {/* 2. Type de Bungalow */}
-                <label style={styles.label}>2. Le type de bungalow *</label>
-                <select name="typeBungalow" style={styles.select} value={formData.typeBungalow} onChange={handleChange}>
-                  <option value="Familiale">Familiale</option>
-                  <option value="Suite">Suite</option>
-                  <option value="Double">Double</option>
-                  <option value="Villa">Villa</option>
-                  <option value="Duplex">Duplex</option>
-                </select>
+                {/* 2. Sélection Multi-Chambres */}
+                <label style={styles.label}>2. Choix des hébergements *</label>
+                <div style={styles.roomContainer}>
+                  {Object.entries(ROOM_LIMITS).map(([type, max], index, array) => {
+                    const count = formData.selectedRooms[type as RoomType];
+                    const isLast = index === array.length - 1;
+                    const rowStyle = isLast ? {...styles.roomRow, borderBottom: "none"} : styles.roomRow;
+                    
+                    return (
+                    <div key={type} style={rowStyle}>
+                      {/* LIEN SANS SOULIGNEMENT */}
+                      <a 
+                        href={`/${type.toLowerCase()}`}
+                        target="_blank"             
+                        rel="noopener noreferrer"   
+                        style={styles.roomNameLink}
+                        title={`Voir les détails de la ${type}`} 
+                      >
+                        {type} <span style={{fontSize: "0.8em"}}>↗</span>
+                      </a>
+
+                      {/* Stepper (+/-) */}
+                      <div style={styles.stepperContainer}>
+                        <button 
+                            type="button" 
+                            onClick={() => handleRoomChange(type as RoomType, count - 1, max)}
+                            disabled={count <= 0}
+                            style={{...styles.stepperBtn, ...(count <= 0 ? styles.stepperBtnDisabled : {})}}
+                        >
+                         - 
+                        </button>
+                        
+                        <span style={styles.stepperValue}>{count}</span>
+                        
+                        <button 
+                            type="button" 
+                            onClick={() => handleRoomChange(type as RoomType, count + 1, max)}
+                            disabled={count >= max}
+                            style={{...styles.stepperBtn, ...(count >= max ? styles.stepperBtnDisabled : {})}}
+                        >
+                         + 
+                        </button>
+                      </div>
+                    </div>
+                  )})}
+                </div>
 
                 {/* 3. Nombre de personnes */}
-                <label style={styles.label}>3. Le nombre de personnes *</label>
+                <label style={styles.label}>3. Le nombre total de personnes *</label>
                 <div className="row">
                   <div className="col-6">
-                    <label style={styles.subLabel}>Nombre d'adultes</label>
+                    <label style={styles.subLabel}>Total Adultes</label>
                     <input type="number" min="1" name="nbAdultes" required style={styles.input} value={formData.nbAdultes} onChange={handleChange} />
                   </div>
                   <div className="col-6">
-                    <label style={styles.subLabel}>Nombre d'enfants</label>
+                    <label style={styles.subLabel}>Total Enfants</label>
                     <input type="number" min="0" name="nbEnfants" required style={styles.input} value={formData.nbEnfants} onChange={handleEnfantsChange} />
                   </div>
                 </div>
@@ -158,7 +258,7 @@ const FarihyReservation = () => {
                                 <div key={index} className="col-4">
                                     <input 
                                         type="text" 
-                                        placeholder={`Âge ${index + 1}`}
+                                        placeholder={`Enfant ${index + 1}`}
                                         required
                                         style={{...styles.input, marginBottom: "5px"}}
                                         value={age}
@@ -170,7 +270,7 @@ const FarihyReservation = () => {
                     </div>
                 )}
 
-                {/* 4. Coordonnées Personnelles */}
+                {/* 4. Coordonnées */}
                 <div className="row mt-4">
                     <div className="col-md-6">
                         <label style={styles.label}>4. Nom *</label>
@@ -182,7 +282,7 @@ const FarihyReservation = () => {
                     </div>
                 </div>
 
-                {/* 5. Contact (Tel + Email) */}
+                {/* 5. Contact */}
                 <label style={styles.label}>5. Numéro de téléphone *</label>
                 <div style={{ display: "flex", marginBottom: "15px" }}>
                   <input type="text" name="countryCode" style={styles.codeField} value={formData.countryCode} onChange={handleChange} placeholder="+261" />
