@@ -1,6 +1,7 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
+const axios = require('axios'); // N'oubliez pas: npm install axios
 require('dotenv').config();
 
 const app = express();
@@ -16,16 +17,39 @@ const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS, // Mot de passe d'application
+    pass: process.env.EMAIL_PASS,
   },
 });
 
+// Fonction utilitaire pour vérifier le Captcha
+const verifyRecaptcha = async (token) => {
+  if (!token) return false;
+  
+  const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+  const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${token}`;
+
+  try {
+    const response = await axios.post(verifyUrl);
+    return response.data.success;
+  } catch (error) {
+    console.error("Erreur vérification Captcha:", error);
+    return false;
+  }
+};
+
 // ==========================================
-// ROUTE 1 : CONTACT SIMPLE (Mise en page améliorée)
+// ROUTE 1 : CONTACT SIMPLE
 // ==========================================
 app.post('/send-email', async (req, res) => {
-  const { nom, prenom, email, countryCode, telephone, sujet, message } = req.body;
+  const { nom, prenom, email, countryCode, telephone, sujet, message, captchaToken } = req.body;
 
+  // 1. Vérification du Captcha
+  const isHuman = await verifyRecaptcha(captchaToken);
+  if (!isHuman) {
+    return res.status(400).json({ success: false, message: 'Échec de la validation Captcha' });
+  }
+
+  // 2. Préparation de l'email
   const mailOptions = {
     from: `"${prenom} ${nom}" <${process.env.EMAIL_USER}>`, 
     to: process.env.EMAIL_USER, 
@@ -33,13 +57,10 @@ app.post('/send-email', async (req, res) => {
     subject: `Contact Site Web: ${sujet}`,
     html: `
       <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 5px; overflow: hidden;">
-        
         <div style="background-color: #4a3728; padding: 20px; text-align: center;">
           <h2 style="color: #ffffff; margin: 0; font-family: 'Playfair Display', serif;">Nouveau Message</h2>
         </div>
-
         <div style="padding: 20px;">
-          
           <h3 style="background-color: #f2efe9; padding: 10px; color: #4a3728; border-left: 4px solid #4a3728;">
             👤 Informations Expéditeur
           </h3>
@@ -48,21 +69,16 @@ app.post('/send-email', async (req, res) => {
             <li style="margin-bottom: 8px;"><strong>Email :</strong> <a href="mailto:${email}" style="color: #4a3728;">${email}</a></li>
             <li style="margin-bottom: 8px;"><strong>Téléphone :</strong> ${countryCode} ${telephone}</li>
           </ul>
-
           <h3 style="background-color: #f2efe9; padding: 10px; color: #4a3728; border-left: 4px solid #4a3728;">
             ✉️ Le Message
           </h3>
-          
           <div style="margin-left: 10px;">
             <p style="font-size: 1.1em; font-weight: bold; color: #4a3728;">Sujet : ${sujet}</p>
-            
             <div style="background-color: #f8f9fa; padding: 15px; border: 1px solid #e9ecef; border-radius: 4px; color: #555; white-space: pre-wrap; line-height: 1.6;">
 ${message}
             </div>
           </div>
-
         </div>
-
         <div style="background-color: #f9f9f9; padding: 10px; text-align: center; font-size: 12px; color: #999; border-top: 1px solid #e0e0e0;">
           Email envoyé via le formulaire de contact du site Farihy.
         </div>
@@ -81,7 +97,7 @@ ${message}
 });
 
 // ==========================================
-// ROUTE 2 : RÉSERVATION (Style identique)
+// ROUTE 2 : RÉSERVATION
 // ==========================================
 app.post('/send-reservation', async (req, res) => {
   const { 
@@ -96,13 +112,21 @@ app.post('/send-reservation', async (req, res) => {
     countryCode, 
     telephone, 
     email, 
-    questions 
+    questions,
+    captchaToken // Récupération du token envoyé par le front
   } = req.body;
+
+  // 1. Vérification du Captcha
+  const isHuman = await verifyRecaptcha(captchaToken);
+  if (!isHuman) {
+    return res.status(400).json({ success: false, message: 'Échec de la validation Captcha' });
+  }
 
   const detailsEnfants = nbEnfants > 0 
     ? `Oui (${nbEnfants}) - Âges: ${agesEnfants.join(', ')}` 
     : 'Aucun';
 
+  // 2. Préparation de l'email
   const mailOptions = {
     from: `"${prenom} ${nom}" <${process.env.EMAIL_USER}>`, 
     to: process.env.EMAIL_USER,
@@ -110,13 +134,10 @@ app.post('/send-reservation', async (req, res) => {
     subject: `RESA Website: ${typeBungalow} - ${prenom} ${nom}`, 
     html: `
       <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 5px; overflow: hidden;">
-        
         <div style="background-color: #4a3728; padding: 20px; text-align: center;">
            <h2 style="color: #ffffff; margin: 0; font-family: 'Playfair Display', serif;">Nouvelle Réservation</h2>
         </div>
-        
         <div style="padding: 20px;">
-
           <h3 style="background-color: #f2efe9; padding: 10px; color: #4a3728; border-left: 4px solid #4a3728;">
             👤 Client
           </h3>
@@ -126,7 +147,6 @@ app.post('/send-reservation', async (req, res) => {
             <li style="margin-bottom: 8px;"><strong>Email :</strong> <a href="mailto:${email}" style="color: #4a3728;">${email}</a></li>
             <li style="margin-bottom: 8px;"><strong>Téléphone :</strong> ${countryCode} ${telephone}</li>
           </ul>
-
           <h3 style="background-color: #f2efe9; padding: 10px; color: #4a3728; border-left: 4px solid #4a3728;">
             📅 Détails du Séjour
           </h3>
@@ -135,7 +155,6 @@ app.post('/send-reservation', async (req, res) => {
             <li style="margin-bottom: 8px;"><strong>Départ :</strong> ${dateDepart}</li>
             <li style="margin-bottom: 8px;"><strong>Bungalow souhaité :</strong> <span style="background-color: #4a3728; color: #fff; padding: 2px 6px; border-radius: 3px;">${typeBungalow}</span></li>
           </ul>
-          
           <h3 style="background-color: #f2efe9; padding: 10px; color: #4a3728; border-left: 4px solid #4a3728;">
             👨‍👩‍👧‍👦 Occupants
           </h3>
@@ -143,7 +162,6 @@ app.post('/send-reservation', async (req, res) => {
             <li style="margin-bottom: 8px;"><strong>Adultes :</strong> ${nbAdultes}</li>
             <li style="margin-bottom: 8px;"><strong>Enfants :</strong> ${detailsEnfants}</li>
           </ul>
-
           ${questions ? `
           <h3 style="background-color: #f2efe9; padding: 10px; color: #4a3728; border-left: 4px solid #4a3728;">
             💬 Message / Questions
@@ -152,9 +170,7 @@ app.post('/send-reservation', async (req, res) => {
             ${questions}
           </div>
           ` : ''}
-          
         </div>
-
         <div style="background-color: #f9f9f9; padding: 10px; text-align: center; font-size: 12px; color: #999; border-top: 1px solid #e0e0e0;">
           Demande envoyée via le formulaire de réservation du site Farihy.
         </div>
