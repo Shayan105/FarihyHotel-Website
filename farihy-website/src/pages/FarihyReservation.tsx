@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const FarihyReservation = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSending, setIsSending] = useState(false);
+  
+  // Référence pour le Captcha
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   // État du formulaire complet
   const [formData, setFormData] = useState({
@@ -12,8 +16,8 @@ const FarihyReservation = () => {
     nbAdultes: 1,
     nbEnfants: 0,
     agesEnfants: [] as string[],
-    nom: "",        // AJOUTÉ
-    prenom: "",     // AJOUTÉ
+    nom: "",
+    prenom: "",
     countryCode: "+261",
     telephone: "",
     email: "",
@@ -51,36 +55,45 @@ const FarihyReservation = () => {
     title: { fontSize: "2.5rem", fontWeight: 500, textAlign: "center" as const, marginBottom: "20px" },
     intro: { textAlign: "center" as const, fontFamily: "sans-serif", fontSize: "1rem", marginBottom: "40px", maxWidth: "800px", margin: "0 auto 40px auto" },
     label: { display: "block", marginBottom: "5px", fontWeight: 600, fontFamily: "sans-serif", fontSize: "0.9rem" },
-    subLabel: { display: "block", marginBottom: "5px", fontSize: "0.85rem", color: "#666", fontFamily: "sans-serif" }, // Nouveau style pour sous-titres
+    subLabel: { display: "block", marginBottom: "5px", fontSize: "0.85rem", color: "#666", fontFamily: "sans-serif" },
     input: { width: "100%", padding: "10px", marginBottom: "15px", border: "1px solid #ccc", borderRadius: "5px", backgroundColor: "#fff" },
     select: { width: "100%", padding: "10px", marginBottom: "15px", border: "1px solid #ccc", borderRadius: "5px", backgroundColor: "#fff", cursor: "pointer" },
     codeField: { padding: "10px", border: "1px solid #ccc", borderRadius: "5px 0 0 5px", backgroundColor: "#fff", borderRight: "none", width: "80px", textAlign: "center" as const },
-    button: { backgroundColor: "#4a3728", color: "#fff", padding: "12px 30px", border: "none", borderRadius: "5px", cursor: "pointer", fontSize: "1.1rem", marginTop: "20px", width: "100%" },
+    button: { backgroundColor: "#4a3728", color: "#fff", padding: "12px 30px", border: "none", borderRadius: "5px", cursor: "pointer", fontSize: "1.1rem", marginTop: "10px", width: "100%", opacity: isSending ? 0.7 : 1 },
     successBox: { backgroundColor: "#d4edda", color: "#155724", padding: "20px", borderRadius: "10px", marginTop: "20px", border: "1px solid #c3e6cb" },
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // 1. Validation du Captcha
+    const token = recaptchaRef.current?.getValue();
+    if (!token) {
+      alert("Veuillez valider le CAPTCHA.");
+      return;
+    }
+
     setIsSending(true);
 
     try {
+      // 2. Envoi des données + token captcha
       const response = await fetch("http://localhost:5000/send-reservation", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, captchaToken: token }),
       });
 
       const result = await response.json();
 
       if (response.ok && result.success) {
         setIsSubmitted(true);
-        // On ne reset pas tout pour éviter de frustrer l'utilisateur s'il veut juste changer une date, 
-        // mais on peut vider les questions.
         setFormData({ ...formData, questions: "" }); 
       } else {
-        alert("Erreur lors de l'envoi.");
+        alert("Erreur lors de l'envoi ou validation CAPTCHA échouée.");
+        recaptchaRef.current?.reset(); // Reset du captcha en cas d'erreur
       }
     } catch (error) {
+      console.error("Erreur:", error);
       alert("Impossible de contacter le serveur.");
     } finally {
       setIsSending(false);
@@ -157,7 +170,7 @@ const FarihyReservation = () => {
                     </div>
                 )}
 
-                {/* 4. Coordonnées Personnelles (AJOUT NOM/PRENOM) */}
+                {/* 4. Coordonnées Personnelles */}
                 <div className="row mt-4">
                     <div className="col-md-6">
                         <label style={styles.label}>4. Nom *</label>
@@ -183,8 +196,17 @@ const FarihyReservation = () => {
                 <label style={styles.label}>6. Demande particulière ?</label>
                 <textarea name="questions" rows={3} style={styles.input} value={formData.questions} onChange={handleChange}></textarea>
 
+                {/* CAPTCHA */}
+                <div className="d-flex justify-content-center my-3">
+                  <ReCAPTCHA
+                    sitekey="6Lfe_EssAAAAAMdlwx5E09rQPUlNge7IYsffIcQe"
+                    ref={recaptchaRef}
+                  />
+                </div>
+
+                {/* BOUTON */}
                 <button type="submit" style={styles.button} disabled={isSending}>
-                  {isSending ? "Envoi..." : "Envoyer ma demande de réservation"}
+                  {isSending ? "Envoi en cours..." : "Envoyer ma demande de réservation"}
                 </button>
               </form>
             ) : (
