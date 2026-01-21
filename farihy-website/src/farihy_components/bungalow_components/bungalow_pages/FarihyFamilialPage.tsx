@@ -1,7 +1,5 @@
 import React from "react";
-// Imports Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-// Imports Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
@@ -10,7 +8,6 @@ import FarihyRoomPageTemplate from "../FarihyRoomPageTemplate";
 import { VillaCard, SuiteCard, DuplexCard, DoubleCard } from "../../../components/RoomCard";
 import { GalleryImage } from "../../../components/LargePictureGallery";
 
-// --- Interfaces ---
 interface PresentationSection {
   imageSrc: string;
   reversed: boolean;
@@ -21,9 +18,7 @@ interface PresentationSection {
   };
 }
 
-// --- Composant Local : Gestion Responsive (Swiper Mobile / Grille Desktop) ---
 const OtherRoomsSuggestions = () => {
-  // Liste des chambres à afficher
   const rooms = [
     { id: 'double', Component: DoubleCard },
     { id: 'suite', Component: SuiteCard },
@@ -33,31 +28,31 @@ const OtherRoomsSuggestions = () => {
 
   return (
     <div>
-      {/* --- VUE MOBILE : SWIPER --- */}
-      <div className="d-block d-md-none" style={{ paddingBottom: '30px' }}>
+      {/* Mobile View: Swiper */}
+      <div className="d-block d-md-none">
         <Swiper
           modules={[Pagination]}
-          spaceBetween={15}
-          slidesPerView={1.2} // Show slightly more of the next card
+          spaceBetween={20}
+          slidesPerView={1.2}
           centeredSlides={true}
+          loop={false}
+          initialSlide={1}
           pagination={{ clickable: true }}
-          grabCursor={true}
-          // Fix for "buggy" feel: Disable loop and enable touch settings
-          loop={false} 
+          
+          // Stability fixes to prevent page jumping
+          roundLengths={true}
           touchStartPreventDefault={false} 
-          style={{ overflow: 'visible' }} // Allows shadows not to be cut off
+          style={{ paddingBottom: "40px" }}
         >
           {rooms.map((item) => (
-            <SwiperSlide key={item.id} style={{ height: 'auto', display: 'flex' }}>
-              <div style={{ width: '100%', height: '100%' }}>
-                <item.Component />
-              </div>
+            <SwiperSlide key={item.id}>
+              <item.Component />
             </SwiperSlide>
           ))}
         </Swiper>
       </div>
 
-      {/* --- VUE DESKTOP : GRILLE --- */}
+      {/* Desktop View: Grid */}
       <div 
         className="d-none d-md-grid" 
         style={{ 
@@ -75,7 +70,6 @@ const OtherRoomsSuggestions = () => {
   );
 };
 
-// --- Page Principale ---
 const FarihyFamilialPage = () => {
   const basePath = "/src/assets/pictures/familiale/";
 

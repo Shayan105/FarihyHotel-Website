@@ -1,10 +1,9 @@
 import React from "react";
-// Imports Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-// Imports Swiper styles
+import { Pagination } from "swiper/modules";
+
 import "swiper/css";
 import "swiper/css/pagination";
-import { Pagination } from "swiper/modules";
 
 import FarihyRoomPageTemplate from "../FarihyRoomPageTemplate";
 import {
@@ -16,7 +15,6 @@ import {
 } from "../../../components/RoomCard";
 import { GalleryImage } from "../../../components/LargePictureGallery";
 
-// --- Interfaces ---
 interface PresentationSection {
   imageSrc: string;
   reversed: boolean;
@@ -24,52 +22,51 @@ interface PresentationSection {
   details?: {
     price: string;
     checkIn: string;
+    addText?: string;
   };
 }
 
-// --- Composant Local : Gestion Responsive (Swiper Mobile / Grille Desktop) ---
-const OtherRoomsSuggestions = () => {
-  // Liste des chambres à afficher (On exclut la Familiale)
-  const rooms = [
-    { id: "double", Component: DoubleCard },
-    { id: "villa", Component: VillaCard },
-    { id: "duplex", Component: DuplexCard },
-    { id: "familial", Component: FamilialeCard },
-  ];
+const ROOMS_DATA = [
+  { id: "double", Component: DoubleCard },
+  { id: "villa", Component: VillaCard },
+  { id: "duplex", Component: DuplexCard },
+  { id: "familial", Component: FamilialeCard },
+];
 
+const OtherRoomsSuggestions = () => {
   return (
     <div>
-
-
-      {/* --- VUE MOBILE : SWIPER (Visible seulement sur petit écran) --- */}
-      {/* Note: 'd-md-none' est une classe Bootstrap qui cache l'élément sur medium screens et + */}
+      {/* Mobile View: Swiper Slider */}
       <div className="d-block d-md-none">
         <Swiper
+          modules={[Pagination]}
           spaceBetween={20}
-          slidesPerView={1.15} // Affiche un bout de la carte suivante pour inciter au swipe
+          slidesPerView={1.2}
           centeredSlides={true}
           loop={false}
-          modules={[Pagination]}
+          initialSlide={1}
           pagination={{ clickable: true }}
+          roundLengths={true} 
+          touchStartPreventDefault={false}
+          style={{ paddingBottom: "40px" }} 
         >
-          {rooms.map((item) => (
-            <SwiperSlide key={item.id} style={{ height: "auto" }}>
+          {ROOMS_DATA.map((item) => (
+            <SwiperSlide key={item.id}>
               <item.Component />
             </SwiperSlide>
           ))}
         </Swiper>
       </div>
 
-      {/* --- VUE DESKTOP : GRILLE (Visible seulement sur grand écran) --- */}
-      {/* Note: 'd-none d-md-grid' cache sur mobile, affiche en grid sur desktop */}
+      {/* Desktop View: Grid Layout */}
       <div
         className="d-none d-md-grid"
         style={{
-          gridTemplateColumns: "repeat(4, 1fr)", // Force 4 colonnes
+          gridTemplateColumns: "repeat(4, 1fr)",
           gap: "20px",
         }}
       >
-        {rooms.map((item) => (
+        {ROOMS_DATA.map((item) => (
           <div key={item.id}>
             <item.Component />
           </div>
@@ -79,7 +76,6 @@ const OtherRoomsSuggestions = () => {
   );
 };
 
-// --- Page Principale ---
 const FarihySuitePage = () => {
   const basePath = "/src/assets/pictures/suite/";
 
@@ -110,7 +106,6 @@ const FarihySuitePage = () => {
       reversed: false,
       text: [
         "La suite bénéficie d’une terrasse privée donnant sur le lac, d’une piscine privée ainsi que d’un jacuzzi*, pour des moments de détente privilégiés.",
-        
       ],
       details: {
         price: "Tarif hors petit-déjeuner : 750.000 Ariary la nuit",
@@ -118,8 +113,6 @@ const FarihySuitePage = () => {
         addText: "*Pour des raisons énergétiques, le jacuzzi peut être utilisé 30 minutes par jour entre 8h00 et 19h00"
       },
     },
-
-
   ];
 
   return (
@@ -129,7 +122,6 @@ const FarihySuitePage = () => {
       contentSections={pageSections}
       galleryTitle="Aperçu de la Suite"
       galleryImages={bungalowImages}
-      // Injection du composant créé ci-dessus
       otherRoomsComponent={<OtherRoomsSuggestions />}
     />
   );

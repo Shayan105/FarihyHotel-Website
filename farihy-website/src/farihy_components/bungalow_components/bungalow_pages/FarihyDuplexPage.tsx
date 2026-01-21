@@ -1,7 +1,5 @@
 import React from "react";
-// Imports Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-// Imports Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
@@ -16,7 +14,6 @@ import {
 } from "../../../components/RoomCard";
 import { GalleryImage } from "../../../components/LargePictureGallery";
 
-// --- Interfaces ---
 interface PresentationSection {
   imageSrc: string;
   reversed: boolean;
@@ -27,9 +24,7 @@ interface PresentationSection {
   };
 }
 
-// --- Composant Local : Gestion Responsive (Swiper Mobile / Grille Desktop) ---
 const OtherRoomsSuggestions = () => {
-  // Liste des chambres à afficher (On exclut la Familiale)
   const rooms = [
     { id: "double", Component: DoubleCard },
     { id: "villa", Component: VillaCard },
@@ -39,31 +34,35 @@ const OtherRoomsSuggestions = () => {
 
   return (
     <div>
-      {/* --- VUE MOBILE : SWIPER (Visible seulement sur petit écran) --- */}
-      {/* Note: 'd-md-none' est une classe Bootstrap qui cache l'élément sur medium screens et + */}
+      {/* Mobile View: Swiper */}
       <div className="d-block d-md-none">
         <Swiper
+          modules={[Pagination]}
           spaceBetween={20}
-          slidesPerView={1.15} // Affiche un bout de la carte suivante pour inciter au swipe
+          slidesPerView={1.2}
           centeredSlides={true}
           loop={false}
-          modules={[Pagination]}
+          initialSlide={1}
           pagination={{ clickable: true }}
+          
+          // Stability fixes to prevent page jumping
+          roundLengths={true}
+          touchStartPreventDefault={false}
+          style={{ paddingBottom: "40px" }}
         >
           {rooms.map((item) => (
-            <SwiperSlide key={item.id} style={{ height: "auto" }}>
+            <SwiperSlide key={item.id}>
               <item.Component />
             </SwiperSlide>
           ))}
         </Swiper>
       </div>
 
-      {/* --- VUE DESKTOP : GRILLE (Visible seulement sur grand écran) --- */}
-      {/* Note: 'd-none d-md-grid' cache sur mobile, affiche en grid sur desktop */}
+      {/* Desktop View: Grid */}
       <div
         className="d-none d-md-grid"
         style={{
-          gridTemplateColumns: "repeat(4, 1fr)", // Force 4 colonnes
+          gridTemplateColumns: "repeat(4, 1fr)",
           gap: "20px",
         }}
       >
@@ -77,7 +76,6 @@ const OtherRoomsSuggestions = () => {
   );
 };
 
-// --- Page Principale ---
 const FarihyDuplexPage = () => {
   const basePath = "/src/assets/pictures/duplex/";
 
@@ -100,7 +98,6 @@ const FarihyDuplexPage = () => {
         "Deux configurations de rez-de-chaussée sont proposées : l’une avec une chambre séparée, l’autre avec un espace ouvert.",
         "Au rez-de-chaussée, une salle de bains entièrement équipée avec une douche à l’italienne.",
         "Les équipements incluent la ventilation, la télévision ainsi que la connexion WIFI.",
-        
       ],
     },
     {
@@ -117,11 +114,10 @@ const FarihyDuplexPage = () => {
       text: [
         "Dans la salle de bains, à l’étage, une élégante baignoire en îlot offre une vue imprenable sur le lac, invitant à la détente.",
         "Chaque duplex dispose également d’une piscine et d’une terrasse privées, pour un séjour placé sous le signe du confort et de l’intimité"
-            ],
+      ],
       details: {
         price: "Tarif hors petit-déjeuner : 800.000 Ariary la nuit",
         checkIn: "Check-in : 13h00 - Check-out : 11h00",
-      
       },
     },
   ];
@@ -133,7 +129,6 @@ const FarihyDuplexPage = () => {
       contentSections={pageSections}
       galleryTitle="Aperçu des Duplex"
       galleryImages={bungalowImages}
-      // Injection du composant créé ci-dessus
       otherRoomsComponent={<OtherRoomsSuggestions />}
     />
   );
