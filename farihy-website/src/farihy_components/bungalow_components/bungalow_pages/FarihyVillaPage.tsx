@@ -121,8 +121,8 @@ const FarihyVillaPage = () => {
         "La villa bénéficie par ailleurs d’une vaste terrasse ombragée donnant sur la piscine et le jacuzzi, idéale pour des moments de détente en toute sérénité.",
       ],
       details: {
-        price: "Tarif hors petit-déjeuner : 425.000 Ariary la nuit",
-        checkIn: "Check-in : 13h00 - Check-out : 11h00",
+        price: "Tarif hors petit-déjeuner : 1.750.000 Ariary la nuit",
+        checkIn: "Check-in : 14h00 - Check-out : 14h00",
       },
     },
 

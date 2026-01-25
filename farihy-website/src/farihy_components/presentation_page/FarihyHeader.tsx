@@ -59,7 +59,7 @@ const FarihyHeader = () => {
 
   const bungalowLinks = [
     { label: "Les Doubles", path: "/double" },
-    { label: "Familiales", path: "/familiale" },
+    { label: "Les Familiales", path: "/familiale" },
     { label: "La Suite", path: "/suite" },
     { label: "Les Duplex", path: "/duplex" },
     { label: "La Villa", path: "/villa" },

@@ -34,7 +34,7 @@ const MassageGallery: React.FC = () => {
       images={massageContent.images}
       footerTextPrefix="N’attendez plus, "
       footerLinkText="reservez"
-      ctaLink="www.google.com"
+      ctaLink="/reservation"
       footerTextSuffix="dès maintenant."
     />
   );
