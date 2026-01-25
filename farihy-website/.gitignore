@@ -18,6 +18,8 @@ dist-ssr
 .idea
 .DS_Store
 *.suo
+*.wepb
+*.jpg
 *.ntvs*
 *.njsproj
 *.sln
