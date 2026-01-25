@@ -4,13 +4,19 @@ import FarihyRoomGallery from "../farihy_components/presentation_page/FarihyRoom
 import MassageGallery from "../farihy_components/presentation_page/MassageImageGallery";
 import PresentationCard from "../farihy_components/presentation_page/PresentationCard";
 import RestaurantGallery from "../farihy_components/presentation_page/RestaurantImageGallery";
-
-// 1. Importer le composant Location
 import FarihyLocation from "../farihy_components/presentation_page/FarihyLocation";
+
+// 1. Import the new Banner component
+// (Ensure the file path matches where you saved the banner code)
+import FarihyBanner from "../farihy_components/presentation_page/FarihyBanner"; 
 
 const HomePage = () => {
   return (
     <>
+      {/* 2. Place the Banner at the very top */}
+      {/* The auto-scroll logic in the banner will smoothly scroll down to the PresentationCard */}
+      <FarihyBanner />
+
       <PresentationCard />
       <FarihyRoomGallery />
       
@@ -20,7 +26,6 @@ const HomePage = () => {
         <MassageGallery />
       </div>
 
-      {/* 2. Ajouter la section map tout en bas */}
       <FarihyLocation />
     </>
   );
