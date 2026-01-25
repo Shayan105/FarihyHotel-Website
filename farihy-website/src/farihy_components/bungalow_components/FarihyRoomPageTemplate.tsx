@@ -74,8 +74,7 @@ const FarihyRoomPageTemplate: React.FC<RoomPageProps> = ({
       ))}
 
       {/* Photo Gallery */}
-      <LargePictureGallery title={galleryTitle} images={galleryImages} />
-
+<LargePictureGallery title={galleryTitle} images={galleryImages || []} />
       {/* Suggestions Section */}
       {otherRoomsComponent && (
         <div className="container-fluid py-5" style={{ backgroundColor: "#F9F5F0" }}>
