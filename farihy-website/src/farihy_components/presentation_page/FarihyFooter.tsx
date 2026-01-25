@@ -39,12 +39,21 @@ const FarihyFooter = () => {
           
           {/* COLONNE 1 : CONTACT (Gauche sur Desktop, Centre sur Mobile) */}
           <div className="col-md-4 text-center text-md-start">
-            <div style={textStyle}>
-              <p className="mb-1">Téléphone +261 32 07 413 55</p>
-              <a href="mailto:farihyhotel@gmail.com" style={linkStyle}>
-                contact@farihyhotel.com
-              </a>
-            </div>
+<div style={textStyle}>
+  <p className="mb-1">
+    <a href="tel:+261320741355" style={linkStyle}>
+      +261 32 07 413 55
+    </a>
+  </p>
+  <p className="mb-1">
+    <a href="tel:+261388480370" style={linkStyle}>
+      +261 38 84 803 70
+    </a>
+  </p>
+  <a href="mailto:farihyhotel@gmail.com" style={linkStyle}>
+    contact@farihyhotel.com
+  </a>
+</div>
           </div>
 
           {/* COLONNE 2 : LOGO CENTRAL */}
