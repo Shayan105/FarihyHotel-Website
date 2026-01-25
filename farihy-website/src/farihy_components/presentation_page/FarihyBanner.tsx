@@ -18,7 +18,7 @@ const FarihyBanner: React.FC = () => {
   }, []);
 
   const bannerStyle: React.CSSProperties = {
-    backgroundImage: 'url("/src/assets/pictures/accueil/banner.webp")',
+    backgroundImage: 'url("/pictures/accueil/banner.webp")',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     minHeight: '100vh',

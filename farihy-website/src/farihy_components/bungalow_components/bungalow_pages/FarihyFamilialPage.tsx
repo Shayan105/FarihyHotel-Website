@@ -71,7 +71,7 @@ const OtherRoomsSuggestions = () => {
 };
 
 const FarihyFamilialPage = () => {
-  const basePath = "/src/assets/pictures/familiale/";
+  const basePath = "/pictures/familiale/";
 
   const bungalowImages: GalleryImage[] = [
     { src: basePath + "1.webp" },

@@ -6,7 +6,7 @@ import ImageGallery from "../../components/ImageGallery";
  * generic ImageGallery component.
  */
 const CuisineGallery: React.FC = () => {
-  const basePath = "/src/assets/pictures/cuisine/";
+  const basePath = "/pictures/cuisine/";
   const massageContent = {
     title: "La Cuisine",
     subtitle:

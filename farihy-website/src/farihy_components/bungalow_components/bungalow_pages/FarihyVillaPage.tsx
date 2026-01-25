@@ -80,7 +80,7 @@ const OtherRoomsSuggestions = () => {
 
 // --- Page Principale ---
 const FarihyVillaPage = () => {
-  const basePath = "/src/assets/pictures/villa/";
+  const basePath = "/pictures/villa/";
 
   const bungalowImages: GalleryImage[] = [
     { src: basePath + "1.webp" },

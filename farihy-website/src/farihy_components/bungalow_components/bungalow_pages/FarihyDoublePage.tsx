@@ -77,7 +77,7 @@ const OtherRoomsSuggestions = () => {
 };
 
 const FarihyDoublePage = () => {
-  const basePath = "/src/assets/pictures/double/";
+  const basePath = "/pictures/double/";
 
   const bungalowImages: GalleryImage[] = [
     { src: basePath + "1.webp" },

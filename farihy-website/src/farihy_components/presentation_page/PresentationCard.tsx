@@ -8,7 +8,7 @@ interface PresentationCardProps {
 }
 
 const PresentationCard: React.FC<PresentationCardProps> = ({
-  imageSrc = "/src/assets/pictures/accueil/pirogue.webp",
+  imageSrc = "/pictures/accueil/pirogue.webp",
   title = "Le calme à 120km d'Antananarivo",
   paragraphs = [
     "Découvrez votre havre de tranquillité au cœur d'Ampefy.",

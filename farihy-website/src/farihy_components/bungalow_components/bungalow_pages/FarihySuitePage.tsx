@@ -77,7 +77,7 @@ const OtherRoomsSuggestions = () => {
 };
 
 const FarihySuitePage = () => {
-  const basePath = "/src/assets/pictures/suite/";
+  const basePath = "/pictures/suite/";
 
   const bungalowImages: GalleryImage[] = [
     { src: basePath + "1.webp" },

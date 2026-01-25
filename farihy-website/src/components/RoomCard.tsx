@@ -30,7 +30,7 @@ export const farihyRooms: RoomData[] = [
     maxPax: 2,
     roomName: "Les Doubles",
     price: "400 000",
-    imagePath: "/src/assets/pictures/double/ext.webp",
+    imagePath: "/pictures/double/ext.webp",
     link: "/double",
   },
   {
@@ -39,7 +39,7 @@ export const farihyRooms: RoomData[] = [
     maxPax: 5,
     roomName: "Familiales",
     price: "425 000",
-    imagePath: "/src/assets/pictures/familiale/ext.webp",
+    imagePath: "/pictures/familiale/ext.webp",
     link: "/familiale",
   },
   {
@@ -48,7 +48,7 @@ export const farihyRooms: RoomData[] = [
     maxPax: 5,
     roomName: "La Suite",
     price: "750 000",
-    imagePath: "/src/assets/pictures/suite/ext.webp",
+    imagePath: "/pictures/suite/ext.webp",
     link: "/suite",
   },
   {
@@ -57,7 +57,7 @@ export const farihyRooms: RoomData[] = [
     maxPax: 6,
     roomName: "Les Duplex",
     price: "800 000",
-    imagePath: "/src/assets/pictures/duplex/ext.webp",
+    imagePath: "/pictures/duplex/ext.webp",
     link: "/duplex",
   },
   {
@@ -66,7 +66,7 @@ export const farihyRooms: RoomData[] = [
     maxPax: 10,
     roomName: "La Villa",
     price: "1 750 000",
-    imagePath: "/src/assets/pictures/villa/ext.webp",
+    imagePath: "/pictures/villa/ext.webp",
     link: "/villa",
   },
 ];

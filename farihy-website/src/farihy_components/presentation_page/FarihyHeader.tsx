@@ -122,7 +122,7 @@ const FarihyHeader = () => {
         <div className="d-flex align-items-center">
           <a href="/" onClick={closeAllMenus}> 
             <img 
-              src="/src/assets/pictures/accueil/logo.webp" 
+              src="/pictures/accueil/logo.webp" 
               alt="Logo" 
               style={{ height: '40px', objectFit: 'contain' }}
             />
