@@ -47,8 +47,12 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
             <Route path="/villa" element={<FarihyVillaPage />} />
             <Route path="/suite" element={<FarihySuitePage />} />
             <Route path="/double" element={<FarihyDoublePage />} />
+            <Route path="/chambre-double" element={<FarihyDoublePage />} />
+            <Route path="/hebergements" element={<FarihyDoublePage />} />
             <Route path="/duplex" element={<FarihyDuplexPage />} />
+            <Route path="/suite-duplex-luxe-2" element={<FarihyDuplexPage />} />
             <Route path="/familiale" element={<FarihyFamilialPage />} />
+            <Route path="/chambre-familiale" element={<FarihyFamilialPage />} />
             <Route path="/bungalows" element={<HomePage />} />
             {/*Contact Route */}
             <Route path="/contact" element={<FarihyContact />} />
