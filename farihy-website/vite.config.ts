@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     host: true, // Listen on all network interfaces
     port: 3000,
-    allowedHosts: ['farihy.spotiphi.org'], // Allow your specific domain
+    allowedHosts: ['farihy.spotiphi.org','farihy-hotel.com'], // Allow your specific domain
     hmr: false 
   }
 })
