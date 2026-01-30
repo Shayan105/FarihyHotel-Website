@@ -1,20 +1,19 @@
 import React from "react";
+import FarihyBanner from "../farihy_components/presentation_page/FarihyBanner"; 
+import FarihyPopupNotification from "../farihy_components/presentation_page/FarihyPopupNotification";
 import CuisineGallery from "../farihy_components/presentation_page/CuisineRestaurantGallery";
+import FarihyLocation from "../farihy_components/presentation_page/FarihyLocation";
 import FarihyRoomGallery from "../farihy_components/presentation_page/FarihyRoomGallery";
 import MassageGallery from "../farihy_components/presentation_page/MassageImageGallery";
 import PresentationCard from "../farihy_components/presentation_page/PresentationCard";
 import RestaurantGallery from "../farihy_components/presentation_page/RestaurantImageGallery";
-import FarihyLocation from "../farihy_components/presentation_page/FarihyLocation";
-
-// 1. Import the new Banner component
-// (Ensure the file path matches where you saved the banner code)
-import FarihyBanner from "../farihy_components/presentation_page/FarihyBanner"; 
 
 const HomePage = () => {
   return (
     <>
-      {/* 2. Place the Banner at the very top */}
-      {/* The auto-scroll logic in the banner will smoothly scroll down to the PresentationCard */}
+      {/* Logic-based Notification */}
+      <FarihyPopupNotification />
+
       <FarihyBanner />
 
       <PresentationCard />
