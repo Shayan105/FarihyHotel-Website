@@ -39,9 +39,36 @@ const FarihyReservation = () => {
     questions: "",
   });
 
+  // --- DATE HELPERS ---
+  const getTodayDate = () => {
+    const today = new Date();
+    return today.toISOString().split("T")[0];
+  };
+
+  const getNextDay = (dateString: string) => {
+    if (!dateString) return getTodayDate();
+    const date = new Date(dateString);
+    date.setDate(date.getDate() + 1);
+    return date.toISOString().split("T")[0];
+  };
+
+  const today = getTodayDate();
+  const minDeparture = formData.dateArrivee ? getNextDay(formData.dateArrivee) : today;
+
+  // --- HANDLERS ---
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    if (name === "dateArrivee") {
+      // Logic: If arrival is changed to a date AFTER the current departure, reset departure
+      if (formData.dateDepart && value >= formData.dateDepart) {
+         setFormData((prev) => ({ ...prev, [name]: value, dateDepart: "" }));
+      } else {
+         setFormData((prev) => ({ ...prev, [name]: value }));
+      }
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleRoomChange = (type: RoomType, newQuantity: number, max: number) => {
@@ -86,25 +113,19 @@ const FarihyReservation = () => {
     codeField: { padding: "10px", border: "1px solid #ccc", borderRadius: "5px 0 0 5px", backgroundColor: "#fff", borderRight: "none", width: "80px", textAlign: "center" as const },
     button: { backgroundColor: "#4a3728", color: "#fff", padding: "12px 30px", border: "none", borderRadius: "5px", cursor: "pointer", fontSize: "1.1rem", marginTop: "10px", width: "100%", opacity: isSending ? 0.7 : 1, transition: "opacity 0.3s" },
     successBox: { backgroundColor: "#d4edda", color: "#155724", padding: "20px", borderRadius: "10px", marginTop: "20px", border: "1px solid #c3e6cb" },
-    
-    // Styles de liste
     roomContainer: { backgroundColor: "#fff", borderRadius: "8px", padding: "10px 20px", marginBottom: "20px", boxShadow: "0 2px 5px rgba(0,0,0,0.05)" },
     roomRow: { display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid #f0f0f0", padding: "12px 0" },
-    
-    // Style du lien (Modifié: suppression de l'underline)
     roomNameLink: { 
         fontSize: "1.05rem", 
         fontWeight: 500, 
         fontFamily: "'Playfair Display', serif",
         color: "#4a3728",
-        textDecoration: "none", // <--- Underline supprimé
+        textDecoration: "none", 
         cursor: "pointer",
         display: "flex",
         alignItems: "center",
-        gap: "5px" // Espacement entre le texte et la flèche
+        gap: "5px"
     },
-    
-    // Stepper styles
     stepperContainer: { display: "flex", alignItems: "center", backgroundColor: "#f8f9fa", borderRadius: "20px", padding: "2px" },
     stepperBtn: { width: "32px", height: "32px", display: "flex", alignItems: "center", justifyContent: "center", border: "none", backgroundColor: "#fff", borderRadius: "50%", boxShadow: "0 1px 3px rgba(0,0,0,0.1)", cursor: "pointer", color: "#4a3728", fontSize: "1.2rem", fontWeight: "bold", transition: "all 0.2s" },
     stepperBtnDisabled: { opacity: 0.3, cursor: "not-allowed", boxShadow: "none", backgroundColor: "transparent" },
@@ -177,15 +198,32 @@ const FarihyReservation = () => {
             {!isSubmitted ? (
               <form onSubmit={handleSubmit}>
                 
-                {/* 1. Dates */}
+                {/* 1. Dates (UPDATED) */}
                 <div className="row">
                   <div className="col-md-6">
                     <label style={styles.label}>1. Date d'arrivée *</label>
-                    <input type="date" name="dateArrivee" required style={styles.input} value={formData.dateArrivee} onChange={handleChange} />
+                    <input 
+                        type="date" 
+                        name="dateArrivee" 
+                        required 
+                        style={styles.input} 
+                        value={formData.dateArrivee} 
+                        onChange={handleChange}
+                        min={today} // Prevents past dates
+                    />
                   </div>
                   <div className="col-md-6">
                     <label style={styles.label}>Date de départ *</label>
-                    <input type="date" name="dateDepart" required style={styles.input} value={formData.dateDepart} onChange={handleChange} />
+                    <input 
+                        type="date" 
+                        name="dateDepart" 
+                        required 
+                        style={styles.input} 
+                        value={formData.dateDepart} 
+                        onChange={handleChange}
+                        min={minDeparture} // Prevents incoherent dates
+                        disabled={!formData.dateArrivee} // Forces user to pick arrival first
+                    />
                   </div>
                 </div>
 
@@ -199,7 +237,6 @@ const FarihyReservation = () => {
                     
                     return (
                     <div key={type} style={rowStyle}>
-                      {/* LIEN SANS SOULIGNEMENT */}
                       <a 
                         href={`/${type.toLowerCase()}`}
                         target="_blank"             
@@ -210,7 +247,6 @@ const FarihyReservation = () => {
                         {type} <span style={{fontSize: "0.8em"}}>↗</span>
                       </a>
 
-                      {/* Stepper (+/-) */}
                       <div style={styles.stepperContainer}>
                         <button 
                             type="button" 
@@ -218,7 +254,7 @@ const FarihyReservation = () => {
                             disabled={count <= 0}
                             style={{...styles.stepperBtn, ...(count <= 0 ? styles.stepperBtnDisabled : {})}}
                         >
-                         - 
+                          - 
                         </button>
                         
                         <span style={styles.stepperValue}>{count}</span>
@@ -229,7 +265,7 @@ const FarihyReservation = () => {
                             disabled={count >= max}
                             style={{...styles.stepperBtn, ...(count >= max ? styles.stepperBtnDisabled : {})}}
                         >
-                         + 
+                          + 
                         </button>
                       </div>
                     </div>

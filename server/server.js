@@ -1,7 +1,7 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
-const axios = require('axios'); // N'oubliez pas: npm install axios
+const axios = require('axios');
 require('dotenv').config();
 
 const app = express();
@@ -9,187 +9,221 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cors({
-  origin: 'http://localhost:5173' // Autorise uniquement votre frontend Vite
+  origin: 'http://localhost:5173' 
 }));
 
-// Configuration Nodemailer (Gmail)
+// ==========================================
+// CONFIGURATION: NODEMAILER
+// ==========================================
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: process.env.SMTP_HOST,
+  port: process.env.SMTP_PORT,
+  secure: process.env.SMTP_PORT == 465, 
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
+    user: process.env.EMAIL_USER, 
+    pass: process.env.EMAIL_PASS, 
   },
 });
 
-// Fonction utilitaire pour vérifier le Captcha
+transporter.verify(function (error, success) {
+  if (error) {
+    console.log("Error connecting to SMTP:", error);
+  } else {
+    console.log("Server is ready to take our messages");
+  }
+});
+
 const verifyRecaptcha = async (token) => {
   if (!token) return false;
-  
   const secretKey = process.env.RECAPTCHA_SECRET_KEY;
   const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${token}`;
-
   try {
     const response = await axios.post(verifyUrl);
     return response.data.success;
   } catch (error) {
-    console.error("Erreur vérification Captcha:", error);
+    console.error("Captcha verification error:", error);
     return false;
   }
 };
 
 // ==========================================
-// ROUTE 1 : CONTACT SIMPLE
+// ROUTE 1: SIMPLE CONTACT
 // ==========================================
 app.post('/send-email', async (req, res) => {
   const { nom, prenom, email, countryCode, telephone, sujet, message, captchaToken } = req.body;
 
-  // 1. Vérification du Captcha
   const isHuman = await verifyRecaptcha(captchaToken);
-  if (!isHuman) {
-    return res.status(400).json({ success: false, message: 'Échec de la validation Captcha' });
-  }
+  if (!isHuman) return res.status(400).json({ success: false, message: 'Captcha validation failed' });
 
-  // 2. Préparation de l'email
-  const mailOptions = {
-    from: `"${prenom} ${nom}" <${process.env.EMAIL_USER}>`, 
-    to: process.env.EMAIL_USER, 
+  // --- EMAIL 1: TO ADMIN (You) ---
+  const mailToAdmin = {
+    from: `"${prenom} ${nom}" <${process.env.EMAIL_USER}>`,
+    to: process.env.EMAIL_TO, // shayan...
     replyTo: email, 
-    subject: `Contact Site Web: ${sujet}`,
+    subject: `🔔 Contact Site Web: ${sujet}`,
     html: `
-      <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 5px; overflow: hidden;">
-        <div style="background-color: #4a3728; padding: 20px; text-align: center;">
-          <h2 style="color: #ffffff; margin: 0; font-family: 'Playfair Display', serif;">Nouveau Message</h2>
+      <div style="font-family: Arial, sans-serif; color: #333; padding: 20px; border: 1px solid #ddd;">
+        <h2 style="color: #4a3728;">Nouveau Message Reçu</h2>
+        <p><strong>De :</strong> ${prenom} ${nom} (${email})</p>
+        <p><strong>Téléphone :</strong> ${countryCode} ${telephone}</p>
+        <hr>
+        <p><strong>Sujet :</strong> ${sujet}</p>
+        <p><strong>Message :</strong></p>
+        <blockquote style="background: #f9f9f9; padding: 10px; border-left: 4px solid #4a3728;">${message}</blockquote>
+      </div>
+    `,
+  };
+
+  // --- EMAIL 2: TO CLIENT (Confirmation) ---
+  const mailToClient = {
+    from: `"${process.env.EMAIL_FROM_NAME}" <${process.env.EMAIL_USER}>`,
+    to: email, 
+    subject: `Nous avons bien reçu votre message - Farihy`,
+    html: `
+      <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff;">
+        <div style="background-color: #4a3728; padding: 30px 20px; text-align: center;">
+          <h1 style="color: #ffffff; margin: 0; font-family: 'Playfair Display', serif; font-size: 24px;">Merci de nous avoir contactés</h1>
         </div>
-        <div style="padding: 20px;">
-          <h3 style="background-color: #f2efe9; padding: 10px; color: #4a3728; border-left: 4px solid #4a3728;">
-            👤 Informations Expéditeur
-          </h3>
-          <ul style="list-style: none; padding-left: 10px;">
-            <li style="margin-bottom: 8px;"><strong>Nom complet :</strong> ${nom.toUpperCase()} ${prenom}</li>
-            <li style="margin-bottom: 8px;"><strong>Email :</strong> <a href="mailto:${email}" style="color: #4a3728;">${email}</a></li>
-            <li style="margin-bottom: 8px;"><strong>Téléphone :</strong> ${countryCode} ${telephone}</li>
-          </ul>
-          <h3 style="background-color: #f2efe9; padding: 10px; color: #4a3728; border-left: 4px solid #4a3728;">
-            ✉️ Le Message
-          </h3>
-          <div style="margin-left: 10px;">
-            <p style="font-size: 1.1em; font-weight: bold; color: #4a3728;">Sujet : ${sujet}</p>
-            <div style="background-color: #f8f9fa; padding: 15px; border: 1px solid #e9ecef; border-radius: 4px; color: #555; white-space: pre-wrap; line-height: 1.6;">
-${message}
-            </div>
+        <div style="padding: 30px 20px; color: #555555; line-height: 1.6;">
+          <p>Bonjour <strong>${prenom}</strong>,</p>
+          <p>Nous avons bien reçu votre message et nous vous en remercions. Notre équipe vous répondra dans les plus brefs délais.</p>
+          
+          <div style="background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 5px; padding: 20px; margin-top: 20px;">
+            <p style="margin-top: 0; font-size: 14px; color: #888; text-transform: uppercase; letter-spacing: 1px;">Copie de votre message :</p>
+            <p style="font-weight: bold; margin-bottom: 5px;">${sujet}</p>
+            <p style="font-style: italic; color: #666;">"${message}"</p>
           </div>
+
+          <p style="margin-top: 30px;">Cordialement,<br><strong>L'équipe Farihy</strong></p>
         </div>
-        <div style="background-color: #f9f9f9; padding: 10px; text-align: center; font-size: 12px; color: #999; border-top: 1px solid #e0e0e0;">
-          Email envoyé via le formulaire de contact du site Farihy.
+        <div style="background-color: #f1f1f1; padding: 15px; text-align: center; font-size: 12px; color: #888;">
+          <p style="margin: 0;">Ceci est un message automatique, merci de ne pas y répondre directement.</p>
+          <p style="margin: 5px 0 0;"><a href="https://www.farihy-hotel.com" style="color: #4a3728; text-decoration: none;">www.farihy-hotel.com</a></p>
         </div>
       </div>
     `,
   };
 
   try {
-    await transporter.sendMail(mailOptions);
-    console.log('Email de contact envoyé avec succès !');
-    res.status(200).json({ success: true, message: 'Email envoyé' });
+    // Send both emails effectively in parallel
+    await Promise.all([
+      transporter.sendMail(mailToAdmin),
+      transporter.sendMail(mailToClient)
+    ]);
+    console.log('Emails (Admin + Client) sent successfully!');
+    res.status(200).json({ success: true, message: 'Emails envoyés' });
   } catch (error) {
-    console.error('Erreur contact:', error);
+    console.error('Contact error:', error);
     res.status(500).json({ success: false, message: 'Erreur serveur' });
   }
 });
 
 // ==========================================
-// ROUTE 2 : RÉSERVATION
+// ROUTE 2: RESERVATION
 // ==========================================
 app.post('/send-reservation', async (req, res) => {
   const { 
-    dateArrivee, 
-    dateDepart, 
-    typeBungalow, 
-    nbAdultes, 
-    nbEnfants, 
-    agesEnfants, 
-    nom, 
-    prenom, 
-    countryCode, 
-    telephone, 
-    email, 
-    questions,
-    captchaToken // Récupération du token envoyé par le front
+    dateArrivee, dateDepart, typeBungalow, nbAdultes, nbEnfants, agesEnfants, 
+    nom, prenom, countryCode, telephone, email, questions, captchaToken 
   } = req.body;
 
-  // 1. Vérification du Captcha
   const isHuman = await verifyRecaptcha(captchaToken);
-  if (!isHuman) {
-    return res.status(400).json({ success: false, message: 'Échec de la validation Captcha' });
-  }
+  if (!isHuman) return res.status(400).json({ success: false, message: 'Captcha validation failed' });
 
-  const detailsEnfants = nbEnfants > 0 
-    ? `Oui (${nbEnfants}) - Âges: ${agesEnfants.join(', ')}` 
-    : 'Aucun';
+  const detailsEnfants = nbEnfants > 0 ? `Oui (${nbEnfants}) - Âges: ${agesEnfants.join(', ')}` : 'Aucun';
 
-  // 2. Préparation de l'email
-  const mailOptions = {
-    from: `"${prenom} ${nom}" <${process.env.EMAIL_USER}>`, 
-    to: process.env.EMAIL_USER,
+  // --- EMAIL 1: TO ADMIN (You) ---
+  const mailToAdmin = {
+    from: `"${prenom} ${nom}" <${process.env.EMAIL_USER}>`,
+    to: process.env.EMAIL_TO,
     replyTo: email,
-    subject: `RESA Website: ${typeBungalow} - ${prenom} ${nom}`, 
+    subject: `📅 Nouvelle Réservation: ${prenom} ${nom}`,
     html: `
-      <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 5px; overflow: hidden;">
-        <div style="background-color: #4a3728; padding: 20px; text-align: center;">
-           <h2 style="color: #ffffff; margin: 0; font-family: 'Playfair Display', serif;">Nouvelle Réservation</h2>
+      <div style="font-family: Arial, sans-serif; color: #333; padding: 20px; border: 1px solid #ddd;">
+        <h2 style="color: #4a3728;">Demande de Réservation</h2>
+        
+        <h3>👤 Client</h3>
+        <p>${prenom} ${nom}<br>
+        ${email}<br>
+        ${countryCode} ${telephone}</p>
+
+        <h3>🏨 Séjour</h3>
+        <ul>
+          <li><strong>Arrivée :</strong> ${dateArrivee}</li>
+          <li><strong>Départ :</strong> ${dateDepart}</li>
+          <li><strong>Logement :</strong> ${typeBungalow}</li>
+        </ul>
+
+        <h3>👨‍👩‍👧‍👦 Occupants</h3>
+        <ul>
+          <li><strong>Adultes :</strong> ${nbAdultes}</li>
+          <li><strong>Enfants :</strong> ${detailsEnfants}</li>
+        </ul>
+
+        ${questions ? `<h3>💬 Remarques</h3><p>${questions}</p>` : ''}
+      </div>
+    `,
+  };
+
+  // --- EMAIL 2: TO CLIENT (Confirmation) ---
+  const mailToClient = {
+    from: `"${process.env.EMAIL_FROM_NAME}" <${process.env.EMAIL_USER}>`,
+    to: email, 
+    subject: `Confirmation de réception de votre demande - Farihy`,
+    html: `
+      <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff;">
+        <div style="background-color: #4a3728; padding: 30px 20px; text-align: center;">
+          <h1 style="color: #ffffff; margin: 0; font-family: 'Playfair Display', serif; font-size: 24px;">Demande bien reçue</h1>
         </div>
-        <div style="padding: 20px;">
-          <h3 style="background-color: #f2efe9; padding: 10px; color: #4a3728; border-left: 4px solid #4a3728;">
-            👤 Client
-          </h3>
-          <ul style="list-style: none; padding-left: 10px;">
-            <li style="margin-bottom: 8px;"><strong>Nom :</strong> ${nom ? nom.toUpperCase() : ''}</li>
-            <li style="margin-bottom: 8px;"><strong>Prénom :</strong> ${prenom}</li>
-            <li style="margin-bottom: 8px;"><strong>Email :</strong> <a href="mailto:${email}" style="color: #4a3728;">${email}</a></li>
-            <li style="margin-bottom: 8px;"><strong>Téléphone :</strong> ${countryCode} ${telephone}</li>
-          </ul>
-          <h3 style="background-color: #f2efe9; padding: 10px; color: #4a3728; border-left: 4px solid #4a3728;">
-            📅 Détails du Séjour
-          </h3>
-          <ul style="list-style: none; padding-left: 10px;">
-            <li style="margin-bottom: 8px;"><strong>Arrivée :</strong> ${dateArrivee}</li>
-            <li style="margin-bottom: 8px;"><strong>Départ :</strong> ${dateDepart}</li>
-            <li style="margin-bottom: 8px;"><strong>Bungalow souhaité :</strong> <span style="background-color: #4a3728; color: #fff; padding: 2px 6px; border-radius: 3px;">${typeBungalow}</span></li>
-          </ul>
-          <h3 style="background-color: #f2efe9; padding: 10px; color: #4a3728; border-left: 4px solid #4a3728;">
-            👨‍👩‍👧‍👦 Occupants
-          </h3>
-          <ul style="list-style: none; padding-left: 10px;">
-            <li style="margin-bottom: 8px;"><strong>Adultes :</strong> ${nbAdultes}</li>
-            <li style="margin-bottom: 8px;"><strong>Enfants :</strong> ${detailsEnfants}</li>
-          </ul>
-          ${questions ? `
-          <h3 style="background-color: #f2efe9; padding: 10px; color: #4a3728; border-left: 4px solid #4a3728;">
-            💬 Message / Questions
-          </h3>
-          <div style="background-color: #f8f9fa; padding: 15px; border: 1px solid #e9ecef; border-radius: 4px; margin-left: 10px; color: #555;">
-            ${questions}
+        <div style="padding: 30px 20px; color: #555555; line-height: 1.6;">
+          <p>Bonjour <strong>${prenom}</strong>,</p>
+          <p>Nous avons bien pris en compte votre demande de réservation pour un séjour au Farihy.</p>
+          <p><strong>⚠️ Important :</strong> Ceci n'est pas une confirmation définitive. Notre équipe va vérifier la disponibilité pour vos dates et reviendra vers vous très rapidement pour valider votre séjour.</p>
+          
+          <div style="background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 5px; padding: 20px; margin-top: 20px;">
+            <p style="margin-top: 0; font-size: 14px; color: #888; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #ddd; padding-bottom: 10px; margin-bottom: 15px;">Récapitulatif de votre demande</p>
+            
+            <table style="width: 100%; border-collapse: collapse;">
+              <tr>
+                <td style="padding: 5px 0; color: #888;">Dates :</td>
+                <td style="padding: 5px 0; font-weight: bold; text-align: right;">Du ${dateArrivee} au ${dateDepart}</td>
+              </tr>
+              <tr>
+                <td style="padding: 5px 0; color: #888;">Logement :</td>
+                <td style="padding: 5px 0; font-weight: bold; text-align: right;">${typeBungalow}</td>
+              </tr>
+              <tr>
+                <td style="padding: 5px 0; color: #888;">Voyageurs :</td>
+                <td style="padding: 5px 0; font-weight: bold; text-align: right;">${nbAdultes} Adulte(s), ${nbEnfants} Enfant(s)</td>
+              </tr>
+            </table>
           </div>
-          ` : ''}
+
+          <p style="margin-top: 30px;">À très bientôt,<br><strong>L'équipe Farihy</strong></p>
         </div>
-        <div style="background-color: #f9f9f9; padding: 10px; text-align: center; font-size: 12px; color: #999; border-top: 1px solid #e0e0e0;">
-          Demande envoyée via le formulaire de réservation du site Farihy.
+        <div style="background-color: #f1f1f1; padding: 15px; text-align: center; font-size: 12px; color: #888;">
+          <p style="margin: 0;">Farihy Hotel & Lodge</p>
+          <p style="margin: 5px 0 0;"><a href="https://www.farihy-hotel.com" style="color: #4a3728; text-decoration: none;">www.farihy-hotel.com</a></p>
         </div>
       </div>
     `,
   };
 
   try {
-    await transporter.sendMail(mailOptions);
-    console.log(`Réservation reçue de ${prenom} ${nom}`);
+    // Send both emails effectively in parallel
+    await Promise.all([
+      transporter.sendMail(mailToAdmin),
+      transporter.sendMail(mailToClient)
+    ]);
+    console.log(`Reservation emails (Admin + Client) sent for ${prenom} ${nom}`);
     res.status(200).json({ success: true, message: 'Réservation envoyée' });
   } catch (error) {
-    console.error('Erreur réservation:', error);
+    console.error('Reservation error:', error);
     res.status(500).json({ success: false, message: 'Erreur serveur' });
   }
 });
 
-// Démarrage du serveur
 const PORT = 5000;
 app.listen(PORT, () => {
-  console.log(`Serveur de mail démarré sur le port ${PORT}`);
+  console.log(`Mail server started on port ${PORT}`);
 });
