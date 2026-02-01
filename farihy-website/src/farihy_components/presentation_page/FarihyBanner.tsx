@@ -11,7 +11,7 @@ const FarihyBanner: React.FC = () => {
           behavior: "smooth",      // Make it a smooth "swipe" effect
         });
       }
-    }, 2000); // 1.5 seconds delay
+    }, 4000); // 1.5 seconds delay
 
     // Cleanup: clear the timer if the component unmounts before 1.5s
     return () => clearTimeout(timer);
