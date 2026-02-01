@@ -51,7 +51,7 @@ const FarihyFooter = () => {
     </a>
   </p>
   <a href="mailto:farihyhotel@gmail.com" style={linkStyle}>
-    contact@farihyhotel.com
+    farihyhotel@gmail.com
   </a>
 </div>
           </div>
