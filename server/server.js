@@ -177,7 +177,7 @@ app.post('/send-reservation', async (req, res) => {
         </div>
         <div style="padding: 30px 20px; color: #555555; line-height: 1.6;">
           <p>Bonjour <strong>${prenom}</strong>,</p>
-          <p>Nous avons bien pris en compte votre demande de réservation pour un séjour au Farihy.</p>
+          <p>Nous avons bien pris en compte votre demande de réservation pour un séjour à Farihy Hôtel.</p>
           <p><strong>⚠️ Important :</strong> Ceci n'est pas une confirmation définitive. Notre équipe va vérifier la disponibilité pour vos dates et reviendra vers vous très rapidement pour valider votre séjour.</p>
           
           <div style="background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 5px; padding: 20px; margin-top: 20px;">
@@ -199,10 +199,10 @@ app.post('/send-reservation', async (req, res) => {
             </table>
           </div>
 
-          <p style="margin-top: 30px;">À très bientôt,<br><strong>L'équipe Farihy</strong></p>
+          <p style="margin-top: 30px;">À très bientôt,<br><strong>L'équipe Farihy Hôtel</strong></p>
         </div>
         <div style="background-color: #f1f1f1; padding: 15px; text-align: center; font-size: 12px; color: #888;">
-          <p style="margin: 0;">Farihy Hotel & Lodge</p>
+          <p style="margin: 0;">Farihy Hotel</p>
           <p style="margin: 5px 0 0;"><a href="https://www.farihy-hotel.com" style="color: #4a3728; text-decoration: none;">www.farihy-hotel.com</a></p>
         </div>
       </div>
