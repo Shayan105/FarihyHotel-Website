@@ -26,5 +26,24 @@
     "room-home": {
       "title": "Our Accommodations"
     }
+  },
+  "location": {
+    "text_1": "Where to find us",
+    "text_2": "In the heart of the Itasy region"
+  },
+  "presentation-card": {
+    "title": "Serenity 120km from Antananarivo",
+    "p1": "Discover your haven of tranquility in the heart of Ampefy.",
+    "p2": "Our hotel invites you to a stay combining relaxation, nature, and authenticity.",
+    "p3": "Enjoy a peaceful setting facing Lake Itasy for a moment of well-being."
+  },
+  "popup": {
+    "title": "Important Announcement",
+    "greeting": "Dear Guests,",
+    "message_closed": "We inform you that we are closed for annual leave from <1>January 27th to March 1st included</1>.",
+    "message_contact": "Our phone line will not be available during this period, but we remain at your disposal via <1>email and WhatsApp</1>.",
+    "closing": "See you soon,",
+    "team": "The Farihy Hotel Team",
+    "button": "OK"
   }
 }

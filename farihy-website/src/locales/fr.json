@@ -36,7 +36,14 @@
     "p1" : "Découvrez votre havre de tranquillité au cœur d'Ampefy.",
     "p2" : "Notre hôtel vous invite à un séjour alliant détente, nature et authenticité.",
     "p3" : "Profitez d'un cadre paisible en face du lac Itasy pour un moment de bien-être."
+  },
+  "popup": {
+    "title": "Annonce Importante",
+    "greeting": "Chers clients,",
+    "message_closed": "Nous vous informons que nous sommes fermés pour congé annuel du <1>27 janvier au 1er mars inclus</1>.",
+    "message_contact": "Notre ligne téléphonique ne sera pas disponible durant cette période mais nous restons toutefois à votre disposition par <1>e-mail et sur WhatsApp</1>.",
+    "closing": "À très bientôt,",
+    "team": "Toute l’équipe Farihy Hôtel",
+    "button": "OK"
   }
-  
-  
 }
