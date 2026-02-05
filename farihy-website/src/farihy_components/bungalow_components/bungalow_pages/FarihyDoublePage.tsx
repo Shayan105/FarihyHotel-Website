@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
+import { useTranslation } from "react-i18next"; // Import hook
 
 import FarihyRoomPageTemplate from "../FarihyRoomPageTemplate";
 import {
@@ -77,6 +78,7 @@ const OtherRoomsSuggestions = () => {
 };
 
 const FarihyDoublePage = () => {
+  const { t } = useTranslation(); // Initialize hook
   const basePath = "/pictures/double/";
 
   const bungalowImages: GalleryImage[] = [
@@ -93,13 +95,13 @@ const FarihyDoublePage = () => {
       imageSrc: basePath + "1.webp",
       reversed: true,
       text: [
-        "Idéal pour les personnes seules ou les couples, nos trois bungalows doubles disposent d’un lit Queen-size,  d’une salle de bains et d’une terrasse privative.",
-        "Les équipements incluent la ventilation, la télévision ainsi que la connexion WIFI.",
-        "Profitez d’une vue directe sur le lac Itasy depuis votre bungalow.",
+        t("bungalows.doubles.description.p1"),
+        t("bungalows.doubles.description.p2"),
+        t("bungalows.doubles.description.p3"),
       ],
       details: {
-        price: "Tarif hors petit-déjeuner : 400.000 Ariary la nuit",
-        checkIn: "Check-in : 13h00 - Check-out : 11h00",
+        price: t("bungalows.doubles.details.price"),
+        checkIn: t("bungalows.doubles.details.checkIn"),
       },
     },
   ];
@@ -107,9 +109,9 @@ const FarihyDoublePage = () => {
   return (
     <FarihyRoomPageTemplate
       headerImageSrc={basePath + "ext.webp"}
-      pageTitle="Les Doubles"
+      pageTitle={t("bungalows.doubles.title")}
       contentSections={pageSections}
-      galleryTitle="Aperçu des doubles"
+      galleryTitle={t("bungalows.doubles.gallery_title")}
       galleryImages={bungalowImages}
       otherRoomsComponent={<OtherRoomsSuggestions />}
     />

@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
+import { useTranslation } from "react-i18next"; // Import translation hook
 
 import FarihyRoomPageTemplate from "../FarihyRoomPageTemplate";
 import {
@@ -44,7 +45,6 @@ const OtherRoomsSuggestions = () => {
           loop={false}
           initialSlide={1}
           pagination={{ clickable: true }}
-          
           // Stability fixes to prevent page jumping
           roundLengths={true}
           touchStartPreventDefault={false}
@@ -77,6 +77,7 @@ const OtherRoomsSuggestions = () => {
 };
 
 const FarihyDuplexPage = () => {
+  const { t } = useTranslation(); // Initialize hook
   const basePath = "/pictures/duplex/";
 
   const bungalowImages: GalleryImage[] = [
@@ -94,30 +95,30 @@ const FarihyDuplexPage = () => {
       imageSrc: basePath + "1.webp",
       reversed: true,
       text: [
-        "D’une superficie de 100 m², les Duplex peuvent accueillir jusqu’à 6 personnes.",
-        "Deux configurations de rez-de-chaussée sont proposées : l’une avec une chambre séparée, l’autre avec un espace ouvert.",
-        "Au rez-de-chaussée, une salle de bains entièrement équipée avec une douche à l’italienne.",
-        "Les équipements incluent la ventilation, la télévision ainsi que la connexion WIFI.",
+        t("bungalows.duplex.description.section1.p1"),
+        t("bungalows.duplex.description.section1.p2"),
+        t("bungalows.duplex.description.section1.p3"),
+        t("bungalows.duplex.description.section1.p4"),
       ],
     },
     {
       imageSrc: basePath + "7.webp",
       reversed: false,
       text: [
-        "A l’étage, une grande chambre avec lit double et un petit coin salon.",
-        "Depuis le balcon,  la vue donne sur le lac Itasy."
+        t("bungalows.duplex.description.section2.p1"),
+        t("bungalows.duplex.description.section2.p2"),
       ],
     },
     {
       imageSrc: basePath + "10.webp",
       reversed: true,
       text: [
-        "Dans la salle de bains, à l’étage, une élégante baignoire en îlot offre une vue imprenable sur le lac, invitant à la détente.",
-        "Chaque duplex dispose également d’une piscine et d’une terrasse privées, pour un séjour placé sous le signe du confort et de l’intimité"
+        t("bungalows.duplex.description.section3.p1"),
+        t("bungalows.duplex.description.section3.p2"),
       ],
       details: {
-        price: "Tarif hors petit-déjeuner : 800.000 Ariary la nuit",
-        checkIn: "Check-in : 13h00 - Check-out : 11h00",
+        price: t("bungalows.duplex.details.price"),
+        checkIn: t("bungalows.duplex.details.checkIn"),
       },
     },
   ];
@@ -125,9 +126,9 @@ const FarihyDuplexPage = () => {
   return (
     <FarihyRoomPageTemplate
       headerImageSrc={basePath + "ext.webp"}
-      pageTitle="Les Duplex"
+      pageTitle={t("bungalows.duplex.title")}
       contentSections={pageSections}
-      galleryTitle="Aperçu des Duplex"
+      galleryTitle={t("bungalows.duplex.gallery_title")}
       galleryImages={bungalowImages}
       otherRoomsComponent={<OtherRoomsSuggestions />}
     />

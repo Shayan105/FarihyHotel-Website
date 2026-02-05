@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 interface InfoDetails {
   price?: string;
@@ -20,6 +21,7 @@ const FarihyRoomPresentationCard: React.FC<FarihyRoomPresentationCardProps> = ({
   details,
   reversed = false,
 }) => {
+  const {t} = useTranslation();
   const themeColors = {
     bg: "#F9F5F0",
     text: "#4a3728",

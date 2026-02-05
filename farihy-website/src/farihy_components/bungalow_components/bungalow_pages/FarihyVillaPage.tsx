@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
+import { useTranslation } from "react-i18next"; // Import translation hook
 
 import FarihyRoomPageTemplate from "../FarihyRoomPageTemplate";
 import {
@@ -38,10 +39,7 @@ const OtherRoomsSuggestions = () => {
 
   return (
     <div>
-
-
       {/* --- VUE MOBILE : SWIPER (Visible seulement sur petit écran) --- */}
-      {/* Note: 'd-md-none' est une classe Bootstrap qui cache l'élément sur medium screens et + */}
       <div className="d-block d-md-none">
         <Swiper
           spaceBetween={20}
@@ -60,7 +58,6 @@ const OtherRoomsSuggestions = () => {
       </div>
 
       {/* --- VUE DESKTOP : GRILLE (Visible seulement sur grand écran) --- */}
-      {/* Note: 'd-none d-md-grid' cache sur mobile, affiche en grid sur desktop */}
       <div
         className="d-none d-md-grid"
         style={{
@@ -80,6 +77,7 @@ const OtherRoomsSuggestions = () => {
 
 // --- Page Principale ---
 const FarihyVillaPage = () => {
+  const { t } = useTranslation(); // Initialize hook
   const basePath = "/pictures/villa/";
 
   const bungalowImages: GalleryImage[] = [
@@ -100,43 +98,38 @@ const FarihyVillaPage = () => {
       imageSrc: basePath + "8.webp",
       reversed: true,
       text: [
-        "La Villa spacieuse de 200 m² offre une vue imprenable sur le lac Itasy depuis ses deux balcons.",
-        "Elle est idéale pour les grandes familles et peut accueillir jusqu’à 10 personnes.",
-        "Au rez-de-chaussée, elle dispose de deux chambres :  une double et une triple.  Deux salles de bains, dont l’une est équipée d’une grande baignoire ainsi que d’une douche à l’italienne.",
-        "Un confortable coin salon complète cet espace.",
+        t("bungalows.villa.description.section1.p1"),
+        t("bungalows.villa.description.section1.p2"),
+        t("bungalows.villa.description.section1.p3"),
+        t("bungalows.villa.description.section1.p4"),
       ],
     },
     {
       imageSrc: basePath + "2.webp",
       reversed: false,
       text: [
-        "À l’étage, deux chambres communicantes sont aménagées : une chambre triple et une chambre double, avec deux salles de bains, dont l’une comprend également une baignoire.",
-        "Les équipements incluent la ventilation, la télévision ainsi que la connexion WIFI."
+        t("bungalows.villa.description.section2.p1"),
+        t("bungalows.villa.description.section2.p2"),
       ],
     },
     {
       imageSrc: basePath + "9.webp",
       reversed: true,
-      text: [
-        "La villa bénéficie par ailleurs d’une vaste terrasse ombragée donnant sur la piscine et le jacuzzi, idéale pour des moments de détente en toute sérénité.",
-      ],
+      text: [t("bungalows.villa.description.section3.p1")],
       details: {
-        price: "Tarif hors petit-déjeuner : 1.750.000 Ariary la nuit",
-        checkIn: "Check-in : 14h00 - Check-out : 14h00",
+        price: t("bungalows.villa.details.price"),
+        checkIn: t("bungalows.villa.details.checkIn"),
       },
     },
-
-
   ];
 
   return (
     <FarihyRoomPageTemplate
       headerImageSrc={basePath + "ext.webp"}
-      pageTitle="La Villa"
+      pageTitle={t("bungalows.villa.title")}
       contentSections={pageSections}
-      galleryTitle="Aperçu de la Villa"
+      galleryTitle={t("bungalows.villa.gallery_title")}
       galleryImages={bungalowImages}
-      // Injection du composant créé ci-dessus
       otherRoomsComponent={<OtherRoomsSuggestions />}
     />
   );

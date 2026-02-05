@@ -4,24 +4,24 @@
     "bungalows": "BUNGALOWS",
     "book": "BOOK NOW",
     "contact": "CONTACT",
-    "doubles": "Double Rooms",
-    "familials": "Family Rooms",
+    "doubles": "The Doubles",
+    "familials": "The Family Rooms",
     "suite": "The Suite",
-    "duplex": "Duplexes",
+    "duplex": "The Duplexes",
     "villa": "The Villa"
   },
   "galleries": {
     "cuisine": {
-      "title": "Our Cuisine",
-      "subtitle": "Simple, generous, and authentic cuisine, prepared with fresh seasonal ingredients and served with a smile, from our kitchen to your table."
+      "title": "The Cuisine",
+      "subtitle": "Simple, generous, and authentic cuisine, prepared with fresh seasonal produce and served with a smile, from our kitchen to your table."
     },
     "restaurant": {
       "title": "The Restaurant",
-      "subtitle": "Take a seat on the terrace, the beach, or in the garden; let yourself be captivated by the view of Lake Itasy and savor the moment by the pool."
+      "subtitle": "Settle on the terrace, the beach, or in the garden; let yourself be carried away by the view of Lake Itasy and savor the moment by the pool."
     },
     "massage": {
       "title": "A Moment of Relaxation",
-      "subtitle": "Surrender to the expert hands of our masseuse for an interlude of relaxation and serenity."
+      "subtitle": "Entrust yourself to the expert hands of our masseuse for an interlude of relaxation and serenity."
     },
     "room-home": {
       "title": "Our Accommodations"
@@ -32,7 +32,7 @@
     "text_2": "In the heart of the Itasy region"
   },
   "presentation-card": {
-    "title": "Serenity 120km from Antananarivo",
+    "title": "Peace and quiet 120km from Antananarivo",
     "p1": "Discover your haven of tranquility in the heart of Ampefy.",
     "p2": "Our hotel invites you to a stay combining relaxation, nature, and authenticity.",
     "p3": "Enjoy a peaceful setting facing Lake Itasy for a moment of well-being."
@@ -40,10 +40,110 @@
   "popup": {
     "title": "Important Announcement",
     "greeting": "Dear Guests,",
-    "message_closed": "We inform you that we are closed for annual leave from <1>January 27th to March 1st included</1>.",
-    "message_contact": "Our phone line will not be available during this period, but we remain at your disposal via <1>email and WhatsApp</1>.",
+    "message_closed": "We inform you that we are closed for annual leave from <1>January 27th to March 1st inclusive</1>.",
+    "message_contact": "Our telephone line will not be available during this period, but we remain at your disposal via <1>e-mail and WhatsApp</1>.",
     "closing": "See you soon,",
     "team": "The Farihy Hotel Team",
     "button": "OK"
+  },
+  "bungalows": {
+    "template": {
+      "gallery-picture": {
+        "title": "Room Preview"
+      }
+    },
+    "doubles": {
+      "title": "The Doubles",
+      "gallery_title": "Preview of the Doubles",
+      "description": {
+        "p1": "Ideal for solo travelers or couples, our three double bungalows feature a Queen-size bed, a bathroom, and a private terrace.",
+        "p2": "Amenities include ventilation, television, and WIFI connection.",
+        "p3": "Enjoy a direct view of Lake Itasy from your bungalow."
+      },
+      "details": {
+        "price": "Rate excluding breakfast: 400,000 Ariary per night",
+        "checkIn": "Check-in: 1:00 PM - Check-out: 11:00 AM"
+      }
+    },
+    "suite": {
+      "title": "The Suite",
+      "gallery_title": "Preview of the Suite",
+      "description": {
+        "section1": {
+          "p1": "This 80 m² suite is ideal for a couple, a group of friends, or a family of up to 5 people.",
+          "p2": "It consists of two connecting rooms.",
+          "p3": "The main bedroom is equipped with a Queen-size bed and has its own bathroom.",
+          "p4": "The second bedroom is flexible, with three single beds or one double bed and one single bed, and also includes a bathroom.",
+          "p5": "Amenities include ventilation, television, and WIFI connection."
+        },
+        "section2": {
+          "p1": "The suite benefits from a private terrace overlooking the lake, a private pool, as well as a jacuzzi*, for privileged moments of relaxation."
+        }
+      },
+      "details": {
+        "price": "Rate excluding breakfast: 750,000 Ariary per night",
+        "checkIn": "Check-in: 1:00 PM - Check-out: 11:00 AM",
+        "addText": "*For energy conservation reasons, the jacuzzi can be used for 30 minutes per day between 8:00 AM and 7:00 PM"
+      }
+    },
+    "familial": {
+      "title": "Family Bungalow",
+      "gallery_title": "Preview of the Bungalow",
+      "description": {
+        "p1": "Ideal for a group of friends or a family, our four family bungalows feature two large Queen-size beds and a small bed, a bathroom, and a small terrace.",
+        "p2": "Amenities include ventilation, television, and WIFI connection."
+      },
+      "details": {
+        "price": "Rate excluding breakfast: 425,000 Ariary per night",
+        "checkIn": "Check-in: 1:00 PM - Check-out: 11:00 AM"
+      }
+    },
+    "villa": {
+      "title": "The Villa",
+      "gallery_title": "Preview of the Villa",
+      "description": {
+        "section1": {
+          "p1": "The spacious 200 m² Villa offers a breathtaking view of Lake Itasy from its two balconies.",
+          "p2": "It is ideal for large families and can accommodate up to 10 people.",
+          "p3": "On the ground floor, it features two bedrooms: one double and one triple. Two bathrooms, one of which is equipped with a large bathtub and a walk-in shower.",
+          "p4": "A comfortable lounge area completes this space."
+        },
+        "section2": {
+          "p1": "Upstairs, two connecting rooms are arranged: one triple bedroom and one double bedroom, with two bathrooms, one of which also includes a bathtub.",
+          "p2": "Amenities include ventilation, television, and WIFI connection."
+        },
+        "section3": {
+          "p1": "The villa also benefits from a vast shaded terrace overlooking the pool and jacuzzi, ideal for moments of relaxation in complete serenity."
+        }
+      },
+      "details": {
+        "price": "Rate excluding breakfast: 1,750,000 Ariary per night",
+        "checkIn": "Check-in: 2:00 PM - Check-out: 2:00 PM"
+      }
+    },
+    "duplex": {
+      "title": "The Duplexes",
+      "gallery_title": "Preview of the Duplexes",
+      "description": {
+        "section1": {
+          "p1": "With an area of 100 m², the Duplexes can accommodate up to 6 people.",
+          "p2": "Two ground-floor configurations are available: one with a separate bedroom, the other with an open-plan space.",
+          "p3": "On the ground floor, a fully equipped bathroom with a walk-in shower.",
+          "p4": "Amenities include ventilation, television, and WIFI connection."
+        },
+        "section2": {
+          "p1": "Upstairs, a large bedroom with a double bed and a small lounge area.",
+          "p2": "From the balcony, the view overlooks Lake Itasy."
+        },
+        "section3": {
+          "p1": "In the upstairs bathroom, an elegant freestanding bathtub offers a stunning view of the lake, inviting you to relax.",
+          "p2": "Each duplex also features a private pool and terrace, for a stay dedicated to comfort and privacy."
+        }
+      },
+      "details": {
+        "price": "Rate excluding breakfast: 800,000 Ariary per night",
+        "checkIn": "Check-in: 1:00 PM - Check-out: 11:00 AM"
+      }
+    }
   }
 }

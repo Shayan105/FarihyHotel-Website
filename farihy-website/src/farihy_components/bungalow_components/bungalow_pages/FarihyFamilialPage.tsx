@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
+import { useTranslation } from "react-i18next"; // Import translation hook
 
 import FarihyRoomPageTemplate from "../FarihyRoomPageTemplate";
 import { VillaCard, SuiteCard, DuplexCard, DoubleCard } from "../../../components/RoomCard";
@@ -71,6 +72,7 @@ const OtherRoomsSuggestions = () => {
 };
 
 const FarihyFamilialPage = () => {
+  const { t } = useTranslation(); // Initialize hook
   const basePath = "/pictures/familiale/";
 
   const bungalowImages: GalleryImage[] = [
@@ -87,12 +89,12 @@ const FarihyFamilialPage = () => {
       imageSrc: basePath + "ext.webp",
       reversed: true,
       text: [
-        "Idéal pour un groupe d’amis ou une famille, nos quatre bungalows familiaux disposent de deux grands lit Queen-size et d’un petit lit, d’une salle de bains et d’une petite terrasse.",
-        "Les équipements incluent la ventilation, la télévision ainsi que la connexion WIFI."
+        t("bungalows.familial.description.p1"),
+        t("bungalows.familial.description.p2"),
       ],
       details: {
-        price: "Tarif hors petit-déjeuner : 425.000 Ariary la nuit",
-        checkIn: "Check-in : 13h00 - Check-out : 11h00",
+        price: t("bungalows.familial.details.price"),
+        checkIn: t("bungalows.familial.details.checkIn"),
       },
     },
   ];
@@ -100,9 +102,9 @@ const FarihyFamilialPage = () => {
   return (
     <FarihyRoomPageTemplate
       headerImageSrc={basePath + "out.webp"}
-      pageTitle="Bungalow familial"
+      pageTitle={t("bungalows.familial.title")}
       contentSections={pageSections}
-      galleryTitle="Aperçu du bungalow"
+      galleryTitle={t("bungalows.familial.gallery_title")}
       galleryImages={bungalowImages}
       otherRoomsComponent={<OtherRoomsSuggestions />} 
     />
