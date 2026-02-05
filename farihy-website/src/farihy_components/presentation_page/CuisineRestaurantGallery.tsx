@@ -1,16 +1,17 @@
 import React from "react";
 import ImageGallery from "../../components/ImageGallery";
+import { useTranslation } from "react-i18next";
 
 /**
  * Cuisine serves as the data provider for the
  * generic ImageGallery component.
  */
 const CuisineGallery: React.FC = () => {
+  const { t } = useTranslation();
   const basePath = "/pictures/cuisine/";
   const massageContent = {
-    title: "La Cuisine",
-    subtitle:
-      "Une cuisine simple, généreuse et authentique, préparée avec des produits frais de saison et servie avec le sourire, de notre cuisine à votre table. ",
+    title: t("galleries.cuisine.title"),
+    subtitle:t('galleries.cuisine.subtitle'),
     images: [
       {
         path: basePath + "cuisine-1.webp",

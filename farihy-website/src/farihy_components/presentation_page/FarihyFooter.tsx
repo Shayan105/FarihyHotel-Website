@@ -94,7 +94,6 @@ const FarihyFooter = () => {
                 </svg>
               </a>
             </div>
-            <p style={{ ...textStyle, fontSize: "14px", fontWeight: "bold" }}>FarihyAmpefy</p>
           </div>
           
         </div>
@@ -102,7 +101,7 @@ const FarihyFooter = () => {
         {/* Petit Copyright en bas, très discret */}
         <div className="row mt-5 pt-4 border-top border-secondary-subtle">
            <div className="col-12 text-center" style={{ fontSize: "12px", opacity: 0.6 }}>
-              &copy; {new Date().getFullYear()} Farihy Hôtel. Tous droits réservés.
+              &copy; {new Date().getFullYear()} Farihy Hôtel.
            </div>
         </div>
 

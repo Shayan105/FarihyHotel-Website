@@ -9,5 +9,22 @@
     "suite": "The Suite",
     "duplex": "Duplexes",
     "villa": "The Villa"
+  },
+  "galleries": {
+    "cuisine": {
+      "title": "Our Cuisine",
+      "subtitle": "Simple, generous, and authentic cuisine, prepared with fresh seasonal ingredients and served with a smile, from our kitchen to your table."
+    },
+    "restaurant": {
+      "title": "The Restaurant",
+      "subtitle": "Take a seat on the terrace, the beach, or in the garden; let yourself be captivated by the view of Lake Itasy and savor the moment by the pool."
+    },
+    "massage": {
+      "title": "A Moment of Relaxation",
+      "subtitle": "Surrender to the expert hands of our masseuse for an interlude of relaxation and serenity."
+    },
+    "room-home": {
+      "title": "Our Accommodations"
+    }
   }
 }

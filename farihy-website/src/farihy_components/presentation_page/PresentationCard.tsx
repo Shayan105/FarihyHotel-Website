@@ -9,12 +9,8 @@ interface PresentationCardProps {
 
 const PresentationCard: React.FC<PresentationCardProps> = ({
   imageSrc = "/pictures/accueil/pirogue.webp",
-  title = "Le calme à 120km d'Antananarivo",
-  paragraphs = [
-    "Découvrez votre havre de tranquillité au cœur d'Ampefy.",
-    "Notre hôtel vous invite à un séjour alliant détente, nature et authenticité.",
-    "Profitez d'un cadre paisible en face du lac Itasy pour un moment de bien-être."
-  ],
+  title = "",
+  paragraphs = [],
   reversed = false,
 }) => {
   

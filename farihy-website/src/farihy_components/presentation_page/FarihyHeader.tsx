@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useTranslation } from "react-i18next"; // 1. Import hook
-import LanguageSwitcher from "../../components/LanguageSwitcher"; // 2. Import switcher
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "../../components/LanguageSwitcher";
 const FarihyHeader = () => {
   const { t } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);

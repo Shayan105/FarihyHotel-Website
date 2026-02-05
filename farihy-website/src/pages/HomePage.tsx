@@ -7,8 +7,10 @@ import FarihyRoomGallery from "../farihy_components/presentation_page/FarihyRoom
 import MassageGallery from "../farihy_components/presentation_page/MassageImageGallery";
 import PresentationCard from "../farihy_components/presentation_page/PresentationCard";
 import RestaurantGallery from "../farihy_components/presentation_page/RestaurantImageGallery";
+import { useTranslation } from "react-i18next";
 
 const HomePage = () => {
+  const {t} = useTranslation();
   return (
     <>
       {/* Logic-based Notification */}
@@ -16,7 +18,17 @@ const HomePage = () => {
 
       <FarihyBanner />
 
-      <PresentationCard />
+      <PresentationCard 
+      title={t('presentation-card.title')}
+      paragraphs={
+          [
+        t('presentation-card.p1'),
+        t('presentation-card.p2'),
+        t('presentation-card.p3'),
+          ]
+        }
+      
+      />
       <FarihyRoomGallery />
       
       <div className="container py-5">

@@ -1,9 +1,11 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const FarihyLocation = () => {
   // Lien Google Maps centré spécifiquement sur "Farihy Hotel, Ampefy"
   // Utilisation du mode &output=embed pour l'intégration sans clé API complexe
   const mapSrc = "https://maps.google.com/maps?q=Farihy+Hotel+Ampefy+Madagascar&t=&z=15&ie=UTF8&iwloc=&output=embed";
+  const {t} = useTranslation();
 
   const titleStyle: React.CSSProperties = {
     fontFamily: "'Playfair Display', serif",
@@ -18,10 +20,10 @@ const FarihyLocation = () => {
         {/* Titre de la section */}
         <div className="text-center mb-5">
           <h2 className="display-4" style={titleStyle}>
-            Où nous trouver
+            {t('location.text_1')}
           </h2>
           <p className="lead text-muted" style={{ fontFamily: "serif", fontSize: "1.1rem" }}>
-            Au cœur de la région Itasy
+            {t('location.text_2')}
           </p>
         </div>
 

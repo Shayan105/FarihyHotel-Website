@@ -9,5 +9,34 @@
     "suite": "La Suite",
     "duplex": "Les Duplex",
     "villa": "La Villa"
+  },
+  "galleries":{
+    "cuisine": {
+      "title" : "La cuisine",
+      "subtitle" :"Une cuisine simple, généreuse et authentique, préparée avec des produits frais de saison et servie avec le sourire, de notre cuisine à votre table. "
+    },
+    "restaurant": {
+      "title" : "Le restaurant",
+      "subtitle" :"Installez-vous sur la terrasse, la plage ou dans le jardin, laissez-vous porter par la vue sur le lac Itasy et savourez l’instant au bord de la piscine."
+    },
+    "massage": {
+      "title" : "Un moment de détente",
+      "subtitle" :"Confiez-vous aux mains expertes de notre masseuse pour une parenthèse de relaxation et de sérénité."
+    },
+    "room-home": {
+      "title" : "Nos hébergements"
+    }
+  },
+  "location":{
+    "text_1" : "Où nous trouver",
+    "text_2" : "Au cœur de la région Itasy"
+  },
+  "presentation-card":{
+    "title" : "Le calme à 120km d'Antananarivo",
+    "p1" : "Découvrez votre havre de tranquillité au cœur d'Ampefy.",
+    "p2" : "Notre hôtel vous invite à un séjour alliant détente, nature et authenticité.",
+    "p3" : "Profitez d'un cadre paisible en face du lac Itasy pour un moment de bien-être."
   }
+  
+  
 }
