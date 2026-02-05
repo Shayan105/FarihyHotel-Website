@@ -1,0 +1,13 @@
+{
+  "nav": {
+    "home": "HOME",
+    "bungalows": "BUNGALOWS",
+    "book": "BOOK NOW",
+    "contact": "CONTACT",
+    "doubles": "Double Rooms",
+    "familials": "Family Rooms",
+    "suite": "The Suite",
+    "duplex": "Duplexes",
+    "villa": "The Villa"
+  }
+}

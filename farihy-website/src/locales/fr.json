@@ -1,0 +1,13 @@
+{
+  "nav": {
+    "home": "ACCUEIL",
+    "bungalows": "BUNGALOWS",
+    "book": "RÉSERVER",
+    "contact": "CONTACT",
+    "doubles": "Les Doubles",
+    "familials": "Les Familiales",
+    "suite": "La Suite",
+    "duplex": "Les Duplex",
+    "villa": "La Villa"
+  }
+}

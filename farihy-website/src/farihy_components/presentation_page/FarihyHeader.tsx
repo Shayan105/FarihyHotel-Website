@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-
+import { useTranslation } from "react-i18next"; // 1. Import hook
+import LanguageSwitcher from "../../components/LanguageSwitcher"; // 2. Import switcher
 const FarihyHeader = () => {
+  const { t } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileSubMenuOpen, setIsMobileSubMenuOpen] = useState(false);
@@ -58,11 +60,11 @@ const FarihyHeader = () => {
   }, []);
 
   const bungalowLinks = [
-    { label: "Les Doubles", path: "/double" },
-    { label: "Les Familiales", path: "/familiale" },
-    { label: "La Suite", path: "/suite" },
-    { label: "Les Duplex", path: "/duplex" },
-    { label: "La Villa", path: "/villa" },
+    { label: t('nav.doubles'), path: "/double" },
+    { label: t('nav.familials'), path: "/familiale" },
+    { label: t('nav.suite'), path: "/suite" },
+    { label: t('nav.duplex'), path: "/duplex" },
+    { label: t('nav.villa'), path: "/villa" },
   ];
 
   // --- STYLES ---
@@ -131,13 +133,13 @@ const FarihyHeader = () => {
 
         {/* DESKTOP NAV */}
         <nav className="d-none d-md-flex gap-4 align-items-center">
-          <a href="/" style={linkStyle} onClick={closeAllMenus}>ACCUEIL</a>
+          <a href="/" style={linkStyle} onClick={closeAllMenus}>{t('nav.home')}</a>
           <div 
             style={{ position: "relative", height: "100%", display: "flex", alignItems: "center" }}
             onMouseEnter={() => setIsDropdownOpen(true)}
             onMouseLeave={() => setIsDropdownOpen(false)}
           >
-            <span style={{ ...linkStyle, cursor: "default" }}>BUNGALOWS</span>
+            <span style={{ ...linkStyle, cursor: "default" }}>{t('nav.bungalows')}</span>
             <div style={{
                 position: "absolute", top: "100%", left: "0", backgroundColor: "#F0ECE3", minWidth: "200px",
                 boxShadow: "0 8px 16px rgba(0,0,0,0.1)", padding: "10px 0", borderRadius: "0 0 8px 8px",
@@ -151,8 +153,9 @@ const FarihyHeader = () => {
               ))}
             </div>
           </div>
-          <a href="/reservation" style={linkStyle} onClick={closeAllMenus}>RÉSERVER</a>
-          <a href="/contact" style={linkStyle} onClick={closeAllMenus}>CONTACT</a>
+          <a href="/reservation" style={linkStyle} onClick={closeAllMenus}>{t('nav.book')}</a>
+          <a href="/contact" style={linkStyle} onClick={closeAllMenus}>{t('nav.contact')}</a>
+          <LanguageSwitcher />
         </nav>
 
         {/* MOBILE TOGGLE */}
@@ -163,9 +166,9 @@ const FarihyHeader = () => {
 
       {/* MOBILE MENU */}
       <div style={mobileMenuContainerStyle}>
-        <a href="/" style={{ ...linkStyle, fontSize: '18px' }} onClick={closeAllMenus}>ACCUEIL</a>
+        <a href="/" style={{ ...linkStyle, fontSize: '18px' }} onClick={closeAllMenus}>{t('nav.home')}</a>
         <div style={{ width: "100%", textAlign: "center" }}>
-          <div onClick={toggleMobileSubMenu} style={{ ...linkStyle, fontSize: '18px', cursor: "pointer" }}>BUNGALOWS</div>
+          <div onClick={toggleMobileSubMenu} style={{ ...linkStyle, fontSize: '18px', cursor: "pointer" }}>{t('nav.bungalows')}</div>
           <div style={{ display: "grid", gridTemplateRows: isMobileSubMenuOpen ? "1fr" : "0fr", transition: "grid-template-rows 0.3s ease-out" }}>
             <div style={{ overflow: "hidden" }}>
               <div style={{ backgroundColor: "rgba(0,0,0,0.03)", padding: "10px 0" }}>
@@ -178,8 +181,8 @@ const FarihyHeader = () => {
             </div>
           </div>
         </div>
-        <a href="/reservation" style={{ ...linkStyle, fontSize: '18px' }} onClick={closeAllMenus}>RÉSERVER</a>
-        <a href="/contact" style={{ ...linkStyle, fontSize: '18px' }} onClick={closeAllMenus}>CONTACT</a>
+        <a href="/reservation" style={{ ...linkStyle, fontSize: '18px' }} onClick={closeAllMenus}>{t('nav.book')}</a>
+        <a href="/contact" style={{ ...linkStyle, fontSize: '18px' }} onClick={closeAllMenus}>{t('nav.contact')}</a>
       </div>
 
       <style>{`
