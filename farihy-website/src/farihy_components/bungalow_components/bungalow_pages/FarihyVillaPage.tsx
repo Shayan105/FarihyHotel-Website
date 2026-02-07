@@ -122,7 +122,7 @@ const FarihyVillaPage = () => {
       ],
       details: {
         price: "Tarif hors petit-déjeuner : 1.750.000 Ariary la nuit",
-        checkIn: "Check-in : 14h00 - Check-out : 14h00",
+        checkIn: "Check-in : 14h00 - Check-out : 11h00",
       },
     },
 
