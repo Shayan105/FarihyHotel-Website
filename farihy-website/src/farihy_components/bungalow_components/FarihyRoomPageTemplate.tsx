@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next"; // Import du hook
 import FarihyRoomPresentationCard from "./FarihyRoomPresentationCard";
 import LargePictureGallery, {
   GalleryImage,
@@ -28,11 +29,15 @@ const FarihyRoomPageTemplate: React.FC<RoomPageProps> = ({
   headerImageSrc,
   pageTitle,
   contentSections,
-  galleryTitle = "Aperçu de la chambre",
+  galleryTitle, // On retire la valeur par défaut ici
   galleryImages,
   otherRoomsComponent,
 }) => {
-  
+  const { t } = useTranslation(); // Initialisation du hook
+
+  // Gestion du titre de la galerie (valeur fournie ou traduction par défaut)
+  const finalGalleryTitle = galleryTitle || t('bungalows.template.gallery_picture_title');
+
   const titleStyle = { 
     color: "#4a3728", 
     fontFamily: "'Playfair Display', serif" 
@@ -74,7 +79,8 @@ const FarihyRoomPageTemplate: React.FC<RoomPageProps> = ({
       ))}
 
       {/* Photo Gallery */}
-<LargePictureGallery title={galleryTitle} images={galleryImages || []} />
+      <LargePictureGallery title={finalGalleryTitle} images={galleryImages || []} />
+
       {/* Suggestions Section */}
       {otherRoomsComponent && (
         <div className="container-fluid py-5" style={{ backgroundColor: "#F9F5F0" }}>
@@ -82,7 +88,7 @@ const FarihyRoomPageTemplate: React.FC<RoomPageProps> = ({
                 <hr className="mb-5 opacity-25" style={{ borderColor: "#4a3728", width: "60%", margin: "0 auto" }} />
                 
                 <h3 className="display-6 mb-5" style={titleStyle}>
-                    Ils pourraient aussi vous plaire
+                    {t('bungalows.template.suggestions_title')}
                 </h3>
                 
                 {otherRoomsComponent}
