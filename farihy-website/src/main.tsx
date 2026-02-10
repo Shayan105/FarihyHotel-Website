@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "bootstrap/dist/css/bootstrap.css";
 import "./assets/css/index.css";
-
+import "./i18n";
 // 1. Import Router components
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 

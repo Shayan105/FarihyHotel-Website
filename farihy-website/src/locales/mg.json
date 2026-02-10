@@ -1,0 +1,238 @@
+{
+  "nav": {
+    "home": "FANDRAISANA",
+    "bungalows": "BUNGALOWS",
+    "book": "FAMANDRIHANA",
+    "contact": "FIFANDRAISANA",
+    "doubles": "Efitrano Double",
+    "familials": "Efitrano Fianakaviana",
+    "suite": "Suite",
+    "duplex": "Duplex",
+    "villa": "Villa"
+  },
+  "galleries": {
+    "cuisine": {
+      "title": "Ny lakozia",
+      "subtitle": "Sakafo tsotra, feno fitiavana ary tena izy, voaomana amin'ny vokatra vaovao ara-potoana ary aroso amim-pitsikiana, avy ao an-dakozianay mankany amin'ny latabatrao."
+    },
+    "restaurant": {
+      "title": "Ny trano fisakafoanana",
+      "subtitle": "Mipetraha eo amin'ny terry, eny amoron-dranomasina na ao an-jaridaina, avelao ho entin'ny fomba fijery ny farihy Itasy ary ankafizo ny fotoana eo amoron'ny dobo filomanosana."
+    },
+    "massage": {
+      "title": "Fotoana fialan-tsasatra",
+      "subtitle": "Atolory ny tenanao amin'ny tanana manam-pahaizana avy amin'ny mpanao otra anay mba hahazoana fialan-tsasatra sy fitoniana.",
+      "footer": {
+        "prefix": "Don't wait any longer, ",
+        "link": "book",
+        "suffix": "now."
+      }
+    },
+    "room-home": {
+      "title": "Ny toeram-ponenanay"
+    }
+  },
+  "location": {
+    "text_1": "Aiza no ahitana anay",
+    "text_2": "Ao afovoan'ny faritra Itasy"
+  },
+  "presentation-card": {
+    "title": "Ny filaminana 120km miala an'Antananarivo",
+    "p1": "Tadiavo ny toerana milamina ao afovoan'ny Ampefy.",
+    "p2": "Ny hotely dia manasa anao hijanona amin'ny fialan-tsasatra, natiora ary fahamarinana.",
+    "p3": "Ankafizo ny toerana milamina manatrika ny farihy Itasy ho an'ny fahasalamana."
+  },
+  "room_card": {
+    "capacity": "Olona {{min}} ka hatramin'ny {{max}}",
+    "from_price": "manomboka {{price}} Ariary isaky ny alina"
+  },
+  "popup": {
+    "title": "Filazana manan-danja",
+    "greeting": "Tompoko,",
+    "message_closed": "Mampahafantatra anareo izahay fa mikatona noho ny fialan-tsasatra isan-taona ny <1>27 Janoary ka hatramin'ny 1 Martsa ao anatin'izany</1>.",
+    "message_contact": "Tsy ho azo antsoina ny laharana findainay mandritra io fotoana io fa mijanona ho afaka mifandray aminareo amin'ny alalan'ny <1>e-mail sy WhatsApp</1> izahay.",
+    "closing": "Mandra-pihaona,",
+    "team": "Ny ekipan'ny Farihy Hôtel",
+    "button": "OK"
+  },
+  "bungalows": {
+    "template": {
+      "gallery-picture": {
+        "title": "Topimaso ny efitrano"
+      },
+      "presentation-card": {
+        "important-informations": "Fampahalalana manan-danja"
+      }
+    },
+    "doubles": {
+      "title": "Ireo Double",
+      "gallery_title": "Topimaso ny efitrano double",
+      "description": {
+        "p1": "Mety tsara ho an'ny olona tokana na mpivady, ny bungalows double telo dia manana fandriana Queen-size, efitra fandroana ary terry manokana.",
+        "p2": "Ny fitaovana dia ahitana ny rivotra, fahitalavitra ary fifandraisana WIFI.",
+        "p3": "Ankafizo ny fomba fijery mivantana ny farihy Itasy avy ao amin'ny bungalow-nao."
+      },
+      "details": {
+        "price": "Sarany tsy misy sakafo maraina: 400.000 Ariary isaky ny alina",
+        "checkIn": "Check-in: 13h00 - Check-out: 11h00"
+      }
+    },
+    "suite": {
+      "title": "Ny Suite",
+      "gallery_title": "Topimaso ny Suite",
+      "description": {
+        "section1": {
+          "p1": "Ity suite 80 m² ity dia mety tsara ho an'ny mpivady, andiana namana na fianakaviana hatramin'ny 5 olona.",
+          "p2": "Misy efitrano roa mifandray izy.",
+          "p3": "Ny efitrano lehibe dia manana fandriana Queen-size ary manana efitra fandroana manokana.",
+          "p4": "Ny efitrano faharoa dia azo ovaina, misy fandriana tokana telo na fandriana roa ary fandriana tokana iray, ary misy efitra fandroana ihany koa.",
+          "p5": "Ny fitaovana dia ahitana ny rivotra, fahitalavitra ary fifandraisana WIFI."
+        },
+        "section2": {
+          "p1": "Ny suite dia manana terry manokana manatrika ny farihy, dobo filomanosana manokana ary jacuzzi*, ho an'ny fotoana fialan-tsasatra manokana."
+        }
+      },
+      "details": {
+        "price": "Sarany tsy misy sakafo maraina: 750.000 Ariary isaky ny alina",
+        "checkIn": "Check-in: 13h00 - Check-out: 11h00",
+        "addText": "*Noho ny antony angovo, ny jacuzzi dia azo ampiasaina 30 minitra isan'andro eo anelanelan'ny 8h00 sy 19h00."
+      }
+    },
+    "familial": {
+      "title": "Bungalow fianakaviana",
+      "gallery_title": "Topimaso ny bungalow",
+      "description": {
+        "p1": "Mety tsara ho an'ny andiana namana na fianakaviana, ny bungalows fianakaviana efatra dia manana fandriana Queen-size roa lehibe sy fandriana kely iray, efitra fandroana ary terry kely.",
+        "p2": "Ny fitaovana dia ahitana ny rivotra, fahitalavitra ary fifandraisana WIFI."
+      },
+      "details": {
+        "price": "Sarany tsy misy sakafo maraina: 425.000 Ariary isaky ny alina",
+        "checkIn": "Check-in: 13h00 - Check-out: 11h00"
+      }
+    },
+    "villa": {
+      "title": "Ny Villa",
+      "gallery_title": "Topimaso ny Villa",
+      "description": {
+        "section1": {
+          "p1": "Ny Villa malalaka 200 m² dia manolotra fomba fijery mahafinaritra ny farihy Itasy avy amin'ny lavarangana roa.",
+          "p2": "Mety tsara ho an'ny fianakaviana lehibe izy ary afaka mandray olona hatramin'ny 10.",
+          "p3": "Ao amin'ny rihana ambany, manana efitrano roa izy: iray double ary iray triple. Efitra fandroana roa, ny iray dia manana koveta fandroana lehibe ary koa douche italiana.",
+          "p4": "Faritra fandraisana vahiny mahafinaritra no mameno ity toerana ity."
+        },
+        "section2": {
+          "p1": "Ao amin'ny rihana, efitrano roa mifandray no nalamina: efitrano triple iray sy efitrano double iray, miaraka amin'ny efitra fandroana roa, ny iray amin'ireo dia misy koveta fandroana ihany koa.",
+          "p2": "Ny fitaovana dia ahitana ny rivotra, fahitalavitra ary fifandraisana WIFI."
+        },
+        "section3": {
+          "p1": "Ny villa dia manana terry malalaka sy alokaloka manatrika ny dobo filomanosana sy ny jacuzzi, mety tsara ho an'ny fotoana fialan-tsasatra amim-pilaminana tanteraka."
+        }
+      },
+      "details": {
+        "price": "Sarany tsy misy sakafo maraina: 1.750.000 Ariary isaky ny alina",
+        "checkIn": "Check-in: 14h00 - Check-out: 14h00"
+      }
+    },
+    "duplex": {
+      "title": "Ireo Duplex",
+      "gallery_title": "Topimaso ny Duplex",
+      "description": {
+        "section1": {
+          "p1": "Miaraka amin'ny velarantany 100 m², ny Duplex dia afaka mandray olona hatramin'ny 6.",
+          "p2": "Fikirakirana roa ao amin'ny rihana ambany no atolotra: ny iray misy efitrano misaraka, ny iray hafa misy toerana misokatra.",
+          "p3": "Ao amin'ny rihana ambany, efitra fandroana feno fitaovana miaraka amin'ny douche italiana.",
+          "p4": "Ny fitaovana dia ahitana ny rivotra, fahitalavitra ary fifandraisana WIFI."
+        },
+        "section2": {
+          "p1": "Ao amin'ny rihana, efitrano lehibe iray misy fandriana double sy faritra fandraisana vahiny kely.",
+          "p2": "Avy eo amin'ny lavarangana, ny fomba fijery dia manatrika ny farihy Itasy."
+        },
+        "section3": {
+          "p1": "Ao amin'ny efitra fandroana ao amin'ny rihana, koveta fandroana kanto iray dia manolotra fomba fijery mahafinaritra ny farihy, manasa hiala sasatra.",
+          "p2": "Ny duplex tsirairay dia manana dobo filomanosana sy terry manokana ihany koa, ho an'ny fijanonana feno fampiononana sy fiainana manokana."
+        }
+      },
+      "details": {
+        "price": "Sarany tsy misy sakafo maraina: 800.000 Ariary isaky ny alina",
+        "checkIn": "Check-in: 13h00 - Check-out: 11h00"
+      }
+    }
+  },
+  "reservation": {
+    "title": "Ahoana no hamandrihana?",
+    "intro": "Te hipetraka ao amin'ny trano fandraisam-bahininay ve ianao?<br/>Fenoy ity taratasy ity mba hahalalana ny fahafahanay.",
+    "labels": {
+      "arrival": "1. Daty fahatongavana *",
+      "departure": "Daty fiaingana *",
+      "accommodation": "2. Safidy trano fonenana *",
+      "total_persons": "3. Isan'ny olona *",
+      "adults": "Olon-dehibe",
+      "children": "Ankizy",
+      "children_ages": "Taonan'ny ankizy (tsy maintsy atao) :",
+      "child_placeholder": "Zaza {{index}}",
+      "name": "4. Anarana *",
+      "firstname": "Fanampin'anarana *",
+      "phone": "5. Laharana finday *",
+      "email": "Adiresy e-mail *",
+      "requests": "6. Fangatahana manokana ?"
+    },
+    "placeholders": {
+      "phone": "oh: 32 07 413 55"
+    },
+    "buttons": {
+      "sending": "Mandefa...",
+      "send": "Alefaso ny fangatahana famandrihana"
+    },
+    "alerts": {
+      "no_room": "Misafidiana efitrano na bungalow iray farafahakeliny.",
+      "captcha": "Hamarino azafady ny CAPTCHA.",
+      "error": "Nisy olana nandritra ny fandefasana na tsy nahomby ny fanamarinana CAPTCHA.",
+      "server_error": "Tsy afaka mifandray amin'ny mpizara."
+    },
+    "success": {
+      "title": "Misaotra {{name}} !",
+      "message": "Voaray soa aman-tsara ny fangatahanao. Hamaly anao haingana izahay."
+    },
+    "footer": {
+      "whatsapp": "Azonao atao koa ny manoratra aminay amin'ny WhatsApp amin'ny"
+    },
+    "room_types": {
+      "Double": "Double",
+      "Familiale": "Fianakaviana",
+      "Duplex": "Duplex",
+      "Suite": "Suite",
+      "Villa": "Villa"
+    }
+  },
+  "contact": {
+    "title": "Fanontaniana?<br />Mifandraisa aminay eto",
+    "subtitle_mandatory": "<0>*fampahalalana tsy maintsy atao</0>",
+    "labels": {
+      "lastname": "*Anarana :",
+      "firstname": "*Fanampin'anarana :",
+      "email": "*Adiresy e-mail :",
+      "phone": "*Laharana finday :",
+      "subject": "Inona no lohahevitry ny fangatahanao ?",
+      "message": "*Ahoana no ahafahanay manampy anao ?"
+    },
+    "placeholders": {
+      "phone": "oh: 32 07 413 55"
+    },
+    "buttons": {
+      "sending": "Mandefa...",
+      "send": "Alefaso ny fangatahana"
+    },
+    "alerts": {
+      "captcha": "Hamarino azafady ny CAPTCHA.",
+      "error": "Nisy olana nandritra ny fandefasana na tsy nahomby ny fanamarinana CAPTCHA.",
+      "server_error": "Tsy afaka mifandray amin'ny mpizara."
+    },
+    "success": {
+      "title": "Taratasy voalefa",
+      "message": "Misaotra anao tamin'ny fangatahanao, hamaly anao haingana izahay."
+    },
+    "footer": {
+      "whatsapp": "Azonao atao koa ny mandefa hafatra aminay amin'ny WhatsApp amin'ny <1/>"
+    }
+  }
+}

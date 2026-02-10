@@ -1,16 +1,17 @@
 import React from "react";
 import ImageGallery from "../../components/ImageGallery";
+import { useTranslation } from "react-i18next";
 
 /**
  * Restaurant serves as the data provider for the
  * generic ImageGallery component.
  */
 const RestaurantGallery: React.FC = () => {
+  const {t} = useTranslation();
   const basePath = "/pictures/restaurant/";
   const massageContent = {
-    title: "Le restaurant",
-    subtitle:
-      "Installez-vous sur la terrasse, la plage ou dans le jardin, laissez-vous porter par la vue sur le lac Itasy et savourez l’instant au bord de la piscine.",
+    title: t('galleries.restaurant.title'),
+    subtitle:t('galleries.restaurant.subtitle'),
     images: [
       {
         path: basePath + "restaurant-1.webp",

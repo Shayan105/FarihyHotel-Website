@@ -7,10 +7,12 @@ import {
   DoubleCard,
   VillaCard,
 } from  '../../components/RoomCard';
+import { useTranslation } from 'react-i18next';
 
 const FarihyRoomGallery: React.FC = () => {
+  const {t} = useTranslation();
   return (
-    <RoomGallery title="Nos hébergements">
+    <RoomGallery title={t('galleries.room-home.title')}>
       
       {/* Since RoomGallery now accepts "children", 
          we simply list the components here. 

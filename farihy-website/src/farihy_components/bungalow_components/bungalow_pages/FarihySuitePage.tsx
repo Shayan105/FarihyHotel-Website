@@ -1,6 +1,7 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
+import { useTranslation } from "react-i18next"; // Import translation hook
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -77,6 +78,7 @@ const OtherRoomsSuggestions = () => {
 };
 
 const FarihySuitePage = () => {
+  const { t } = useTranslation(); // Initialize hook
   const basePath = "/pictures/suite/";
 
   const bungalowImages: GalleryImage[] = [
@@ -94,23 +96,23 @@ const FarihySuitePage = () => {
       imageSrc: basePath + "2.webp",
       reversed: true,
       text: [
-        "Cette suite de 80 m² , idéale pour un couple, un groupe d’amis ou une famille jusqu’à 5 personnes",
-        "Elle se compose de deux chambres communicantes.",
-        "La chambre principale est équipée d’un lit Queen-size et dispose de sa propre salle de bains.",
-        "La seconde chambre est modulable, avec trois lits simples ou un lit double et un lit simple, et comprend également une salle de bains.",
-        "Les équipements incluent la ventilation, une télévision et une connexion WIFI."
+        t("bungalows.suite.description.section1.p1"),
+        t("bungalows.suite.description.section1.p2"),
+        t("bungalows.suite.description.section1.p3"),
+        t("bungalows.suite.description.section1.p4"),
+        t("bungalows.suite.description.section1.p5"),
       ],
     },
     {
       imageSrc: basePath + "1.webp",
       reversed: false,
       text: [
-        "La suite bénéficie d’une terrasse privée donnant sur le lac, d’une piscine privée ainsi que d’un jacuzzi*, pour des moments de détente privilégiés.",
+        t("bungalows.suite.description.section2.p1"),
       ],
       details: {
-        price: "Tarif hors petit-déjeuner : 750.000 Ariary la nuit",
-        checkIn: "Check-in : 13h00 - Check-out : 11h00",
-        addText: "*Pour des raisons énergétiques, le jacuzzi peut être utilisé 30 minutes par jour entre 8h00 et 19h00"
+        price: t("bungalows.suite.details.price"),
+        checkIn: t("bungalows.suite.details.checkIn"),
+        addText: t("bungalows.suite.details.addText"),
       },
     },
   ];
@@ -118,9 +120,9 @@ const FarihySuitePage = () => {
   return (
     <FarihyRoomPageTemplate
       headerImageSrc={basePath + "6.webp"}
-      pageTitle="La Suite"
+      pageTitle={t("bungalows.suite.title")}
       contentSections={pageSections}
-      galleryTitle="Aperçu de la Suite"
+      galleryTitle={t("bungalows.suite.gallery_title")}
       galleryImages={bungalowImages}
       otherRoomsComponent={<OtherRoomsSuggestions />}
     />

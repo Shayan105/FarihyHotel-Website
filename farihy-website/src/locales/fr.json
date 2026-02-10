@@ -1,0 +1,238 @@
+{
+  "nav": {
+    "home": "ACCUEIL",
+    "bungalows": "BUNGALOWS",
+    "book": "RÉSERVER",
+    "contact": "CONTACT",
+    "doubles": "Les Doubles",
+    "familials": "Les Familiales",
+    "suite": "La Suite",
+    "duplex": "Les Duplex",
+    "villa": "La Villa"
+  },
+  "galleries": {
+    "cuisine": {
+      "title": "La cuisine",
+      "subtitle": "Une cuisine simple, généreuse et authentique, préparée avec des produits frais de saison et servie avec le sourire, de notre cuisine à votre table. "
+    },
+    "restaurant": {
+      "title": "Le restaurant",
+      "subtitle": "Installez-vous sur la terrasse, la plage ou dans le jardin, laissez-vous porter par la vue sur le lac Itasy et savourez l’instant au bord de la piscine."
+    },
+    "massage": {
+      "title": "Un moment de détente",
+      "subtitle": "Confiez-vous aux mains expertes de notre masseuse pour une parenthèse de relaxation et de sérénité.",
+      "footer": {
+        "prefix": "N’attendez plus, ",
+        "link": "réservez",
+        "suffix": "dès maintenant."
+      }
+    },
+    "room-home": {
+      "title": "Nos hébergements"
+    }
+  },
+  "location": {
+    "text_1": "Où nous trouver",
+    "text_2": "Au cœur de la région Itasy"
+  },
+  "presentation-card": {
+    "title": "Le calme à 120km d'Antananarivo",
+    "p1": "Découvrez votre havre de tranquillité au cœur d'Ampefy.",
+    "p2": "Notre hôtel vous invite à un séjour alliant détente, nature et authenticité.",
+    "p3": "Profitez d'un cadre paisible en face du lac Itasy pour un moment de bien-être."
+  },
+  "room_card": {
+    "capacity": "{{min}} à {{max}} personnes",
+    "from_price": "dès {{price}} Ariary la nuit"
+  },
+  "popup": {
+    "title": "Annonce Importante",
+    "greeting": "Chers clients,",
+    "message_closed": "Nous vous informons que nous sommes fermés pour congé annuel du <1>27 janvier au 1er mars inclus</1>.",
+    "message_contact": "Notre ligne téléphonique ne sera pas disponible durant cette période mais nous restons toutefois à votre disposition par <1>e-mail et sur WhatsApp</1>.",
+    "closing": "À très bientôt,",
+    "team": "Toute l’équipe Farihy Hôtel",
+    "button": "OK"
+  },
+  "bungalows": {
+    "template": {
+      "gallery-picture": {
+        "title": "Aperçu de la chambre"
+      },
+      "presentation-card": {
+        "important-informations": "Informations Importantes"
+      }
+    },
+    "doubles": {
+      "title": "Les Doubles",
+      "gallery_title": "Aperçu des doubles",
+      "description": {
+        "p1": "Idéal pour les personnes seules ou les couples, nos trois bungalows doubles disposent d’un lit Queen-size, d’une salle de bains et d’une terrasse privative.",
+        "p2": "Les équipements incluent la ventilation, la télévision ainsi que la connexion WIFI.",
+        "p3": "Profitez d’une vue directe sur le lac Itasy depuis votre bungalow."
+      },
+      "details": {
+        "price": "Tarif hors petit-déjeuner : 400.000 Ariary la nuit",
+        "checkIn": "Check-in : 13h00 - Check-out : 11h00"
+      }
+    },
+    "suite": {
+      "title": "La Suite",
+      "gallery_title": "Aperçu de la Suite",
+      "description": {
+        "section1": {
+          "p1": "Cette suite de 80 m² , idéale pour un couple, un groupe d’amis ou une famille jusqu’à 5 personnes",
+          "p2": "Elle se compose de deux chambres communicantes.",
+          "p3": "La chambre principale est équipée d’un lit Queen-size et dispose de sa propre salle de bains.",
+          "p4": "La seconde chambre est modulable, avec trois lits simples ou un lit double et un lit simple, et comprend également une salle de bains.",
+          "p5": "Les équipements incluent la ventilation, une télévision et une connexion WIFI."
+        },
+        "section2": {
+          "p1": "La suite bénéficie d’une terrasse privée donnant sur le lac, d’une piscine privée ainsi que d’un jacuzzi*, pour des moments de détente privilégiés."
+        }
+      },
+      "details": {
+        "price": "Tarif hors petit-déjeuner : 750.000 Ariary la nuit",
+        "checkIn": "Check-in : 13h00 - Check-out : 11h00",
+        "addText": "*Pour des raisons énergétiques, le jacuzzi peut être utilisé 30 minutes par jour entre 8h00 et 19h00"
+      }
+    },
+    "familial": {
+      "title": "Bungalow familial",
+      "gallery_title": "Aperçu du bungalow",
+      "description": {
+        "p1": "Idéal pour un groupe d’amis ou une famille, nos quatre bungalows familiaux disposent de deux grands lit Queen-size et d’un petit lit, d’une salle de bains et d’une petite terrasse.",
+        "p2": "Les équipements incluent la ventilation, la télévision ainsi que la connexion WIFI."
+      },
+      "details": {
+        "price": "Tarif hors petit-déjeuner : 425.000 Ariary la nuit",
+        "checkIn": "Check-in : 13h00 - Check-out : 11h00"
+      }
+    },
+    "villa": {
+      "title": "La Villa",
+      "gallery_title": "Aperçu de la Villa",
+      "description": {
+        "section1": {
+          "p1": "La Villa spacieuse de 200 m² offre une vue imprenable sur le lac Itasy depuis ses deux balcons.",
+          "p2": "Elle est idéale pour les grandes familles et peut accueillir jusqu’à 10 personnes.",
+          "p3": "Au rez-de-chaussée, elle dispose de deux chambres : une double et une triple. Deux salles de bains, dont l’une est équipée d’une grande baignoire ainsi que d’une douche à l’italienne.",
+          "p4": "Un confortable coin salon complète cet espace."
+        },
+        "section2": {
+          "p1": "À l’étage, deux chambres communicantes sont aménagées : une chambre triple et une chambre double, avec deux salles de bains, dont l’une comprend également une baignoire.",
+          "p2": "Les équipements incluent la ventilation, la télévision ainsi que la connexion WIFI."
+        },
+        "section3": {
+          "p1": "La villa bénéficie par ailleurs d’une vaste terrasse ombragée donnant sur la piscine et le jacuzzi, idéale pour des moments de détente en toute sérénité."
+        }
+      },
+      "details": {
+        "price": "Tarif hors petit-déjeuner : 1.750.000 Ariary la nuit",
+        "checkIn": "Check-in : 14h00 - Check-out : 11h00"
+      }
+    },
+    "duplex": {
+      "title": "Les Duplex",
+      "gallery_title": "Aperçu des Duplex",
+      "description": {
+        "section1": {
+          "p1": "D’une superficie de 100 m², les Duplex peuvent accueillir jusqu’à 6 personnes.",
+          "p2": "Deux configurations de rez-de-chaussée sont proposées : l’une avec une chambre séparée, l’autre avec un espace ouvert.",
+          "p3": "Au rez-de-chaussée, une salle de bains entièrement équipée avec une douche à l’italienne.",
+          "p4": "Les équipements incluent la ventilation, la télévision ainsi que la connexion WIFI."
+        },
+        "section2": {
+          "p1": "A l’étage, une grande chambre avec lit double et un petit coin salon.",
+          "p2": "Depuis le balcon, la vue donne sur le lac Itasy."
+        },
+        "section3": {
+          "p1": "Dans la salle de bains, à l’étage, une élégante baignoire en îlot offre une vue imprenable sur le lac, invitant à la détente.",
+          "p2": "Chaque duplex dispose également d’une piscine et d’une terrasse privées, pour un séjour placé sous le signe du confort et de l’intimité."
+        }
+      },
+      "details": {
+        "price": "Tarif hors petit-déjeuner : 800.000 Ariary la nuit",
+        "checkIn": "Check-in : 13h00 - Check-out : 11h00"
+      }
+    }
+  },
+  "reservation": {
+    "title": "Comment réserver ?",
+    "intro": "Vous souhaitez séjourner dans notre établissement ?<br/>Remplissez ce formulaire pour connaître nos disponibilités.",
+    "labels": {
+      "arrival": "1. Date d'arrivée *",
+      "departure": "Date de départ *",
+      "accommodation": "2. Choix des hébergements *",
+      "total_persons": "3. Le nombre total de personnes *",
+      "adults": "Total Adultes",
+      "children": "Total Enfants",
+      "children_ages": "Âge des enfants (obligatoire) :",
+      "child_placeholder": "Enfant {{index}}",
+      "name": "4. Nom *",
+      "firstname": "Prénom *",
+      "phone": "5. Numéro de téléphone *",
+      "email": "Votre adresse e-mail *",
+      "requests": "6. Demande particulière ?"
+    },
+    "placeholders": {
+      "phone": "ex: 32 07 413 55"
+    },
+    "buttons": {
+      "sending": "Envoi en cours...",
+      "send": "Envoyer ma demande de réservation"
+    },
+    "alerts": {
+      "no_room": "Veuillez sélectionner au moins une chambre ou bungalow.",
+      "captcha": "Veuillez valider le CAPTCHA.",
+      "error": "Erreur lors de l'envoi ou validation CAPTCHA échouée.",
+      "server_error": "Impossible de contacter le serveur."
+    },
+    "success": {
+      "title": "Merci {{name}} !",
+      "message": "Votre demande a bien été envoyée. Nous vous répondrons très vite."
+    },
+    "footer": {
+      "whatsapp": "Vous pouvez également nous écrire sur WhatsApp au"
+    },
+    "room_types": {
+      "Double": "Double",
+      "Familiale": "Familiale",
+      "Duplex": "Duplex",
+      "Suite": "Suite",
+      "Villa": "Villa"
+    }
+  },
+  "contact": {
+    "title": "Une question ?<br />Contactez nous ici",
+    "subtitle_mandatory": "<0>*information obligatoire</0>",
+    "labels": {
+      "lastname": "*Nom :",
+      "firstname": "*Prénom :",
+      "email": "*Adresse e-mail :",
+      "phone": "*Numéro de téléphone :",
+      "subject": "Quel est le sujet de votre demande ?",
+      "message": "*Comment pouvons-nous vous renseigner ?"
+    },
+    "placeholders": {
+      "phone": "ex: 32 07 413 55"
+    },
+    "buttons": {
+      "sending": "Envoi en cours...",
+      "send": "Envoyer ma demande"
+    },
+    "alerts": {
+      "captcha": "Veuillez valider le CAPTCHA.",
+      "error": "Erreur lors de l'envoi ou validation CAPTCHA échouée.",
+      "server_error": "Impossible de contacter le serveur."
+    },
+    "success": {
+      "title": "Formulaire envoyé",
+      "message": "Nous vous remercions pour votre demande, nous vous répondrons au plus vite."
+    },
+    "footer": {
+      "whatsapp": "Vous pouvez également nous envoyer un message sur WhatsApp au <1/>"
+    }
+  }
+}

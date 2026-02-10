@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
+import { useTranslation, Trans } from "react-i18next";
 
 // Configuration des disponibilités
 const ROOM_LIMITS = {
@@ -13,6 +14,7 @@ const ROOM_LIMITS = {
 type RoomType = keyof typeof ROOM_LIMITS;
 
 const FarihyReservation = () => {
+  const { t } = useTranslation();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSending, setIsSending] = useState(false);
   
@@ -137,13 +139,13 @@ const FarihyReservation = () => {
 
     const totalRooms = Object.values(formData.selectedRooms).reduce((a, b) => a + b, 0);
     if (totalRooms === 0) {
-      alert("Veuillez sélectionner au moins une chambre ou bungalow.");
+      alert(t("reservation.alerts.no_room"));
       return;
     }
 
     const token = recaptchaRef.current?.getValue();
     if (!token) {
-      alert("Veuillez valider le CAPTCHA.");
+      alert(t("reservation.alerts.captcha"));
       return;
     }
 
@@ -173,12 +175,12 @@ const FarihyReservation = () => {
         setIsSubmitted(true);
         setFormData(prev => ({ ...prev, questions: "" })); 
       } else {
-        alert("Erreur lors de l'envoi ou validation CAPTCHA échouée.");
+        alert(t("reservation.alerts.error"));
         recaptchaRef.current?.reset();
       }
     } catch (error) {
       console.error("Erreur:", error);
-      alert("Impossible de contacter le serveur.");
+      alert(t("reservation.alerts.server_error"));
     } finally {
       setIsSending(false);
     }
@@ -187,10 +189,12 @@ const FarihyReservation = () => {
   return (
     <section style={styles.section}>
       <div className="container">
-        <h2 style={styles.title}>Comment réserver ?</h2>
+        <h2 style={styles.title}>{t("reservation.title")}</h2>
         <p style={styles.intro}>
-          Vous souhaitez séjourner dans notre établissement ?<br/>
-          Remplissez ce formulaire pour connaître nos disponibilités.
+          <Trans i18nKey="reservation.intro">
+            Vous souhaitez séjourner dans notre établissement ?<br/>
+            Remplissez ce formulaire pour connaître nos disponibilités.
+          </Trans>
         </p>
 
         <div className="row justify-content-center">
@@ -198,10 +202,10 @@ const FarihyReservation = () => {
             {!isSubmitted ? (
               <form onSubmit={handleSubmit}>
                 
-                {/* 1. Dates (UPDATED) */}
+                {/* 1. Dates */}
                 <div className="row">
                   <div className="col-md-6">
-                    <label style={styles.label}>1. Date d'arrivée *</label>
+                    <label style={styles.label}>{t("reservation.labels.arrival")}</label>
                     <input 
                         type="date" 
                         name="dateArrivee" 
@@ -209,11 +213,11 @@ const FarihyReservation = () => {
                         style={styles.input} 
                         value={formData.dateArrivee} 
                         onChange={handleChange}
-                        min={today} // Prevents past dates
+                        min={today} 
                     />
                   </div>
                   <div className="col-md-6">
-                    <label style={styles.label}>Date de départ *</label>
+                    <label style={styles.label}>{t("reservation.labels.departure")}</label>
                     <input 
                         type="date" 
                         name="dateDepart" 
@@ -221,14 +225,14 @@ const FarihyReservation = () => {
                         style={styles.input} 
                         value={formData.dateDepart} 
                         onChange={handleChange}
-                        min={minDeparture} // Prevents incoherent dates
-                        disabled={!formData.dateArrivee} // Forces user to pick arrival first
+                        min={minDeparture} 
+                        disabled={!formData.dateArrivee} 
                     />
                   </div>
                 </div>
 
                 {/* 2. Sélection Multi-Chambres */}
-                <label style={styles.label}>2. Choix des hébergements *</label>
+                <label style={styles.label}>{t("reservation.labels.accommodation")}</label>
                 <div style={styles.roomContainer}>
                   {Object.entries(ROOM_LIMITS).map(([type, max], index, array) => {
                     const count = formData.selectedRooms[type as RoomType];
@@ -242,9 +246,9 @@ const FarihyReservation = () => {
                         target="_blank"             
                         rel="noopener noreferrer"   
                         style={styles.roomNameLink}
-                        title={`Voir les détails de la ${type}`} 
+                        title={t("reservation.room_types." + type)} 
                       >
-                        {type} <span style={{fontSize: "0.8em"}}>↗</span>
+                        {t("reservation.room_types." + type)} <span style={{fontSize: "0.8em"}}>↗</span>
                       </a>
 
                       <div style={styles.stepperContainer}>
@@ -273,14 +277,14 @@ const FarihyReservation = () => {
                 </div>
 
                 {/* 3. Nombre de personnes */}
-                <label style={styles.label}>3. Le nombre total de personnes *</label>
+                <label style={styles.label}>{t("reservation.labels.total_persons")}</label>
                 <div className="row">
                   <div className="col-6">
-                    <label style={styles.subLabel}>Total Adultes</label>
+                    <label style={styles.subLabel}>{t("reservation.labels.adults")}</label>
                     <input type="number" min="1" name="nbAdultes" required style={styles.input} value={formData.nbAdultes} onChange={handleChange} />
                   </div>
                   <div className="col-6">
-                    <label style={styles.subLabel}>Total Enfants</label>
+                    <label style={styles.subLabel}>{t("reservation.labels.children")}</label>
                     <input type="number" min="0" name="nbEnfants" required style={styles.input} value={formData.nbEnfants} onChange={handleEnfantsChange} />
                   </div>
                 </div>
@@ -288,13 +292,13 @@ const FarihyReservation = () => {
                 {/* Champs dynamiques Âges */}
                 {formData.nbEnfants > 0 && (
                     <div style={{ backgroundColor: "#e9ecef", padding: "15px", borderRadius: "5px", marginBottom: "15px" }}>
-                        <label style={{...styles.label, color: "#D9534F", fontSize: "0.85rem"}}>Âge des enfants (obligatoire) :</label>
+                        <label style={{...styles.label, color: "#D9534F", fontSize: "0.85rem"}}>{t("reservation.labels.children_ages")}</label>
                         <div className="row">
                             {formData.agesEnfants.map((age, index) => (
                                 <div key={index} className="col-4">
                                     <input 
                                         type="text" 
-                                        placeholder={`Enfant ${index + 1}`}
+                                        placeholder={t("reservation.labels.child_placeholder", { index: index + 1 })}
                                         required
                                         style={{...styles.input, marginBottom: "5px"}}
                                         value={age}
@@ -309,27 +313,27 @@ const FarihyReservation = () => {
                 {/* 4. Coordonnées */}
                 <div className="row mt-4">
                     <div className="col-md-6">
-                        <label style={styles.label}>4. Nom *</label>
+                        <label style={styles.label}>{t("reservation.labels.name")}</label>
                         <input type="text" name="nom" required style={styles.input} value={formData.nom} onChange={handleChange} />
                     </div>
                     <div className="col-md-6">
-                        <label style={styles.label}>Prénom *</label>
+                        <label style={styles.label}>{t("reservation.labels.firstname")}</label>
                         <input type="text" name="prenom" required style={styles.input} value={formData.prenom} onChange={handleChange} />
                     </div>
                 </div>
 
                 {/* 5. Contact */}
-                <label style={styles.label}>5. Numéro de téléphone *</label>
+                <label style={styles.label}>{t("reservation.labels.phone")}</label>
                 <div style={{ display: "flex", marginBottom: "15px" }}>
                   <input type="text" name="countryCode" style={styles.codeField} value={formData.countryCode} onChange={handleChange} placeholder="+261" />
-                  <input type="tel" name="telephone" required placeholder="ex: 32 07 413 55" style={{ ...styles.input, borderRadius: "0 5px 5px 0", marginBottom: 0 }} value={formData.telephone} onChange={handleChange} />
+                  <input type="tel" name="telephone" required placeholder={t("reservation.placeholders.phone")} style={{ ...styles.input, borderRadius: "0 5px 5px 0", marginBottom: 0 }} value={formData.telephone} onChange={handleChange} />
                 </div>
 
-                <label style={styles.label}>Votre adresse e-mail *</label>
+                <label style={styles.label}>{t("reservation.labels.email")}</label>
                 <input type="email" name="email" required style={styles.input} value={formData.email} onChange={handleChange} />
 
                 {/* 6. Questions */}
-                <label style={styles.label}>6. Demande particulière ?</label>
+                <label style={styles.label}>{t("reservation.labels.requests")}</label>
                 <textarea name="questions" rows={3} style={styles.input} value={formData.questions} onChange={handleChange}></textarea>
 
                 {/* CAPTCHA */}
@@ -342,18 +346,18 @@ const FarihyReservation = () => {
 
                 {/* BOUTON */}
                 <button type="submit" style={styles.button} disabled={isSending}>
-                  {isSending ? "Envoi en cours..." : "Envoyer ma demande de réservation"}
+                  {isSending ? t("reservation.buttons.sending") : t("reservation.buttons.send")}
                 </button>
               </form>
             ) : (
               <div style={styles.successBox}>
-                <h4 style={{marginBottom: "10px", fontFamily: "'Playfair Display', serif"}}>Merci {formData.prenom} !</h4>
-                <p>Votre demande a bien été envoyée. Nous vous répondrons très vite.</p>
+                <h4 style={{marginBottom: "10px", fontFamily: "'Playfair Display', serif"}}>{t("reservation.success.title", { name: formData.prenom })}</h4>
+                <p>{t("reservation.success.message")}</p>
               </div>
             )}
 
             <div style={{ marginTop: "40px", textAlign: "center", fontSize: "0.95rem" }}>
-              <p>Vous pouvez également nous écrire sur WhatsApp au <strong>+261 32 07 413 55</strong></p>
+              <p>{t("reservation.footer.whatsapp")} <strong>+261 32 07 413 55</strong></p>
             </div>
           </div>
         </div>
