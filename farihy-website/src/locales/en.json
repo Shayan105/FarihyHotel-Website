@@ -4,24 +4,24 @@
     "bungalows": "BUNGALOWS",
     "book": "BOOK NOW",
     "contact": "CONTACT",
-    "doubles": "The Doubles",
-    "familials": "The Family Rooms",
+    "doubles": "Double Rooms",
+    "familials": "Family Rooms",
     "suite": "The Suite",
-    "duplex": "The Duplexes",
+    "duplex": "Duplexes",
     "villa": "The Villa"
   },
   "galleries": {
     "cuisine": {
-      "title": "The Cuisine",
-      "subtitle": "Simple, generous, and authentic cuisine, prepared with fresh seasonal produce and served with a smile, from our kitchen to your table."
+      "title": "Our Cuisine",
+      "subtitle": "Simple, generous, and authentic cuisine, prepared with fresh seasonal ingredients and served with a smile, from our kitchen to your table."
     },
     "restaurant": {
       "title": "The Restaurant",
-      "subtitle": "Settle on the terrace, the beach, or in the garden; let yourself be carried away by the view of Lake Itasy and savor the moment by the pool."
+      "subtitle": "Take a seat on the terrace, the beach, or in the garden; let yourself be captivated by the view of Lake Itasy and savor the moment by the pool."
     },
     "massage": {
       "title": "A Moment of Relaxation",
-      "subtitle": "Entrust yourself to the expert hands of our masseuse for an interlude of relaxation and serenity."
+      "subtitle": "Surrender to the expert hands of our masseuse for an interlude of relaxation and serenity."
     },
     "room-home": {
       "title": "Our Accommodations"
@@ -32,7 +32,7 @@
     "text_2": "In the heart of the Itasy region"
   },
   "presentation-card": {
-    "title": "Peace and quiet 120km from Antananarivo",
+    "title": "Serenity 120km from Antananarivo",
     "p1": "Discover your haven of tranquility in the heart of Ampefy.",
     "p2": "Our hotel invites you to a stay combining relaxation, nature, and authenticity.",
     "p3": "Enjoy a peaceful setting facing Lake Itasy for a moment of well-being."
@@ -40,8 +40,8 @@
   "popup": {
     "title": "Important Announcement",
     "greeting": "Dear Guests,",
-    "message_closed": "We inform you that we are closed for annual leave from <1>January 27th to March 1st inclusive</1>.",
-    "message_contact": "Our telephone line will not be available during this period, but we remain at your disposal via <1>e-mail and WhatsApp</1>.",
+    "message_closed": "We inform you that we are closed for annual leave from <1>January 27th to March 1st included</1>.",
+    "message_contact": "Our phone line will not be available during this period, but we remain at your disposal via <1>email and WhatsApp</1>.",
     "closing": "See you soon,",
     "team": "The Farihy Hotel Team",
     "button": "OK"
@@ -49,12 +49,15 @@
   "bungalows": {
     "template": {
       "gallery-picture": {
-        "title": "Room Preview"
+        "title": "Room Overview"
+      },
+      "presentation-card": {
+        "important-informations": "Important Information"
       }
     },
     "doubles": {
-      "title": "The Doubles",
-      "gallery_title": "Preview of the Doubles",
+      "title": "Double Rooms",
+      "gallery_title": "Doubles Overview",
       "description": {
         "p1": "Ideal for solo travelers or couples, our three double bungalows feature a Queen-size bed, a bathroom, and a private terrace.",
         "p2": "Amenities include ventilation, television, and WIFI connection.",
@@ -67,28 +70,28 @@
     },
     "suite": {
       "title": "The Suite",
-      "gallery_title": "Preview of the Suite",
+      "gallery_title": "Suite Overview",
       "description": {
         "section1": {
           "p1": "This 80 m² suite is ideal for a couple, a group of friends, or a family of up to 5 people.",
           "p2": "It consists of two connecting rooms.",
-          "p3": "The main bedroom is equipped with a Queen-size bed and has its own bathroom.",
-          "p4": "The second bedroom is flexible, with three single beds or one double bed and one single bed, and also includes a bathroom.",
-          "p5": "Amenities include ventilation, television, and WIFI connection."
+          "p3": "The main bedroom is equipped with a Queen-size bed and has its own private bathroom.",
+          "p4": "The second room is modular, featuring three single beds or one double bed and one single bed, and also includes a bathroom.",
+          "p5": "Amenities include ventilation, a television, and WIFI connection."
         },
         "section2": {
-          "p1": "The suite benefits from a private terrace overlooking the lake, a private pool, as well as a jacuzzi*, for privileged moments of relaxation."
+          "p1": "The suite features a private terrace overlooking the lake, a private pool, and a jacuzzi*, for privileged moments of relaxation."
         }
       },
       "details": {
         "price": "Rate excluding breakfast: 750,000 Ariary per night",
         "checkIn": "Check-in: 1:00 PM - Check-out: 11:00 AM",
-        "addText": "*For energy conservation reasons, the jacuzzi can be used for 30 minutes per day between 8:00 AM and 7:00 PM"
+        "addText": "*For energy reasons, the jacuzzi can be used for 30 minutes per day between 8:00 AM and 7:00 PM."
       }
     },
     "familial": {
       "title": "Family Bungalow",
-      "gallery_title": "Preview of the Bungalow",
+      "gallery_title": "Bungalow Overview",
       "description": {
         "p1": "Ideal for a group of friends or a family, our four family bungalows feature two large Queen-size beds and a small bed, a bathroom, and a small terrace.",
         "p2": "Amenities include ventilation, television, and WIFI connection."
@@ -100,7 +103,7 @@
     },
     "villa": {
       "title": "The Villa",
-      "gallery_title": "Preview of the Villa",
+      "gallery_title": "Villa Overview",
       "description": {
         "section1": {
           "p1": "The spacious 200 m² Villa offers a breathtaking view of Lake Itasy from its two balconies.",
@@ -109,11 +112,11 @@
           "p4": "A comfortable lounge area completes this space."
         },
         "section2": {
-          "p1": "Upstairs, two connecting rooms are arranged: one triple bedroom and one double bedroom, with two bathrooms, one of which also includes a bathtub.",
+          "p1": "Upstairs, two connecting rooms are arranged: a triple room and a double room, with two bathrooms, one of which also includes a bathtub.",
           "p2": "Amenities include ventilation, television, and WIFI connection."
         },
         "section3": {
-          "p1": "The villa also benefits from a vast shaded terrace overlooking the pool and jacuzzi, ideal for moments of relaxation in complete serenity."
+          "p1": "The villa also benefits from a large shaded terrace overlooking the pool and jacuzzi, perfect for moments of relaxation in complete serenity."
         }
       },
       "details": {
@@ -122,12 +125,12 @@
       }
     },
     "duplex": {
-      "title": "The Duplexes",
-      "gallery_title": "Preview of the Duplexes",
+      "title": "Duplexes",
+      "gallery_title": "Duplex Overview",
       "description": {
         "section1": {
           "p1": "With an area of 100 m², the Duplexes can accommodate up to 6 people.",
-          "p2": "Two ground-floor configurations are available: one with a separate bedroom, the other with an open-plan space.",
+          "p2": "Two ground floor configurations are available: one with a separate bedroom, the other with an open space.",
           "p3": "On the ground floor, a fully equipped bathroom with a walk-in shower.",
           "p4": "Amenities include ventilation, television, and WIFI connection."
         },
@@ -136,7 +139,7 @@
           "p2": "From the balcony, the view overlooks Lake Itasy."
         },
         "section3": {
-          "p1": "In the upstairs bathroom, an elegant freestanding bathtub offers a stunning view of the lake, inviting you to relax.",
+          "p1": "In the upstairs bathroom, an elegant freestanding bathtub offers a breathtaking view of the lake, inviting relaxation.",
           "p2": "Each duplex also features a private pool and terrace, for a stay dedicated to comfort and privacy."
         }
       },
@@ -144,6 +147,83 @@
         "price": "Rate excluding breakfast: 800,000 Ariary per night",
         "checkIn": "Check-in: 1:00 PM - Check-out: 11:00 AM"
       }
+    }
+  },
+  "reservation": {
+    "title": "How to Book?",
+    "intro": "Do you wish to stay at our establishment?<br/>Fill out this form to check our availability.",
+    "labels": {
+      "arrival": "1. Arrival Date *",
+      "departure": "Departure Date *",
+      "accommodation": "2. Choice of Accommodation *",
+      "total_persons": "3. Total Number of People *",
+      "adults": "Total Adults",
+      "children": "Total Children",
+      "children_ages": "Age of children (required):",
+      "child_placeholder": "Child {{index}}",
+      "name": "4. Last Name *",
+      "firstname": "First Name *",
+      "phone": "5. Phone Number *",
+      "email": "Your Email Address *",
+      "requests": "6. Special Request?"
+    },
+    "placeholders": {
+      "phone": "ex: 32 07 413 55"
+    },
+    "buttons": {
+      "sending": "Sending...",
+      "send": "Send Booking Request"
+    },
+    "alerts": {
+      "no_room": "Please select at least one room or bungalow.",
+      "captcha": "Please validate the CAPTCHA.",
+      "error": "Error sending or CAPTCHA validation failed.",
+      "server_error": "Unable to contact the server."
+    },
+    "success": {
+      "title": "Thank you {{name}}!",
+      "message": "Your request has been sent successfully. We will get back to you very soon."
+    },
+    "footer": {
+      "whatsapp": "You can also contact us on WhatsApp at"
+    },
+    "room_types": {
+      "Double": "Double",
+      "Familiale": "Family",
+      "Duplex": "Duplex",
+      "Suite": "Suite",
+      "Villa": "Villa"
+    }
+  },
+  "contact": {
+    "title": "A question?<br />Contact us here",
+    "subtitle_mandatory": "<0>*mandatory information</0>",
+    "labels": {
+      "lastname": "*Last Name:",
+      "firstname": "*First Name:",
+      "email": "*Email Address:",
+      "phone": "*Phone Number:",
+      "subject": "What is the subject of your request?",
+      "message": "*How can we help you?"
+    },
+    "placeholders": {
+      "phone": "ex: 32 07 413 55"
+    },
+    "buttons": {
+      "sending": "Sending...",
+      "send": "Send request"
+    },
+    "alerts": {
+      "captcha": "Please validate the CAPTCHA.",
+      "error": "Error sending or CAPTCHA validation failed.",
+      "server_error": "Unable to contact the server."
+    },
+    "success": {
+      "title": "Form sent",
+      "message": "Thank you for your request, we will reply as soon as possible."
+    },
+    "footer": {
+      "whatsapp": "You can also send us a message on WhatsApp at <1/>"
     }
   }
 }

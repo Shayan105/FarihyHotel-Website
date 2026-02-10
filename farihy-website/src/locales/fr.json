@@ -194,5 +194,36 @@
       "Suite": "Suite",
       "Villa": "Villa"
     }
+  },
+  "contact": {
+    "title": "Une question ?<br />Contactez nous ici",
+    "subtitle_mandatory": "<0>*information obligatoire</0>",
+    "labels": {
+      "lastname": "*Nom :",
+      "firstname": "*Prénom :",
+      "email": "*Adresse e-mail :",
+      "phone": "*Numéro de téléphone :",
+      "subject": "Quel est le sujet de votre demande ?",
+      "message": "*Comment pouvons-nous vous renseigner ?"
+    },
+    "placeholders": {
+      "phone": "ex: 32 07 413 55"
+    },
+    "buttons": {
+      "sending": "Envoi en cours...",
+      "send": "Envoyer ma demande"
+    },
+    "alerts": {
+      "captcha": "Veuillez valider le CAPTCHA.",
+      "error": "Erreur lors de l'envoi ou validation CAPTCHA échouée.",
+      "server_error": "Impossible de contacter le serveur."
+    },
+    "success": {
+      "title": "Formulaire envoyé",
+      "message": "Nous vous remercions pour votre demande, nous vous répondrons au plus vite."
+    },
+    "footer": {
+      "whatsapp": "Vous pouvez également nous envoyer un message sur WhatsApp au <1/>"
+    }
   }
 }
