@@ -21,7 +21,12 @@
     },
     "massage": {
       "title": "Un moment de détente",
-      "subtitle": "Confiez-vous aux mains expertes de notre masseuse pour une parenthèse de relaxation et de sérénité."
+      "subtitle": "Confiez-vous aux mains expertes de notre masseuse pour une parenthèse de relaxation et de sérénité.",
+      "footer": {
+        "prefix": "N’attendez plus, ",
+        "link": "réservez",
+        "suffix": "dès maintenant."
+      }
     },
     "room-home": {
       "title": "Nos hébergements"
@@ -36,6 +41,10 @@
     "p1": "Découvrez votre havre de tranquillité au cœur d'Ampefy.",
     "p2": "Notre hôtel vous invite à un séjour alliant détente, nature et authenticité.",
     "p3": "Profitez d'un cadre paisible en face du lac Itasy pour un moment de bien-être."
+  },
+  "room_card": {
+    "capacity": "{{min}} à {{max}} personnes",
+    "from_price": "dès {{price}} Ariary la nuit"
   },
   "popup": {
     "title": "Annonce Importante",

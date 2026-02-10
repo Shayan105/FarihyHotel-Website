@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "../../components/LanguageSwitcher";
+
 const FarihyHeader = () => {
   const { t } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -183,6 +184,11 @@ const FarihyHeader = () => {
         </div>
         <a href="/reservation" style={{ ...linkStyle, fontSize: '18px' }} onClick={closeAllMenus}>{t('nav.book')}</a>
         <a href="/contact" style={{ ...linkStyle, fontSize: '18px' }} onClick={closeAllMenus}>{t('nav.contact')}</a>
+        
+        {/* Added Language Switcher for Mobile */}
+        <div style={{ marginTop: "10px", paddingBottom: "10px" }}>
+          <LanguageSwitcher />
+        </div>
       </div>
 
       <style>{`

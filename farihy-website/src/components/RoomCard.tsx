@@ -1,12 +1,13 @@
 import React from "react";
 // removed "react-router-dom" import since we want a full refresh
+import { useTranslation } from "react-i18next";
 
 // --- 1. Interfaces ---
 interface RoomData {
   id: number;
   minPax: number;
   maxPax: number;
-  roomName: string;
+  titleKey: string; // Remplacé roomName par titleKey
   price: string;
   imagePath: string;
   link: string;
@@ -17,18 +18,19 @@ interface RoomCardProps {
   maxPax: number;
   price: string | number;
   imagePath: string;
-  roomName: string;
+  titleKey: string; // Remplacé roomName par titleKey
   link: string;
   style?: React.CSSProperties;
 }
 
 // --- 2. La Source de Données (Data) ---
+// Utilisation des clés de traduction 'nav.*' pour les titres
 export const farihyRooms: RoomData[] = [
   {
     id: 1,
     minPax: 1,
     maxPax: 2,
-    roomName: "Les Doubles",
+    titleKey: "nav.doubles", 
     price: "400 000",
     imagePath: "/pictures/double/ext.webp",
     link: "/double",
@@ -37,7 +39,7 @@ export const farihyRooms: RoomData[] = [
     id: 2,
     minPax: 1,
     maxPax: 5,
-    roomName: "Familiales",
+    titleKey: "nav.familials",
     price: "425 000",
     imagePath: "/pictures/familiale/ext.webp",
     link: "/familiale",
@@ -46,7 +48,7 @@ export const farihyRooms: RoomData[] = [
     id: 3,
     minPax: 1,
     maxPax: 5,
-    roomName: "La Suite",
+    titleKey: "nav.suite",
     price: "750 000",
     imagePath: "/pictures/suite/ext.webp",
     link: "/suite",
@@ -55,7 +57,7 @@ export const farihyRooms: RoomData[] = [
     id: 4,
     minPax: 1,
     maxPax: 6,
-    roomName: "Les Duplex",
+    titleKey: "nav.duplex",
     price: "800 000",
     imagePath: "/pictures/duplex/ext.webp",
     link: "/duplex",
@@ -64,7 +66,7 @@ export const farihyRooms: RoomData[] = [
     id: 5,
     minPax: 1,
     maxPax: 10,
-    roomName: "La Villa",
+    titleKey: "nav.villa",
     price: "1 750 000",
     imagePath: "/pictures/villa/ext.webp",
     link: "/villa",
@@ -77,10 +79,12 @@ export const RoomCard: React.FC<RoomCardProps> = ({
   maxPax,
   price,
   imagePath,
-  roomName,
+  titleKey,
   link,
   style,
 }) => {
+  const { t } = useTranslation();
+
   const cardStyle: React.CSSProperties = {
     width: "100%",
     backgroundColor: "#F9F5F0",
@@ -120,7 +124,7 @@ export const RoomCard: React.FC<RoomCardProps> = ({
         <img
           src={imagePath}
           className="img-fluid"
-          alt={roomName}
+          alt={t(titleKey)}
           style={imgStyle}
           // Keeps the lazy loading
           loading="lazy"
@@ -132,7 +136,7 @@ export const RoomCard: React.FC<RoomCardProps> = ({
               className="mb-0"
               style={{ ...textStyle, fontSize: "1.2rem", opacity: 0.8 }}
             >
-              {minPax} à {maxPax} personnes
+              {t("room_card.capacity", { min: minPax, max: maxPax })}
             </p>
           </div>
           <div className="mt-1">
@@ -140,10 +144,10 @@ export const RoomCard: React.FC<RoomCardProps> = ({
               className="display-6 mb-1"
               style={{ ...textStyle, fontWeight: "500" }}
             >
-              {roomName}
+              {t(titleKey)}
             </h2>
             <p className="mb-0" style={{ ...textStyle, fontSize: "1.1rem" }}>
-              dès {price} Ariary la nuit
+              {t("room_card.from_price", { price: price })}
             </p>
           </div>
         </div>

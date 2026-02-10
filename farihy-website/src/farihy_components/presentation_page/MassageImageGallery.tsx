@@ -7,11 +7,11 @@ import { useTranslation } from "react-i18next";
  * generic ImageGallery component.
  */
 const MassageGallery: React.FC = () => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const basePath = "/pictures/spa/";
   const massageContent = {
     title: t('galleries.massage.title'),
-    subtitle:t('galleries.massage.subtitle'),
+    subtitle: t('galleries.massage.subtitle'),
     images: [
       {
         path: basePath + "massage-1.webp",
@@ -33,10 +33,10 @@ const MassageGallery: React.FC = () => {
       title={massageContent.title}
       subtitle={massageContent.subtitle}
       images={massageContent.images}
-      footerTextPrefix="N’attendez plus, "
-      footerLinkText="reservez"
+      footerTextPrefix={t('galleries.massage.footer.prefix')}
+      footerLinkText={t('galleries.massage.footer.link')}
       ctaLink="/reservation"
-      footerTextSuffix="dès maintenant."
+      footerTextSuffix={t('galleries.massage.footer.suffix')}
     />
   );
 };

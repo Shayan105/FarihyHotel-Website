@@ -21,7 +21,12 @@
     },
     "massage": {
       "title": "Fotoana fialan-tsasatra",
-      "subtitle": "Atolory ny tenanao amin'ny tanana manam-pahaizana avy amin'ny mpanao otra anay mba hahazoana fialan-tsasatra sy fitoniana."
+      "subtitle": "Atolory ny tenanao amin'ny tanana manam-pahaizana avy amin'ny mpanao otra anay mba hahazoana fialan-tsasatra sy fitoniana.",
+      "footer": {
+        "prefix": "Don't wait any longer, ",
+        "link": "book",
+        "suffix": "now."
+      }
     },
     "room-home": {
       "title": "Ny toeram-ponenanay"
@@ -36,6 +41,10 @@
     "p1": "Tadiavo ny toerana milamina ao afovoan'ny Ampefy.",
     "p2": "Ny hotely dia manasa anao hijanona amin'ny fialan-tsasatra, natiora ary fahamarinana.",
     "p3": "Ankafizo ny toerana milamina manatrika ny farihy Itasy ho an'ny fahasalamana."
+  },
+  "room_card": {
+    "capacity": "Olona {{min}} ka hatramin'ny {{max}}",
+    "from_price": "manomboka {{price}} Ariary isaky ny alina"
   },
   "popup": {
     "title": "Filazana manan-danja",

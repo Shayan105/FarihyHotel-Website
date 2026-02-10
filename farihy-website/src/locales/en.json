@@ -21,7 +21,12 @@
     },
     "massage": {
       "title": "A Moment of Relaxation",
-      "subtitle": "Surrender to the expert hands of our masseuse for an interlude of relaxation and serenity."
+      "subtitle": "Surrender to the expert hands of our masseuse for an interlude of relaxation and serenity.",
+      "footer": {
+        "prefix": "Don't wait any longer, ",
+        "link": "book",
+        "suffix": "now."
+      }
     },
     "room-home": {
       "title": "Our Accommodations"
@@ -36,6 +41,10 @@
     "p1": "Discover your haven of tranquility in the heart of Ampefy.",
     "p2": "Our hotel invites you to a stay combining relaxation, nature, and authenticity.",
     "p3": "Enjoy a peaceful setting facing Lake Itasy for a moment of well-being."
+  },
+  "room_card": {
+    "capacity": "{{min}} to {{max}} people",
+    "from_price": "from {{price}} Ariary per night"
   },
   "popup": {
     "title": "Important Announcement",
