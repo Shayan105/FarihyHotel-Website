@@ -21,8 +21,7 @@ export default function LanguageSwitcher() {
       <button onClick={() => changeLanguage('fr')} style={btnStyle('fr')}>FR</button>
       <span>|</span>
       <button onClick={() => changeLanguage('en')} style={btnStyle('en')}>EN</button>
-      <span>|</span>
-      <button onClick={() => changeLanguage('mg')} style={btnStyle('mg')}>MG</button>
+
     </div>
   );
 }
