@@ -51,8 +51,8 @@
       "gallery-picture": {
         "title": "Aperçu de la chambre"
       },
-      "presentation-card" : {
-        "important-informations" : "Informations Importantes"
+      "presentation-card": {
+        "important-informations": "Informations Importantes"
       }
     },
     "doubles": {
@@ -121,7 +121,7 @@
       },
       "details": {
         "price": "Tarif hors petit-déjeuner : 1.750.000 Ariary la nuit",
-        "checkIn": "Check-in : 14h00 - Check-out : 14h00"
+        "checkIn": "Check-in : 14h00 - Check-out : 11h00"
       }
     },
     "duplex": {
@@ -147,6 +147,52 @@
         "price": "Tarif hors petit-déjeuner : 800.000 Ariary la nuit",
         "checkIn": "Check-in : 13h00 - Check-out : 11h00"
       }
+    }
+  },
+  "reservation": {
+    "title": "Comment réserver ?",
+    "intro": "Vous souhaitez séjourner dans notre établissement ?<br/>Remplissez ce formulaire pour connaître nos disponibilités.",
+    "labels": {
+      "arrival": "1. Date d'arrivée *",
+      "departure": "Date de départ *",
+      "accommodation": "2. Choix des hébergements *",
+      "total_persons": "3. Le nombre total de personnes *",
+      "adults": "Total Adultes",
+      "children": "Total Enfants",
+      "children_ages": "Âge des enfants (obligatoire) :",
+      "child_placeholder": "Enfant {{index}}",
+      "name": "4. Nom *",
+      "firstname": "Prénom *",
+      "phone": "5. Numéro de téléphone *",
+      "email": "Votre adresse e-mail *",
+      "requests": "6. Demande particulière ?"
+    },
+    "placeholders": {
+      "phone": "ex: 32 07 413 55"
+    },
+    "buttons": {
+      "sending": "Envoi en cours...",
+      "send": "Envoyer ma demande de réservation"
+    },
+    "alerts": {
+      "no_room": "Veuillez sélectionner au moins une chambre ou bungalow.",
+      "captcha": "Veuillez valider le CAPTCHA.",
+      "error": "Erreur lors de l'envoi ou validation CAPTCHA échouée.",
+      "server_error": "Impossible de contacter le serveur."
+    },
+    "success": {
+      "title": "Merci {{name}} !",
+      "message": "Votre demande a bien été envoyée. Nous vous répondrons très vite."
+    },
+    "footer": {
+      "whatsapp": "Vous pouvez également nous écrire sur WhatsApp au"
+    },
+    "room_types": {
+      "Double": "Double",
+      "Familiale": "Familiale",
+      "Duplex": "Duplex",
+      "Suite": "Suite",
+      "Villa": "Villa"
     }
   }
 }
