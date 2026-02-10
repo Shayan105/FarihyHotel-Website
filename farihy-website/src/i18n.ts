@@ -4,7 +4,7 @@ import LanguageDetector from "i18next-browser-languagedetector";
 
 import fr from "./locales/fr.json";
 import en from "./locales/en.json";
-import mg from "./locales/mg.json";
+
 
 i18n
   .use(LanguageDetector)
@@ -13,7 +13,6 @@ i18n
     resources: {
       fr: { translation: fr },
       en: { translation: en },
-      mg: { translation: mg }
     },
     fallbackLng: "fr", // French is now the default
     interpolation: {
