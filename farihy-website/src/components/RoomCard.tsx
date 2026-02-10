@@ -1,5 +1,4 @@
 import React from "react";
-// removed "react-router-dom" import since we want a full refresh
 import { useTranslation } from "react-i18next";
 
 // --- 1. Interfaces ---
@@ -7,7 +6,7 @@ interface RoomData {
   id: number;
   minPax: number;
   maxPax: number;
-  titleKey: string; // Remplacé roomName par titleKey
+  titleKey: string;
   price: string;
   imagePath: string;
   link: string;
@@ -18,13 +17,12 @@ interface RoomCardProps {
   maxPax: number;
   price: string | number;
   imagePath: string;
-  titleKey: string; // Remplacé roomName par titleKey
+  titleKey: string;
   link: string;
   style?: React.CSSProperties;
 }
 
-// --- 2. La Source de Données (Data) ---
-// Utilisation des clés de traduction 'nav.*' pour les titres
+// --- 2. La Source de Données ---
 export const farihyRooms: RoomData[] = [
   {
     id: 1,
@@ -92,6 +90,8 @@ export const RoomCard: React.FC<RoomCardProps> = ({
     padding: "20px",
     boxSizing: "border-box",
     transition: "transform 0.2s ease",
+    display: "flex",
+    flexDirection: "column",
     ...style,
   };
 
@@ -100,8 +100,10 @@ export const RoomCard: React.FC<RoomCardProps> = ({
     padding: "30px 25px",
     display: "flex",
     flexDirection: "column",
+    // MODIFICATION ICI : 'flex-start' aligne tout en haut
+    justifyContent: "flex-start", 
     color: "#5C3D2E",
-    height: "auto",
+    flex: 1, 
   };
 
   const textStyle: React.CSSProperties = {
@@ -118,15 +120,21 @@ export const RoomCard: React.FC<RoomCardProps> = ({
   };
 
   return (
-    // Changed back to standard <a> tag to ensure full page refresh
-    <a href={link} style={{ textDecoration: "none", color: "inherit" }}>
+    <a 
+      href={link} 
+      style={{ 
+        textDecoration: "none", 
+        color: "inherit", 
+        display: "block", 
+        height: "100%" 
+      }}
+    >
       <div className="card shadow-sm h-100" style={cardStyle}>
         <img
           src={imagePath}
           className="img-fluid"
           alt={t(titleKey)}
           style={imgStyle}
-          // Keeps the lazy loading
           loading="lazy"
           decoding="async"
         />
@@ -156,37 +164,15 @@ export const RoomCard: React.FC<RoomCardProps> = ({
   );
 };
 
-// --- 4. Les Composants Spécifiques Instanciables ---
-
+// --- 4. Helpers ---
 const getData = (id: number) => farihyRooms.find((r) => r.id === id);
+export const DoubleCard = () => { const data = getData(1); return data ? <RoomCard {...data} /> : null; };
+export const FamilialeCard = () => { const data = getData(2); return data ? <RoomCard {...data} /> : null; };
+export const SuiteCard = () => { const data = getData(3); return data ? <RoomCard {...data} /> : null; };
+export const DuplexCard = () => { const data = getData(4); return data ? <RoomCard {...data} /> : null; };
+export const VillaCard = () => { const data = getData(5); return data ? <RoomCard {...data} /> : null; };
 
-export const DoubleCard = () => {
-  const data = getData(1);
-  return data ? <RoomCard {...data} /> : null;
-};
-
-export const FamilialeCard = () => {
-  const data = getData(2);
-  return data ? <RoomCard {...data} /> : null;
-};
-
-export const SuiteCard = () => {
-  const data = getData(3);
-  return data ? <RoomCard {...data} /> : null;
-};
-
-export const DuplexCard = () => {
-  const data = getData(4);
-  return data ? <RoomCard {...data} /> : null;
-};
-
-export const VillaCard = () => {
-  const data = getData(5);
-  return data ? <RoomCard {...data} /> : null;
-};
-
-// --- 5. La Liste Complète (Grid) ---
-
+// --- 5. La Liste Complète ---
 export const FarihyRoomList: React.FC = () => {
   const gridStyle: React.CSSProperties = {
     display: "grid",
