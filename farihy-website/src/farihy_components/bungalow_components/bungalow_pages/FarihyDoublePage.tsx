@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
-import { useTranslation } from "react-i18next"; // Import hook
+import { useTranslation } from "react-i18next"; 
 
 import FarihyRoomPageTemplate from "../FarihyRoomPageTemplate";
 import {
@@ -35,8 +35,7 @@ const OtherRoomsSuggestions = () => {
 
   return (
     <div>
-      {/* Mobile View: Swiper */}
-      <div className="d-block d-md-none">
+      <div className="d-block d-xl-none">
         <Swiper
           modules={[Pagination]}
           spaceBetween={20}
@@ -45,30 +44,35 @@ const OtherRoomsSuggestions = () => {
           loop={false}
           initialSlide={1}
           pagination={{ clickable: true }}
-          
-          // Stability fixes based on FarihySuitePage
           roundLengths={true}
           touchStartPreventDefault={false}
           style={{ paddingBottom: "40px" }}
         >
           {rooms.map((item) => (
-            <SwiperSlide key={item.id}>
-              <item.Component />
+            <SwiperSlide key={item.id} style={{ height: "auto", display: "flex" }}>
+              <div style={{ width: "100%", display: "flex" }}>
+                <item.Component style={{ flex: 1 }} />
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
       </div>
 
-      {/* Desktop View: Grid */}
+      {/* Desktop View: Grid (Visible seulement sur écrans XL > 1200px) */}
       <div
-        className="d-none d-md-grid"
+        className="d-none d-xl-grid"
         style={{
-          gridTemplateColumns: "repeat(4, 1fr)",
-          gap: "20px",
+          display: "grid",
+          // CORRECTION ICI : 
+          // 'minmax(300px, 1fr)' garantit que les cartes font au moins 300px de large.
+          // Si l'écran n'est pas assez large pour 4 cartes de 300px, il passera à 3 colonnes automatiquement.
+          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+          gap: "30px", // Augmentation légère de l'espace entre les cartes
+          alignItems: "stretch" 
         }}
       >
         {rooms.map((item) => (
-          <div key={item.id}>
+          <div key={item.id} style={{ height: "100%" }}>
             <item.Component />
           </div>
         ))}
@@ -76,9 +80,8 @@ const OtherRoomsSuggestions = () => {
     </div>
   );
 };
-
 const FarihyDoublePage = () => {
-  const { t } = useTranslation(); // Initialize hook
+  const { t } = useTranslation();
   const basePath = "/pictures/double/";
 
   const bungalowImages: GalleryImage[] = [

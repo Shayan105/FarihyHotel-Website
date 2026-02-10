@@ -19,7 +19,7 @@ interface RoomCardProps {
   imagePath: string;
   titleKey: string;
   link: string;
-  style?: React.CSSProperties;
+  style?: React.CSSProperties; // Le style est autorisé ici
 }
 
 // --- 2. La Source de Données ---
@@ -92,6 +92,7 @@ export const RoomCard: React.FC<RoomCardProps> = ({
     transition: "transform 0.2s ease",
     display: "flex",
     flexDirection: "column",
+    height: "100%", // La carte prend toute la hauteur disponible
     ...style,
   };
 
@@ -100,10 +101,9 @@ export const RoomCard: React.FC<RoomCardProps> = ({
     padding: "30px 25px",
     display: "flex",
     flexDirection: "column",
-    // MODIFICATION ICI : 'flex-start' aligne tout en haut
-    justifyContent: "flex-start", 
+    justifyContent: "flex-start", // Aligne le texte en haut
     color: "#5C3D2E",
-    flex: 1, 
+    flex: 1, // Le contenu remplit l'espace restant
   };
 
   const textStyle: React.CSSProperties = {
@@ -125,11 +125,12 @@ export const RoomCard: React.FC<RoomCardProps> = ({
       style={{ 
         textDecoration: "none", 
         color: "inherit", 
-        display: "block", 
-        height: "100%" 
+        display: "flex",        // Important pour la hauteur uniforme
+        flexDirection: "column",
+        height: "100%"          // Le lien prend toute la hauteur de la grille
       }}
     >
-      <div className="card shadow-sm h-100" style={cardStyle}>
+      <div className="card shadow-sm" style={cardStyle}>
         <img
           src={imagePath}
           className="img-fluid"
@@ -164,23 +165,46 @@ export const RoomCard: React.FC<RoomCardProps> = ({
   );
 };
 
-// --- 4. Helpers ---
+// --- 4. Les Composants Spécifiques Instanciables ---
+// C'est ICI que l'erreur TypeScript est corrigée : on accepte les props (style)
 const getData = (id: number) => farihyRooms.find((r) => r.id === id);
-export const DoubleCard = () => { const data = getData(1); return data ? <RoomCard {...data} /> : null; };
-export const FamilialeCard = () => { const data = getData(2); return data ? <RoomCard {...data} /> : null; };
-export const SuiteCard = () => { const data = getData(3); return data ? <RoomCard {...data} /> : null; };
-export const DuplexCard = () => { const data = getData(4); return data ? <RoomCard {...data} /> : null; };
-export const VillaCard = () => { const data = getData(5); return data ? <RoomCard {...data} /> : null; };
 
-// --- 5. La Liste Complète ---
+export const DoubleCard = (props: { style?: React.CSSProperties }) => {
+  const data = getData(1);
+  return data ? <RoomCard {...data} {...props} /> : null;
+};
+
+export const FamilialeCard = (props: { style?: React.CSSProperties }) => {
+  const data = getData(2);
+  return data ? <RoomCard {...data} {...props} /> : null;
+};
+
+export const SuiteCard = (props: { style?: React.CSSProperties }) => {
+  const data = getData(3);
+  return data ? <RoomCard {...data} {...props} /> : null;
+};
+
+export const DuplexCard = (props: { style?: React.CSSProperties }) => {
+  const data = getData(4);
+  return data ? <RoomCard {...data} {...props} /> : null;
+};
+
+export const VillaCard = (props: { style?: React.CSSProperties }) => {
+  const data = getData(5);
+  return data ? <RoomCard {...data} {...props} /> : null;
+};
+
+// --- 5. La Liste Complète (Grid Responsive) ---
 export const FarihyRoomList: React.FC = () => {
   const gridStyle: React.CSSProperties = {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
-    gap: "2rem",
-    padding: "2rem",
+    // Responsive: min 280px par carte. Sur iPad, cela fera 2 colonnes.
+    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", 
+    gap: "20px",
+    padding: "20px",
     maxWidth: "1400px",
     margin: "0 auto",
+    alignItems: "stretch", // Force tous les éléments d'une ligne à avoir la même hauteur
   };
 
   return (

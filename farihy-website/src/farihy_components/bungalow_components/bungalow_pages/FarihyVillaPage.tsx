@@ -29,7 +29,7 @@ interface PresentationSection {
 
 // --- Composant Local : Gestion Responsive (Swiper Mobile / Grille Desktop) ---
 const OtherRoomsSuggestions = () => {
-  // Liste des chambres à afficher (On exclut la Familiale)
+  // Liste des chambres à afficher (On exclut la Villa car on est sur sa page)
   const rooms = [
     { id: "double", Component: DoubleCard },
     { id: "suite", Component: SuiteCard },
@@ -39,34 +39,54 @@ const OtherRoomsSuggestions = () => {
 
   return (
     <div>
-      {/* --- VUE MOBILE : SWIPER (Visible seulement sur petit écran) --- */}
-      <div className="d-block d-md-none">
+      {/* Mobile & Tablet View: Swiper 
+          Visible up to XL screens (1200px) to prevent crunched cards on laptops 
+      */}
+      <div className="d-block d-xl-none">
         <Swiper
+          modules={[Pagination]}
           spaceBetween={20}
-          slidesPerView={1.15} // Affiche un bout de la carte suivante pour inciter au swipe
+          slidesPerView={1.2}
           centeredSlides={true}
           loop={false}
-          modules={[Pagination]}
+          initialSlide={1}
           pagination={{ clickable: true }}
+          // Stability fixes to prevent page jumping
+          roundLengths={true}
+          touchStartPreventDefault={false}
+          style={{ paddingBottom: "40px" }}
+          // Responsive breakpoints
+          breakpoints={{
+            576: { slidesPerView: 2, centeredSlides: false, initialSlide: 0 },
+            768: { slidesPerView: 2.5, centeredSlides: false, initialSlide: 0 },
+            992: { slidesPerView: 3, centeredSlides: false, initialSlide: 0 }
+          }}
         >
           {rooms.map((item) => (
-            <SwiperSlide key={item.id} style={{ height: "auto" }}>
-              <item.Component />
+            <SwiperSlide key={item.id} style={{ height: "auto", display: "flex" }}>
+              <div style={{ width: "100%", display: "flex" }}>
+                <item.Component style={{ flex: 1 }} />
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
       </div>
 
-      {/* --- VUE DESKTOP : GRILLE (Visible seulement sur grand écran) --- */}
+      {/* Desktop View: Grid 
+          Visible only on screens larger than 1200px
+      */}
       <div
-        className="d-none d-md-grid"
+        className="d-none d-xl-grid"
         style={{
-          gridTemplateColumns: "repeat(4, 1fr)", // Force 4 colonnes
-          gap: "20px",
+          display: "grid",
+          // Ensures cards are at least 300px wide
+          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+          gap: "30px",
+          alignItems: "stretch"
         }}
       >
         {rooms.map((item) => (
-          <div key={item.id}>
+          <div key={item.id} style={{ height: "100%" }}>
             <item.Component />
           </div>
         ))}
