@@ -1,7 +1,9 @@
 import React, { useState, useRef } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
+import { useTranslation, Trans } from "react-i18next";
 
 const FarihyContact = () => {
+  const { t } = useTranslation();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
@@ -38,7 +40,7 @@ const FarihyContact = () => {
     
     const token = recaptchaRef.current?.getValue();
     if (!token) {
-      alert("Veuillez valider le CAPTCHA.");
+      alert(t("contact.alerts.captcha"));
       return;
     }
 
@@ -56,12 +58,12 @@ const FarihyContact = () => {
       if (response.ok && result.success) {
         setIsSubmitted(true);
       } else {
-        alert("Erreur lors de l'envoi ou validation CAPTCHA échouée.");
+        alert(t("contact.alerts.error"));
         recaptchaRef.current?.reset();
       }
     } catch (error) {
       console.error("Erreur:", error);
-      alert("Impossible de contacter le serveur.");
+      alert(t("contact.alerts.server_error"));
     } finally {
       setIsSending(false);
     }
@@ -70,8 +72,16 @@ const FarihyContact = () => {
   return (
     <section style={styles.section}>
       <div className="container">
-        <div style={styles.title}>Une question ?<br />Contactez nous ici</div>
-        <p style={styles.subtitle}><span style={styles.redText}>*information obligatoire</span></p>
+        <div style={styles.title}>
+          <Trans i18nKey="contact.title">
+            Une question ?<br />Contactez nous ici
+          </Trans>
+        </div>
+        <p style={styles.subtitle}>
+          <Trans i18nKey="contact.subtitle_mandatory">
+            <span style={styles.redText}>*information obligatoire</span>
+          </Trans>
+        </p>
 
         <div className="row justify-content-center">
           <div className="col-md-8 col-lg-6">
@@ -80,32 +90,32 @@ const FarihyContact = () => {
                 {/* NOM & PRENOM */}
                 <div className="row">
                   <div className="col-md-6">
-                    <label style={styles.label}>*Nom :</label>
+                    <label style={styles.label}>{t("contact.labels.lastname")}</label>
                     <input type="text" name="nom" required style={styles.input} value={formData.nom} onChange={handleChange} />
                   </div>
                   <div className="col-md-6">
-                    <label style={styles.label}>*Prénom :</label>
+                    <label style={styles.label}>{t("contact.labels.firstname")}</label>
                     <input type="text" name="prenom" required style={styles.input} value={formData.prenom} onChange={handleChange} />
                   </div>
                 </div>
 
                 {/* EMAIL */}
-                <label style={styles.label}>*Adresse e-mail :</label>
+                <label style={styles.label}>{t("contact.labels.email")}</label>
                 <input type="email" name="email" required style={styles.input} value={formData.email} onChange={handleChange} />
 
                 {/* TELEPHONE */}
-                <label style={styles.label}>*Numéro de téléphone :</label>
+                <label style={styles.label}>{t("contact.labels.phone")}</label>
                 <div style={{ display: "flex", marginBottom: "15px" }}>
                   <input type="text" name="countryCode" style={styles.codeField} value={formData.countryCode} onChange={handleChange} placeholder="+261" />
-                  <input type="tel" name="telephone" required placeholder="ex: 32 07 413 55" style={{ ...styles.input, borderRadius: "0 5px 5px 0", marginBottom: 0 }} value={formData.telephone} onChange={handleChange} />
+                  <input type="tel" name="telephone" required placeholder={t("contact.placeholders.phone")} style={{ ...styles.input, borderRadius: "0 5px 5px 0", marginBottom: 0 }} value={formData.telephone} onChange={handleChange} />
                 </div>
 
                 {/* SUJET */}
-                <label style={styles.label}>Quel est le sujet de votre demande ?</label>
+                <label style={styles.label}>{t("contact.labels.subject")}</label>
                 <input type="text" name="sujet" style={styles.input} value={formData.sujet} onChange={handleChange} />
 
                 {/* MESSAGE */}
-                <label style={styles.label}>*Comment pouvons-nous vous renseigner ?</label>
+                <label style={styles.label}>{t("contact.labels.message")}</label>
                 <textarea name="message" required rows={5} style={styles.input} value={formData.message} onChange={handleChange}></textarea>
 
                 {/* CAPTCHA */}
@@ -119,19 +129,24 @@ const FarihyContact = () => {
                 {/* SUBMIT BUTTON */}
                 <div className="text-center">
                   <button type="submit" style={styles.button} disabled={isSending}>
-                    {isSending ? "Envoi en cours..." : "Envoyer ma demande"}
+                    {isSending ? t("contact.buttons.sending") : t("contact.buttons.send")}
                   </button>
                 </div>
               </form>
             ) : (
               <div style={styles.successBox}>
-                <h4 style={{marginBottom: "10px"}}>Formulaire envoyé</h4>
-                <p style={{margin: 0}}>Nous vous remercions pour votre demande, nous vous répondrons au plus vite.</p>
+                <h4 style={{marginBottom: "10px"}}>{t("contact.success.title")}</h4>
+                <p style={{margin: 0}}>{t("contact.success.message")}</p>
               </div>
             )}
             
             <div style={styles.whatsapp}>
-              <p>Vous pouvez également nous envoyer un message sur WhatsApp au <br /><strong>+261 32 07 413 55</strong></p>
+              <p>
+                <Trans i18nKey="contact.footer.whatsapp">
+                  Vous pouvez également nous envoyer un message sur WhatsApp au <br />
+                </Trans>
+                <strong>+261 32 07 413 55</strong>
+              </p>
             </div>
           </div>
         </div>
