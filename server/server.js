@@ -13,6 +13,38 @@ app.use(cors({
 }));
 
 // ==========================================
+// HELPER: Get Client IP (Nginx Compatible)
+// ==========================================
+const getClientIp = (req) => {
+  const forwarded = req.headers['x-forwarded-for'];
+  if (forwarded) {
+    return forwarded.split(',')[0].trim();
+  }
+  return req.socket.remoteAddress;
+};
+
+// ==========================================
+// HELPER: Get Geo Location (City, Country)
+// ==========================================
+const getGeoLocation = async (ip) => {
+  // Skip lookup for localhost/private IPs to save API calls
+  if (!ip || ip === '::1' || ip === '127.0.0.1' || ip.startsWith('192.168.')) {
+    return 'Localhost';
+  }
+
+  try {
+    // Using ip-api.com (Free, no key required, 45 requests/min limit)
+    const response = await axios.get(`http://ip-api.com/json/${ip}`);
+    if (response.data && response.data.status === 'success') {
+      return `${response.data.city}, ${response.data.country}`;
+    }
+  } catch (error) {
+    console.error('GeoIP Lookup Failed:', error.message);
+  }
+  return 'Localisation Inconnue'; // Fallback if API fails
+};
+
+// ==========================================
 // CONFIGURATION: NODEMAILER
 // ==========================================
 const transporter = nodemailer.createTransport({
@@ -43,6 +75,11 @@ const verifyRecaptcha = async (token) => {
 app.post('/send-email', async (req, res) => {
   const { nom, prenom, email, countryCode, telephone, sujet, message, captchaToken } = req.body;
 
+  // 1. Retrieve IP
+  const clientIp = getClientIp(req);
+  // 2. Retrieve Location
+  const clientLocation = await getGeoLocation(clientIp);
+
   const isHuman = await verifyRecaptcha(captchaToken);
   if (!isHuman) return res.status(400).json({ success: false, message: 'Captcha validation failed' });
 
@@ -62,7 +99,13 @@ app.post('/send-email', async (req, res) => {
           <div style="padding: 30px; color: #333333; line-height: 1.6; font-size: 16px;">
             <p style="margin: 0 0 10px 0;"><strong>De :</strong> ${prenom} ${nom}</p>
             <p style="margin: 0 0 10px 0;"><strong>Email :</strong> <a href="mailto:${email}" style="color: #4a3728;">${email}</a></p>
-            <p style="margin: 0 0 20px 0;"><strong>Téléphone :</strong> ${countryCode} ${telephone}</p>
+            <p style="margin: 0 0 10px 0;"><strong>Téléphone :</strong> ${countryCode} ${telephone}</p>
+            
+            <div style="margin: 20px 0; padding: 10px; background-color: #eee; border-radius: 4px; font-size: 14px; color: #555;">
+              <strong>📍 Info Client :</strong><br>
+              IP : ${clientIp}<br>
+              Localisation : ${clientLocation}
+            </div>
             
             <h3 style="color: #4a3728; border-bottom: 2px solid #eeeeee; padding-bottom: 8px; margin-top: 30px;">Sujet : ${sujet}</h3>
             <div style="background-color: #f9f9f9; padding: 20px; border-left: 4px solid #4a3728; border-radius: 4px; margin-top: 15px; white-space: pre-wrap;">${message}</div>
@@ -113,6 +156,11 @@ app.post('/send-reservation', async (req, res) => {
     nom, prenom, countryCode, telephone, email, questions, captchaToken 
   } = req.body;
 
+  // 1. Retrieve IP
+  const clientIp = getClientIp(req);
+  // 2. Retrieve Location
+  const clientLocation = await getGeoLocation(clientIp);
+
   const isHuman = await verifyRecaptcha(captchaToken);
   if (!isHuman) return res.status(400).json({ success: false, message: 'Captcha validation failed' });
 
@@ -138,7 +186,13 @@ app.post('/send-reservation', async (req, res) => {
             <h3 style="color: #4a3728; border-bottom: 2px solid #eeeeee; padding-bottom: 8px;">👤 Coordonnées du Client</h3>
             <p style="margin: 0 0 5px 0;"><strong>Nom :</strong> ${prenom} ${nom}</p>
             <p style="margin: 0 0 5px 0;"><strong>Email :</strong> <a href="mailto:${email}" style="color: #4a3728;">${email}</a></p>
-            <p style="margin: 0 0 20px 0;"><strong>Téléphone :</strong> ${countryCode} ${telephone}</p>
+            <p style="margin: 0 0 5px 0;"><strong>Téléphone :</strong> ${countryCode} ${telephone}</p>
+            
+            <div style="margin: 20px 0; padding: 10px; background-color: #eee; border-radius: 4px; font-size: 14px; color: #555;">
+              <strong>📍 Info Client :</strong><br>
+              IP : ${clientIp}<br>
+              Localisation : ${clientLocation}
+            </div>
 
             <h3 style="color: #4a3728; border-bottom: 2px solid #eeeeee; padding-bottom: 8px; margin-top: 30px;">🛏️ Détails du Séjour</h3>
             <p style="margin: 0 0 5px 0;"><strong>Dates :</strong> Du ${dateArrivee} au ${dateDepart}</p>
