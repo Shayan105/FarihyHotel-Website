@@ -50,34 +50,44 @@ app.post('/send-email', async (req, res) => {
   const mailToStaff = {
     from: `"${prenom} ${nom}" <${process.env.EMAIL_USER}>`,
     to: process.env.EMAIL_TO,
-    bcc: process.env.EMAIL_MANAGER, // <--- HIDDEN FROM ADMIN
+    bcc: process.env.EMAIL_MANAGER, 
     replyTo: email, 
     subject: `🔔 Contact Site Web: ${sujet}`,
     html: `
-      <div style="font-family: Arial, sans-serif; color: #333; padding: 20px; border: 1px solid #ddd;">
-        <h2 style="color: #4a3728;">Nouveau Message Reçu</h2>
-        <p><strong>De :</strong> ${prenom} ${nom} (${email})</p>
-        <p><strong>Téléphone :</strong> ${countryCode} ${telephone}</p>
-        <hr>
-        <p><strong>Sujet :</strong> ${sujet}</p>
-        <p><strong>Message :</strong></p>
-        <blockquote style="background: #f9f9f9; padding: 10px; border-left: 4px solid #4a3728;">${message}</blockquote>
+      <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f4f5f7; padding: 40px 20px;">
+        <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+          <div style="background-color: #4a3728; padding: 25px; text-align: center;">
+            <h2 style="color: #ffffff; margin: 0; font-size: 22px;">Nouveau Message Reçu</h2>
+          </div>
+          <div style="padding: 30px; color: #333333; line-height: 1.6; font-size: 16px;">
+            <p style="margin: 0 0 10px 0;"><strong>De :</strong> ${prenom} ${nom}</p>
+            <p style="margin: 0 0 10px 0;"><strong>Email :</strong> <a href="mailto:${email}" style="color: #4a3728;">${email}</a></p>
+            <p style="margin: 0 0 20px 0;"><strong>Téléphone :</strong> ${countryCode} ${telephone}</p>
+            
+            <h3 style="color: #4a3728; border-bottom: 2px solid #eeeeee; padding-bottom: 8px; margin-top: 30px;">Sujet : ${sujet}</h3>
+            <div style="background-color: #f9f9f9; padding: 20px; border-left: 4px solid #4a3728; border-radius: 4px; margin-top: 15px; white-space: pre-wrap;">${message}</div>
+          </div>
+        </div>
       </div>
     `,
   };
 
+  // --- EMAIL 2: TO CLIENT ---
   const mailToClient = {
     from: `"${process.env.EMAIL_FROM_NAME}" <${process.env.EMAIL_USER}>`,
     to: email, 
     subject: `Nous avons bien reçu votre message - Farihy`,
     html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <div style="background-color: #4a3728; padding: 20px; text-align: center; color: white;">
-          <h1>Merci de nous avoir contactés</h1>
-        </div>
-        <div style="padding: 20px; color: #555;">
-          <p>Bonjour ${prenom}, nous avons bien reçu votre message.</p>
-          <p>Cordialement,<br>L'équipe Farihy</p>
+      <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f4f5f7; padding: 40px 20px;">
+        <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+          <div style="background-color: #4a3728; padding: 30px; text-align: center;">
+            <h1 style="color: #ffffff; margin: 0; font-size: 24px;">Merci de nous avoir contactés</h1>
+          </div>
+          <div style="padding: 30px; color: #555555; line-height: 1.6; font-size: 16px;">
+            <p>Bonjour <strong>${prenom}</strong>,</p>
+            <p>Nous avons bien reçu votre message concernant <em>"${sujet}"</em>. Notre équipe va l'étudier avec attention et nous vous répondrons dans les plus brefs délais.</p>
+            <p style="margin-top: 30px;">Cordialement,<br><strong style="color: #4a3728;">L'équipe Farihy</strong></p>
+          </div>
         </div>
       </div>
     `,
@@ -106,30 +116,65 @@ app.post('/send-reservation', async (req, res) => {
   const isHuman = await verifyRecaptcha(captchaToken);
   if (!isHuman) return res.status(400).json({ success: false, message: 'Captcha validation failed' });
 
-  const detailsEnfants = nbEnfants > 0 ? `Oui (${nbEnfants}) - Âges: ${agesEnfants.join(', ')}` : 'Aucun';
+  // Safe check for agesEnfants in case it's not an array
+  const agesArray = Array.isArray(agesEnfants) ? agesEnfants.join(', ') : agesEnfants;
+  const detailsEnfants = nbEnfants > 0 ? `Oui (${nbEnfants}) - Âges: ${agesArray}` : 'Aucun';
 
   // --- EMAIL 1: TO ADMIN (BCC MANAGER) ---
   const mailToStaff = {
     from: `"${prenom} ${nom}" <${process.env.EMAIL_USER}>`,
     to: process.env.EMAIL_TO,
-    bcc: process.env.EMAIL_MANAGER, // <--- HIDDEN FROM ADMIN
+    bcc: process.env.EMAIL_MANAGER, 
     replyTo: email,
     subject: `📅 Nouvelle Réservation: ${prenom} ${nom}`,
     html: `
-      <div style="font-family: Arial, sans-serif; color: #333; padding: 20px; border: 1px solid #ddd;">
-        <h2 style="color: #4a3728;">Demande de Réservation</h2>
-        <p><strong>Client :</strong> ${prenom} ${nom}</p>
-        <p><strong>Dates :</strong> Du ${dateArrivee} au ${dateDepart}</p>
-        <p><strong>Logement :</strong> ${typeBungalow}</p>
+      <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f4f5f7; padding: 40px 20px;">
+        <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+          <div style="background-color: #4a3728; padding: 25px; text-align: center;">
+            <h2 style="color: #ffffff; margin: 0; font-size: 22px;">Nouvelle Demande de Réservation</h2>
+          </div>
+          <div style="padding: 30px; color: #333333; line-height: 1.6; font-size: 16px;">
+            
+            <h3 style="color: #4a3728; border-bottom: 2px solid #eeeeee; padding-bottom: 8px;">👤 Coordonnées du Client</h3>
+            <p style="margin: 0 0 5px 0;"><strong>Nom :</strong> ${prenom} ${nom}</p>
+            <p style="margin: 0 0 5px 0;"><strong>Email :</strong> <a href="mailto:${email}" style="color: #4a3728;">${email}</a></p>
+            <p style="margin: 0 0 20px 0;"><strong>Téléphone :</strong> ${countryCode} ${telephone}</p>
+
+            <h3 style="color: #4a3728; border-bottom: 2px solid #eeeeee; padding-bottom: 8px; margin-top: 30px;">🛏️ Détails du Séjour</h3>
+            <p style="margin: 0 0 5px 0;"><strong>Dates :</strong> Du ${dateArrivee} au ${dateDepart}</p>
+            <p style="margin: 0 0 5px 0;"><strong>Logement :</strong> ${typeBungalow}</p>
+            <p style="margin: 0 0 5px 0;"><strong>Adultes :</strong> ${nbAdultes}</p>
+            <p style="margin: 0 0 20px 0;"><strong>Enfants :</strong> ${detailsEnfants}</p>
+
+            <h3 style="color: #4a3728; border-bottom: 2px solid #eeeeee; padding-bottom: 8px; margin-top: 30px;">💬 Questions / Remarques</h3>
+            <div style="background-color: #f9f9f9; padding: 20px; border-left: 4px solid #4a3728; border-radius: 4px; margin-top: 15px; white-space: pre-wrap;">${questions ? questions : '<em>Aucune remarque supplémentaire.</em>'}</div>
+            
+          </div>
+        </div>
       </div>
     `,
   };
 
+  // --- EMAIL 2: TO CLIENT ---
   const mailToClient = {
     from: `"${process.env.EMAIL_FROM_NAME}" <${process.env.EMAIL_USER}>`,
     to: email, 
-    subject: `Confirmation de réception - Farihy`,
-    html: `<p>Bonjour ${prenom}, votre demande est en cours de traitement.</p>`,
+    subject: `Votre demande de réservation - Farihy`,
+    html: `
+      <div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f4f5f7; padding: 40px 20px;">
+        <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+          <div style="background-color: #4a3728; padding: 30px; text-align: center;">
+            <h1 style="color: #ffffff; margin: 0; font-size: 24px;">Demande de réservation reçue</h1>
+          </div>
+          <div style="padding: 30px; color: #555555; line-height: 1.6; font-size: 16px;">
+            <p>Bonjour <strong>${prenom}</strong>,</p>
+            <p>Merci d'avoir choisi Farihy ! Nous vous confirmons la bonne réception de votre demande de réservation pour le logement <strong>${typeBungalow}</strong> du <strong>${dateArrivee}</strong> au <strong>${dateDepart}</strong>.</p>
+            <p>Notre équipe vérifie actuellement les disponibilités et vous contactera très rapidement.</p>
+            <p style="margin-top: 30px;">À très bientôt,<br><strong style="color: #4a3728;">L'équipe Farihy</strong></p>
+          </div>
+        </div>
+      </div>
+    `,
   };
 
   try {
