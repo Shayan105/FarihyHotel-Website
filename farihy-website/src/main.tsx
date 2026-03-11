@@ -29,10 +29,7 @@ import FarihyContact from "./pages/FarihyContact";
 const posthogKey = import.meta.env.VITE_PUBLIC_POSTHOG_KEY;
 const posthogHost = import.meta.env.VITE_PUBLIC_POSTHOG_HOST;
 
-console.log("PostHog Key Loaded:", posthogKey ? "YES" : "NO (Undefined)");
-console.log("PostHog Host Loaded:", posthogHost ? "YES" : "NO (Undefined)");
 if (posthogKey && posthogHost) {
-  console.log("Initializing PostHog with key:", posthogKey, "and host:", posthogHost);
 posthog.init(
   posthogKey,
   {
@@ -43,9 +40,7 @@ posthog.init(
   }
 );
 }
-else {
-  console.warn("PostHog environment variables are missing. Analytics will not be initialized.");
-}
+
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
